@@ -45,8 +45,8 @@
   .page {
     position: absolute;
     inset: 0;
-    width: 402px;
-    height: 874px;
+    width: 100%;
+    height: 100%;
     background: #ffffff;
     overflow: hidden;
     display: none;
@@ -58,7 +58,7 @@
     position: absolute;
     top: 62px;
     left: 0;
-    width: 402px;
+    width: 100%;
     padding: 10px 20px;
     display: flex;
     align-items: center;
@@ -87,8 +87,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: calc(402px * 4);
-    height: 874px;
+    width: 400%;
+    height: 100%;
     display: flex;
     touch-action: none;
     cursor: grab;
@@ -99,9 +99,9 @@
   .content-track img { -webkit-user-drag: none; user-select: none; pointer-events: none; }
 
   .content-slide {
-    flex: 0 0 402px;
-    width: 402px;
-    height: 874px;
+    flex: 0 0 25%;
+    width: 25%;
+    height: 100%;
     position: relative;
   }
 
@@ -123,7 +123,7 @@
     position: absolute;
     top: 116px;
     left: 0;
-    width: 402px;
+    width: 100%;
     padding: 0 30px;
     display: flex;
     flex-direction: column;
@@ -171,7 +171,8 @@
     top: 758px;
     left: 50%;
     transform: translateX(-50%);
-    width: 369px;
+    width: calc(100% - 32px);
+    max-width: 369px;
     z-index: 2;
   }
   .cta button {
@@ -193,7 +194,7 @@
     position: absolute;
     top: 125px;
     left: 0;
-    width: 402px;
+    width: 100%;
     padding: 0 30px;
     display: flex;
     justify-content: center;
@@ -237,7 +238,7 @@
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
-    white-space: nowrap;
+    white-space: normal;
     padding: 0 12px;
   }
   .pill.regular { color: #000000; font-weight: 400; font-size: 17.73px; }
@@ -381,7 +382,7 @@
 <script>
   (function () {
     var contentTrack = document.getElementById('content-track');
-    var slideWidth = 402;
+    var slideWidth = contentTrack.parentElement.clientWidth;
     var totalSlides = 4;
     var currentIndex = 0;
     var isDragging = false;
@@ -407,6 +408,11 @@
       setTranslate(-currentIndex * slideWidth, animate !== false);
       updateDots();
     }
+
+    window.addEventListener('resize', function () {
+      slideWidth = contentTrack.parentElement.clientWidth;
+      goToContentSlide(currentIndex, false);
+    });
 
     contentTrack.addEventListener('pointerdown', function (e) {
       isDragging = true;

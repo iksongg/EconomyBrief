@@ -104,3 +104,20 @@
 .gnb-tab-bar .tab-item span { font-size: 14px; line-height: 1.3; font-weight: var(--font-weight-regular); color: inherit; }
 .gnb-tab-bar .tab-item.active { color: var(--color-brand-600); }
 .gnb-tab-bar .tab-item.active span { font-weight: var(--font-weight-bold); }
+
+/* Keep the prototype inside a mobile-width frame without creating page-level overflow. */
+@media (max-width: 402px) {
+  html, body { width: 100%; min-width: 0 !important; overflow-x: hidden; }
+  body { padding: 0 !important; align-items: flex-start !important; background: #ffffff !important; }
+  .device.device {
+    width: 100%;
+    max-width: 402px;
+    min-height: 100dvh;
+    height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .status-bar-simple,
+  .gnb-tab-bar { width: 100%; }
+  .status-bar-simple .levels { left: auto; right: 24px; }
+}
