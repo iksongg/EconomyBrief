@@ -1,0 +1,106 @@
+/*
+  EconomyBrief — shared UI components
+  Reused across index.html, main.html, newsfeed.html, article.html,
+  daily-briefing.html, deep-research.html.
+  Loaded together with assets/js/common.js, which injects the markup
+  for any element tagged with a data-eb="..." attribute.
+*/
+
+/* ---- Google Material Symbols icon glyphs (see assets/js/icons.js) ---- */
+.gicon {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: currentColor;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* ---- device frame (shared page shell) ---- */
+.device {
+  position: relative;
+  width: 402px;
+  height: 874px;
+  background: #ffffff;
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.18);
+}
+.scroll-area {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.scroll-area::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ---- status bar: dynamic island (main / newsfeed / daily-briefing / deep-research) ---- */
+.status-bar-dynamic {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  height: 50px; padding-top: 2px; width: 100%; background: #ffffff;
+}
+.status-bar-dynamic .row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
+.status-bar-dynamic .time {
+  flex: 1 0 0; display: flex; align-items: center; justify-content: center;
+  padding: 0 6px 0 16px; font-weight: var(--font-weight-semibold); font-size: 17px; color: #000;
+}
+.status-bar-dynamic .island-spacer { width: 124px; height: 10px; }
+.status-bar-dynamic .levels { flex: 1 0 0; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 0 16px 0 6px; color: #000; }
+
+/* ---- status bar: simple pill (onboarding / article) ---- */
+.status-bar-simple { position: relative; width: 402px; height: 62px; background: #ffffff; }
+.status-bar-simple .time {
+  position: absolute; left: 24px; top: 21px; width: 100px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: var(--font-weight-semibold); font-size: 17px; color: #000000;
+}
+.status-bar-simple .levels { position: absolute; left: 278px; top: 21px; width: 100px; height: 22px; }
+.status-bar-simple .levels img { display: block; width: 100%; height: 100%; }
+
+/* ---- main header row: logo + search/notifications (main / newsfeed) ---- */
+.header-row-main {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 48px; padding: 0 20px; background: #ffffff;
+}
+.header-row-main .logo { font-weight: var(--font-weight-bold); font-size: 24px; line-height: 23px; color: #000000; text-transform: uppercase; white-space: nowrap; }
+.header-row-main .icons { display: flex; align-items: center; gap: 12px; height: 48px; color: #000; }
+
+/* ---- nav header: back + title + share/bookmark (article / daily-briefing / deep-research) ---- */
+.nav-header-common { background: #fff; display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 20px; }
+.nav-header-common.short { height: 48px; }
+.nav-header-common .icon-btn { width: 24px; height: 24px; background: none; border: none; padding: 0; cursor: pointer; display: block; text-decoration: none; color: #000; }
+.nav-header-common .icon-spacer { width: 24px; height: 24px; }
+.nav-header-common .title { font-weight: var(--font-weight-semibold); font-size: 16px; color: #0D0D14; }
+.nav-header-common .nav-text-btn {
+  background: none; border: none; padding: 0; cursor: pointer; font-family: inherit;
+  font-weight: var(--font-weight-semibold); font-size: 16px; color: #000; white-space: nowrap;
+}
+
+/* ---- bottom GNB tab bar (main / newsfeed) ----
+   Always pinned to the bottom of .device — pages using it should add
+   padding-bottom: 90px to their .scroll-area so content isn't hidden under it. */
+.gnb-tab-bar {
+  position: absolute; left: 0; bottom: 0; width: 402px; z-index: 5;
+  background: #fff; border-top: 1px solid #DBDBDB;
+  display: flex; align-items: center; justify-content: center;
+  height: 90px; padding-bottom: 20px;
+}
+.gnb-tab-bar .tab-item {
+  flex: 1 0 0; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  height: 48px; text-decoration: none; color: #B5BAC5;
+}
+.gnb-tab-bar .tab-item svg { width: 24px; height: 24px; display: block; fill: currentColor; }
+.gnb-tab-bar .tab-item span { font-size: 14px; line-height: 1.3; font-weight: var(--font-weight-regular); color: inherit; }
+.gnb-tab-bar .tab-item.active { color: var(--color-brand-600); }
+.gnb-tab-bar .tab-item.active span { font-weight: var(--font-weight-bold); }

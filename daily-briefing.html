@@ -1,0 +1,550 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>이코노미브리프 - 데일리브리핑</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="design-system/tokens/colors.css" />
+<link rel="stylesheet" href="design-system/tokens/typography.css" />
+<link rel="stylesheet" href="design-system/tokens/layout.css" />
+<link rel="stylesheet" href="assets/css/common.css" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-family-base);
+    background: #EAEBEF;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 16px;
+  }
+
+  .device { background: #fafafa; }
+
+  .screen { position: absolute; inset: 0; display: none; }
+  .screen.active { display: block; }
+
+  /* ---- progress block ---- */
+  .progress-block {
+    position: absolute;
+    top: 120px; left: 50%; transform: translateX(-50%);
+    width: 362px;
+    display: flex; flex-direction: column; gap: 10px;
+    z-index: 3;
+  }
+  .progress-block .counter-row { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
+  .progress-block .counter-row.end-only { justify-content: flex-end; }
+  .progress-block .count-current { color: var(--color-brand-600); font-weight: var(--font-weight-semibold); }
+  .progress-block .count-total { color: #7A7A7A; font-weight: var(--font-weight-regular); }
+  .progress-block .eta { color: var(--color-brand-600); font-weight: var(--font-weight-bold); }
+  .progress-block .done-label { color: var(--color-brand-600); font-weight: var(--font-weight-bold); }
+  .progress-track { width: 100%; height: 10px; border-radius: 999px; background: #EEE; overflow: hidden; }
+  .progress-fill { height: 100%; border-radius: 999px; background: var(--color-brand-600); transition: width 0.35s ease; }
+  .progress-block ul {
+    list-style: disc; margin: 0; padding-left: 18px;
+    color: #5B5E73; font-size: 12px; font-weight: var(--font-weight-regular); line-height: 1.6;
+  }
+
+  /* ---- card stack (reading state) ---- */
+  .card-stack { position: absolute; top: 242px; left: 0; width: 402px; height: 632px; }
+  /* peek sheets are the same tall "paper" shape as the front card, just offset up a
+     little and dimmed, like the next A4 pages waiting underneath — not a stretchy pill */
+  .peek-back {
+    position: absolute; background: #ffffff; opacity: 0.55; border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.08);
+    left: 27px; top: 14px; width: 342px; height: 617px;
+    transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
+  }
+  .peek-front {
+    position: absolute; background: #ffffff; opacity: 0.85; border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
+    left: 22px; top: 22px; width: 352px; height: 617px;
+    transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
+  }
+  /* stack "advances": each sheet slides forward one slot, like flipping to the next A4 page */
+  .peek-back.advance { left: 22px; top: 22px; width: 352px; opacity: 0.85; }
+  .peek-front.advance { left: 17px; top: 30px; width: 362px; opacity: 1; }
+  .peek-back.no-anim, .peek-front.no-anim { transition: none !important; }
+
+  .reading-card {
+    position: absolute;
+    left: 17px; top: 30px; width: 362px; height: 617px;
+    background: #ffffff; border-radius: 10px;
+    box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
+    padding: 20px; overflow: hidden;
+    display: flex; flex-direction: column; gap: 15px;
+    cursor: grab;
+    touch-action: pan-y;
+    z-index: 2;
+  }
+  .reading-card.dragging { cursor: grabbing; transition: none !important; }
+  .reading-card.animating { transition: transform 0.3s ease, opacity 0.3s ease; }
+  .reading-card.no-anim { transition: none !important; }
+  .reading-card img { -webkit-user-drag: none; user-select: none; }
+
+  .article-head { display: flex; flex-direction: column; gap: 11px; }
+  .article-head .headline-wrap {
+    border-bottom: 2px solid var(--color-border-default);
+    padding: 20px 0;
+    display: flex; align-items: center; justify-content: left;
+  }
+  .article-head .headline { font-weight: var(--font-weight-semibold); font-size: 24px; color: #000; line-height: 1.3; }
+  .article-head .subhead { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; line-height: 1.3; }
+
+  .article-body-wrap { display: flex; flex-direction: column; gap: 27px; flex: 1; min-height: 0; overflow-y: auto; }
+  .article-media-wrap { display: flex; flex-direction: column; gap: 15px; }
+  .article-image { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+  .article-body { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
+  .article-body .term-link {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-brand-600);
+    text-decoration: underline;
+    cursor: pointer;
+    background: none; border: none; font-family: inherit; font-size: inherit; padding: 0;
+  }
+
+  .related-list { display: flex; flex-direction: column; gap: 4px; width: 174px; }
+  .related-list .related-item { display: flex; gap: 2px; align-items: center; }
+  .related-list .gicon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: var(--color-brand-600); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .related-list span { font-size: 12px; color: #000; line-height: 1.6; }
+
+  /* ---- term tooltip popup ---- */
+  .term-overlay {
+    position: absolute; left: 17px; top: 30px; width: 362px; height: 587px;
+    display: none; z-index: 10;
+  }
+  .term-overlay.visible { display: block; }
+  .term-overlay img.dim { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; }
+  .term-popup {
+    position: absolute; left: 50%; top: calc(50% + 40px); transform: translate(-50%, -50%);
+    width: 314px; background: #ffffff; border-radius: 12px; padding: 16px;
+    box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .term-popup .top-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
+  .term-popup .term-title { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-600); line-height: 1.6; }
+  .term-popup .close-btn { width: 24px; height: 24px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
+  .term-popup .close-btn .gicon { font-size: 24px; width: 24px; height: 24px; color: #000; }
+  .term-popup .term-desc { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
+  .term-popup .save-btn {
+    align-self: flex-end;
+    width: 90px; height: 40px; border-radius: 8px; background: #3271CB;
+    color: #fff; border: none; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px;
+    cursor: pointer;
+  }
+
+  /* ---- summary state ---- */
+  .summary-card {
+    position: absolute; left: 20px; top: 223px; width: 362px; height: 713px;
+    background: #ffffff; border-radius: 10px; box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
+    padding: 20px; display: flex; flex-direction: column; gap: 15px;
+    cursor: grab; touch-action: pan-y;
+  }
+  .summary-card.dragging { cursor: grabbing; transition: none !important; }
+  .summary-card.animating { transition: transform 0.3s ease, opacity 0.3s ease; }
+  .summary-intro { display: flex; gap: 8px; align-items: center; }
+  .summary-intro .icon-box {
+    width: 24px; height: 24px; border-radius: 10px; background: #F1F1F1;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .summary-intro .icon-box .gicon { font-size: 18px; width: 18px; height: 18px; color: #5F738C; }
+  .summary-intro p { font-size: 14px; color: #898989; font-weight: var(--font-weight-regular); line-height: 1.3; }
+  .summary-intro .em { color: var(--color-brand-600); font-weight: var(--font-weight-semibold); }
+
+  .summary-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
+  .summary-head .headline { font-weight: var(--font-weight-bold); font-size: 24px; color: #000; line-height: 1.3; }
+  .summary-head .tags { display: flex; gap: 12px; font-size: 14px; color: #000; font-weight: var(--font-weight-regular); }
+
+  .tab-row {
+    display: flex; align-items: center; height: 37px; padding: 2px;
+    border: 1px solid var(--color-border-default); border-radius: 30px;
+  }
+  .tab-row button {
+    flex: 1 0 0; height: 100%; border: none; border-radius: 999px; background: none;
+    font-family: inherit; font-size: 14px; font-weight: var(--font-weight-regular); color: #3C4043; cursor: pointer;
+  }
+  .tab-row button.active { background: var(--color-brand-600); color: #fff; }
+
+  .summary-box {
+    background: #FAFBFE; border: 1px solid var(--color-border-default);
+    padding: 16px; display: flex; align-items: center; justify-content: center;
+  }
+  .summary-box p { font-weight: var(--font-weight-semibold); font-size: 20px; color: #000; line-height: 1.3; text-align: left; width: 100%; }
+
+  /* ---- completion state ---- */
+  .completion-content {
+    position: absolute; left: 50%; top: 226px; transform: translateX(-50%);
+    width: 197px; display: flex; flex-direction: column; align-items: center; gap: 20px;
+  }
+  .completion-content .wallet-img { width: 100%; height: auto; display: block; }
+  .completion-content .headline { font-weight: var(--font-weight-semibold); font-size: 22px; color: #000; text-align: center; }
+  .completion-content .badge {
+    background: #EFF6FF; border-radius: 999px; padding: 4px 10px;
+    font-weight: var(--font-weight-semibold); font-size: 12px; color: #666;
+  }
+  .completion-buttons {
+    position: absolute; left: 20px; top: 678px; width: 362px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+  .completion-buttons .primary-btn {
+    height: 60px; border-radius: 16px; background: var(--color-brand-600); border: none;
+    color: #fff; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 16px; cursor: pointer;
+  }
+  .completion-buttons .outline-btn {
+    height: 48px; border-radius: 16px; background: none; border: 1px solid var(--color-border-default);
+    color: var(--color-brand-600); font-family: inherit; font-weight: var(--font-weight-medium); font-size: 14px; cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="device">
+
+  <!-- Screen 1: 읽기 (article stack, swipe to advance) -->
+  <div class="screen active" id="screen-reading">
+    <div class="status-bar-dynamic"></div>
+    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
+
+    <div class="progress-block">
+      <div class="counter-row">
+        <p><span class="count-current" id="count-current">1</span><span class="count-total"> / 5건</span></p>
+        <p class="eta">도착 9분 전</p>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <ul>
+        <li>AI로 쉽고 편향되지 않은 뉴스를 작성합니다.</li>
+        <li>교차검증으로 정보의 신뢰성을 확인합니다.</li>
+      </ul>
+    </div>
+
+    <div class="card-stack">
+      <div class="peek-back"></div>
+      <div class="peek-front"></div>
+      <div class="reading-card" id="reading-card">
+        <div class="article-head">
+          <div class="headline-wrap"><div class="headline" id="article-headline"></div></div>
+          <div class="subhead" id="article-subhead"></div>
+        </div>
+        <div class="article-body-wrap">
+          <div class="article-media-wrap">
+            <img class="article-image" id="article-image" style="display:none;" src="" alt="" />
+            <p class="article-body" id="article-body"></p>
+          </div>
+          <div class="related-list" id="article-related" style="display:none;"></div>
+        </div>
+      </div>
+      <div class="term-overlay" id="term-overlay">
+        <img class="dim" src="assets/img/icons/dim-overlay.svg" alt="" />
+        <div class="term-popup">
+          <div class="top-row">
+            <div class="term-title">프로젝트파이낸싱(PF)</div>
+            <button type="button" class="close-btn" id="term-close"><span class="gicon" role="img" aria-label="닫기">close</span></button>
+          </div>
+          <div class="term-desc">부동산 개발 사업에 필요한 자금을 미리 빌리는 금융 방식</div>
+          <button type="button" class="save-btn" id="term-save">용어저장</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Screen 2: 요약 (완료!) -->
+  <div class="screen" id="screen-summary">
+    <div class="status-bar-dynamic"></div>
+    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
+
+    <div class="progress-block">
+      <div class="counter-row end-only"><p class="done-label">완료!</p></div>
+      <div class="progress-track"><div class="progress-fill" style="width:100%"></div></div>
+      <ul>
+        <li>AI로 쉽고 편향되지 않은 뉴스를 작성합니다.</li>
+        <li>교차검증으로 정보의 신뢰성을 확인합니다.</li>
+      </ul>
+    </div>
+
+    <div class="summary-card" id="summary-card">
+      <div class="summary-intro">
+        <div class="icon-box"><span class="gicon" role="img" aria-label="">chat_bubble</span></div>
+        <p>가장 중요한 <span class="em">경제 이슈를 쉽게</span> <span class="em">설명</span> 해드릴게요.</p>
+      </div>
+      <div class="summary-head">
+        <div class="headline">부동산·ETF 시장 안정화 대책 발표</div>
+        <div class="tags"><span>#PF</span><span>#ETF</span><span>#부동산</span><span>#시장안정</span></div>
+      </div>
+      <div class="tab-row">
+        <button type="button" class="active" data-tab="one-line">한 줄</button>
+        <button type="button" data-tab="other-view">다른 시각</button>
+        <button type="button" data-tab="30sec">30초 브리핑</button>
+      </div>
+      <div class="summary-box"><p>투자자 보호와 PF 리스크 관리가<br />핵심입니다.</p></div>
+    </div>
+  </div>
+
+  <!-- Screen 3: 완료 -->
+  <div class="screen" id="screen-complete">
+    <div class="status-bar-dynamic"></div>
+    <div data-eb="nav-header" data-right="share" data-short="true"></div>
+
+    <div class="completion-content">
+      <img class="wallet-img" src="assets/img/briefing-wallet-coins.png" alt="" />
+      <div>
+        <div class="headline">다 따라잡았어요!</div>
+      </div>
+      <div class="badge">오늘 브리핑 5건 · 12분</div>
+    </div>
+
+    <div class="completion-buttons">
+      <button type="button" class="primary-btn" id="get-token-btn">토큰 획득하기</button>
+      <button type="button" class="outline-btn" id="more-news-btn">부동산 뉴스 1건 더 보기</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="assets/js/icons.js"></script>
+<script src="assets/js/common.js"></script>
+<script>
+  (function () {
+    var articles = [
+      {
+        headline: '한국은행, 기준금리 3.25%로 동결',
+        subhead: '5회 연속 동결, 물가·가계부채 균형 고려',
+        image: 'assets/img/news-thumb-1.png',
+        body: '한국은행이 기준금리를 3.25%로 5회 연속 동결했다. 물가 안정과 가계부채 관리 사이 균형을 고려한 결정으로 풀이된다.',
+        related: null
+      },
+      {
+        headline: '정부, 부동산·ETF 시장 안정화<br />대책 발표',
+        subhead: '시장 변동성 확대 속 투자자 보호와 유동성 관리 방안 공개',
+        image: 'assets/img/briefing-article-pf.png',
+        bodyHtml: '최근 부동산 <span class="term-link" data-term="pf">프로젝트파이낸싱(PF)</span> 리스크와 레버리지ETF 투자 증가에 대응하기 위해 정부가 시장 안정화 대책을 발표했습니다. 금융당국은 투자자 보호를 강화하고 시장 변동성 완화를 위한 관리 방안을 단계적으로 추진할 예정입니다.',
+        related: [
+          '정부 대책 핵심 브리핑',
+          '부동산 PF 리스크, 무엇이 달라지나',
+          'ETF 시장 안정화 방안 살펴보기',
+          '투자자 보호 조치와 향후 일정'
+        ]
+      },
+      {
+        headline: '삼성전자, HBM4 양산 AI 메모리<br />경쟁',
+        subhead: '엔비디아향 공급 확대 기대감',
+        image: 'assets/img/news-thumb-2.png',
+        body: '삼성전자가 차세대 고대역폭메모리 HBM4 양산에 들어갔다. 엔비디아향 공급 확대 기대감에 반도체 업종 전반이 강세를 보였다.',
+        related: null
+      },
+      {
+        headline: '서울 아파트값 3주 연속 상승,<br />강남권 주도',
+        subhead: '재건축 단지 중심 상승 폭 확대',
+        image: 'assets/img/news-thumb-3.png',
+        body: '서울 아파트 매매가격이 3주 연속 오름세를 나타냈다. 강남·서초 등 재건축 단지 중심으로 상승 폭이 확대되는 모습이다.',
+        related: null
+      },
+      {
+        headline: '美연준, 9월 금리 인하 시사,<br />시장 환호',
+        subhead: '뉴욕증시 3대 지수 일제히 상승',
+        image: 'assets/img/news-thumb-4.png',
+        body: '미 연방준비제도 의장이 9월 회의에서 금리 인하 가능성을 시사했다. 뉴욕증시 3대 지수가 일제히 상승 마감했다.',
+        related: null
+      }
+    ];
+
+    var currentIndex = 0; // 0-based
+    var readingCard = document.getElementById('reading-card');
+    var termOverlay = document.getElementById('term-overlay');
+
+    function renderArticle(i) {
+      var a = articles[i];
+      document.getElementById('article-headline').innerHTML = a.headline;
+      document.getElementById('article-subhead').textContent = a.subhead;
+      var img = document.getElementById('article-image');
+      var body = document.getElementById('article-body');
+      var related = document.getElementById('article-related');
+
+      if (a.image) {
+        img.src = a.image;
+        img.style.display = 'block';
+      } else {
+        img.style.display = 'none';
+      }
+
+      if (a.bodyHtml) {
+        body.innerHTML = a.bodyHtml;
+      } else {
+        body.textContent = a.body;
+      }
+
+      if (a.related) {
+        related.style.display = 'flex';
+        related.innerHTML = a.related.map(function (t) {
+          return '<div class="related-item"><span class="gicon" role="img" aria-label="">play_circle</span><span>' + t + '</span></div>';
+        }).join('');
+      } else {
+        related.style.display = 'none';
+      }
+
+      document.querySelectorAll('.term-link').forEach(function (el) {
+        el.addEventListener('click', function (e) {
+          e.stopPropagation();
+          termOverlay.classList.add('visible');
+        });
+      });
+    }
+
+    document.getElementById('term-close').addEventListener('click', function () {
+      termOverlay.classList.remove('visible');
+    });
+    document.getElementById('term-save').addEventListener('click', function () {
+      var result = EB.glossary.save({
+        term: '프로젝트파이낸싱(PF)',
+        definition: '부동산 개발 사업에 필요한 자금을 미리 빌리는 금융 방식',
+        category: '부동산'
+      });
+      var btn = document.getElementById('term-save');
+      btn.textContent = result.added ? '저장완료 ✓' : '이미 저장됨';
+      setTimeout(function () {
+        termOverlay.classList.remove('visible');
+        btn.textContent = '용어저장';
+      }, 700);
+    });
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
+      document.getElementById(id).classList.add('active');
+    }
+
+    function updateProgress(i) {
+      document.getElementById('count-current').textContent = (i + 1);
+      document.getElementById('progress-fill').style.width = (((i + 1) / articles.length) * 100) + '%';
+    }
+
+    var peekBack = document.querySelector('.peek-back');
+    var peekFront = document.querySelector('.peek-front');
+
+    function snapInstantly(el, apply) {
+      el.classList.add('no-anim');
+      apply();
+      // eslint-disable-next-line no-unused-expressions
+      el.offsetHeight; // force reflow so the next transition re-enables cleanly
+      el.classList.remove('no-anim');
+    }
+
+    // Sequence once the front card has flown off-screen (already invisible at this point):
+    // 1) the article content is swapped while the card is still transparent
+    // 2) the stacked papers sliding forward AND the new card fading in happen together, at once
+    // 3) once everything has settled into place, the progress bar fills up
+    function advanceReading() {
+      if (currentIndex >= articles.length - 1) {
+        showScreen('screen-summary');
+        return;
+      }
+
+      currentIndex++;
+      renderArticle(currentIndex);
+
+      // card is still fully transparent here, so resetting its position is invisible
+      snapInstantly(readingCard, function () {
+        readingCard.style.transform = 'translateX(0) rotate(0deg)';
+        readingCard.style.opacity = '0';
+      });
+
+      requestAnimationFrame(function () {
+        peekFront.classList.add('advance');
+        peekBack.classList.add('advance');
+        readingCard.classList.add('animating');
+        readingCard.style.opacity = '1';
+
+        setTimeout(function () {
+          readingCard.classList.remove('animating');
+          // the opaque card now fully covers the stack, so the peeks can reset without being seen
+          snapInstantly(peekFront, function () { peekFront.classList.remove('advance'); });
+          snapInstantly(peekBack, function () { peekBack.classList.remove('advance'); });
+          updateProgress(currentIndex);
+        }, 300);
+      });
+    }
+
+    function resetCardPosition(card) {
+      card.classList.add('animating');
+      card.style.transform = 'translateX(0) rotate(0deg)';
+      card.style.opacity = '1';
+      setTimeout(function () { card.classList.remove('animating'); }, 300);
+    }
+
+    function setupSwipe(card, onSwipeAway) {
+      var isDragging = false;
+      var startX = 0, startY = 0;
+      var dragMoved = false;
+
+      card.addEventListener('pointerdown', function (e) {
+        if (termOverlay.classList.contains('visible')) return;
+        if (e.target.closest('.term-link') || e.target.closest('button')) return;
+        isDragging = true;
+        dragMoved = false;
+        startX = e.clientX;
+        startY = e.clientY;
+        card.classList.add('dragging');
+        card.setPointerCapture(e.pointerId);
+      });
+
+      card.addEventListener('pointermove', function (e) {
+        if (!isDragging) return;
+        var dx = e.clientX - startX;
+        var dy = e.clientY - startY;
+        if (Math.abs(dx) > 8) dragMoved = true;
+        card.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx / 20) + 'deg)';
+        card.style.opacity = String(Math.max(0.4, 1 - Math.abs(dx) / 400));
+      });
+
+      function endDrag(e) {
+        if (!isDragging) return;
+        isDragging = false;
+        card.classList.remove('dragging');
+        var dx = e.clientX - startX;
+        if (Math.abs(dx) > 90) {
+          var dir = dx > 0 ? 1 : -1;
+          card.classList.add('animating');
+          card.style.transform = 'translateX(' + (dir * 500) + 'px) rotate(' + (dir * 20) + 'deg)';
+          card.style.opacity = '0';
+          setTimeout(function () {
+            card.classList.remove('animating');
+            onSwipeAway();
+          }, 260);
+        } else {
+          resetCardPosition(card);
+        }
+      }
+
+      card.addEventListener('pointerup', endDrag);
+      card.addEventListener('pointercancel', endDrag);
+
+      card.addEventListener('click', function (e) {
+        if (dragMoved) { e.stopPropagation(); e.preventDefault(); dragMoved = false; }
+      }, true);
+    }
+
+    setupSwipe(readingCard, advanceReading);
+    setupSwipe(document.getElementById('summary-card'), function () { showScreen('screen-complete'); });
+
+    document.querySelectorAll('.tab-row button').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-row button').forEach(function (b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+      });
+    });
+
+    document.getElementById('get-token-btn').addEventListener('click', function () {
+      EB.appState.rewardBriefing();
+      window.location.href = 'token.html';
+    });
+    document.getElementById('more-news-btn').addEventListener('click', function () { window.location.href = 'main.html'; });
+
+    renderArticle(0);
+    updateProgress(0);
+  })();
+</script>
+
+</body>
+</html>
