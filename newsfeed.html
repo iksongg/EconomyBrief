@@ -54,7 +54,12 @@
   .timeline-head .th-sort .gicon { font-size: 18px; width: 18px; height: 18px; color: #000; }
 
   .timeline-list { position: relative; padding: 0 20px 20px 51px; display: flex; flex-direction: column; gap: 20px; }
-  .timeline-line { position: absolute; left: 25.5px; top: 26px; bottom: 26px; border-left: 1.4px dashed #82B0F9; }
+  /* top/height are set by JS to span exactly from the first dot's center to the
+     last dot's center — card heights vary with content, so a fixed top/bottom
+     guess either goes invisible (sub-pixel border-left on some mobile browsers)
+     or overshoots past the last dot. background-image (not border) renders the
+     dashes reliably at any DPI. */
+  .timeline-line { position: absolute; left: 24.5px; top: 0; width: 2px; height: 0; background-image: repeating-linear-gradient(to bottom, #82B0F9 0, #82B0F9 4px, transparent 4px, transparent 8px); }
   .timeline-card {
     position: relative; border: 1px solid #E6E9F0; border-radius: 16px; padding: 16px;
     display: flex; flex-direction: column; gap: 12px;
@@ -236,6 +241,26 @@
       window.location.href = 'article.html';
     });
   });
+
+  (function () {
+    var list = document.querySelector('.timeline-list');
+    var line = document.querySelector('.timeline-line');
+    var cards = document.querySelectorAll('.timeline-card');
+    if (!list || !line || cards.length < 2) return;
+    var DOT_CENTER = 24 + 11 / 2; // matches .timeline-card::before's top:24px, 11px circle
+
+    function layoutLine() {
+      var listTop = list.getBoundingClientRect().top;
+      var firstY = cards[0].getBoundingClientRect().top - listTop + DOT_CENTER;
+      var lastY = cards[cards.length - 1].getBoundingClientRect().top - listTop + DOT_CENTER;
+      line.style.top = firstY + 'px';
+      line.style.height = Math.max(0, lastY - firstY) + 'px';
+    }
+
+    layoutLine();
+    window.addEventListener('resize', layoutLine);
+    window.addEventListener('load', layoutLine);
+  })();
 </script>
 
 </body>

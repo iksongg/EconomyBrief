@@ -31,7 +31,21 @@
     justify-content: center;
   }
 
-  .device { height: max(100dvh, 874px); }
+  /* .device (assets/css/common.css) is sized to the real viewport: width up to 402px,
+     height:100dvh, overflow hidden. Every .page's children below use absolute px
+     coordinates authored against the original 402x874 Figma frame, so .onboard-canvas
+     is pinned at that exact native size and scaled down (via JS, see bottom of file)
+     to fit whatever .device's actual box is — this fills the screen top-to-bottom
+     with no scrolling and nothing cut off, instead of clipping content that no
+     longer fits a shorter real viewport. */
+  .device { display: flex; align-items: center; justify-content: center; }
+  .onboard-canvas {
+    position: relative;
+    width: 402px;
+    height: 874px;
+    flex-shrink: 0;
+    transform-origin: center center;
+  }
 
   .page {
     position: absolute;
@@ -269,6 +283,7 @@
 <body>
 
 <div class="device">
+<div class="onboard-canvas" id="onboard-canvas">
 
   <!-- Page 1: 온보딩1~4 (상태바/건너뛰기/도트/버튼 고정, 내용만 드래그) -->
   <div class="page active" id="page-intro">
@@ -367,10 +382,25 @@
   </div>
 
 </div>
+</div>
 
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
+  (function () {
+    var device = document.querySelector('.device');
+    var canvas = document.getElementById('onboard-canvas');
+
+    function fitCanvas() {
+      var scale = Math.min(1, device.clientWidth / 402, device.clientHeight / 874);
+      canvas.style.transform = 'scale(' + scale + ')';
+    }
+
+    fitCanvas();
+    window.addEventListener('resize', fitCanvas);
+    window.addEventListener('orientationchange', fitCanvas);
+  })();
+
   (function () {
     var contentTrack = document.getElementById('content-track');
     var slideWidth = contentTrack.parentElement.clientWidth;
