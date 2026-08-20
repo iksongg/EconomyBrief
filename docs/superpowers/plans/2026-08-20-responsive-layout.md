@@ -151,8 +151,8 @@ html, body { width: 100%; min-width: 0; overflow-x: hidden; }
 
 - [ ] **Step 5: Verify no fixed 402/874px sizing remains in the shared shell rules**
 
-Run: `grep -n "402px\|874px" assets/css/common.css`
-Expected: no output (the only remaining 402 references — `max-width: 402px` — use a different grep pattern, so plain `402px`/`874px` should no longer match).
+Run: `grep -n "width: 402px\|height: 874px" assets/css/common.css`
+Expected: no output. (This intentionally does not match `max-width: 402px`, which is the correct fluid cap and should remain.)
 
 - [ ] **Step 6: Commit**
 
