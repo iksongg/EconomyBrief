@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
+<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   :root {
     --color-primary: #2461FA;
@@ -47,7 +48,7 @@
   /* skip row (fixed chrome) */
   .skip-row {
     position: absolute;
-    top: 62px;
+    top: 0px;
     left: 0;
     width: 100%;
     padding: 10px 20px;
@@ -71,7 +72,7 @@
     color: var(--color-text-secondary);
     white-space: nowrap;
   }
-  .skip-row .gicon { font-size: 14px; width: 14px; height: 14px; color: var(--color-text-secondary); }
+  .skip-row .gicon { color: var(--color-text-secondary); }
 
   /* draggable content section: circle-bg + hero-img + intro-text */
   .content-track {
@@ -98,7 +99,7 @@
 
   .circle-bg {
     position: absolute;
-    top: 295px;
+    top: 233px;
     width: 260px;
     height: 260px;
   }
@@ -112,7 +113,7 @@
 
   .intro-text {
     position: absolute;
-    top: 116px;
+    top: 54px;
     left: 0;
     width: 100%;
     padding: 0 30px;
@@ -138,7 +139,7 @@
   /* dots (fixed chrome) */
   .dots {
     position: absolute;
-    top: 612px;
+    top: 550px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -159,7 +160,7 @@
   /* CTA button (fixed chrome) */
   .cta {
     position: absolute;
-    top: 758px;
+    top: 696px;
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 32px);
@@ -183,7 +184,7 @@
   /* keyword selection page */
   .keyword-title {
     position: absolute;
-    top: 125px;
+    top: 63px;
     left: 0;
     width: 100%;
     padding: 0 30px;
@@ -198,6 +199,22 @@
     text-align: center;
   }
 
+  .keyword-subtitle {
+    position: absolute;
+    top: 155px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--color-text-secondary);
+  }
+  .keyword-subtitle strong {
+    color: #000000;
+    font-weight: 700;
+  }
+
   .keyword-grid {
     position: absolute;
     top: 50%;
@@ -206,13 +223,15 @@
     width: 293px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
   }
   .keyword-row {
     display: flex;
+    align-items: center;
+    align-self: stretch;
     gap: 8px;
     height: 53.176px;
-    width: 100%;
   }
   .pill {
     flex: 1 0 0;
@@ -221,18 +240,18 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50px;
+    border-radius: 55.39px;
     background: #ffffff;
     border: 1.108px solid var(--color-border);
     color: var(--color-pill-text);
-    font-size: 19.64px;
+    font-size: 18px;
     font-weight: 500;
     font-family: inherit;
     cursor: pointer;
-    white-space: normal;
-    padding: 0 12px;
+    white-space: nowrap;
+    padding: 0 14px;
   }
-  .pill.regular { color: #000000; font-weight: 400; font-size: 17.73px; }
+  .pill.regular { color: #000000; font-weight: 400; font-size: 18px; }
   .pill.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
@@ -242,7 +261,7 @@
 
   .skip-later {
     position: absolute;
-    top: 727px;
+    top: 665px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 14px;
@@ -268,15 +287,26 @@
 </head>
 <body>
 
+<div class="portfolio-stage">
+<div class="iphone-device">
+<div class="device-bezel">
+<div class="app-screen">
+<div class="dynamic-island"></div>
+<div class="ios-status-bar">
+  <span class="status-time">9:41</span>
+  <div class="status-icons">
+    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
+  </div>
+</div>
+
 <div class="device">
 
-  <!-- Page 1: 온보딩1~4 (상태바/건너뛰기/도트/버튼 고정, 내용만 드래그) -->
+  <!-- Page 1: 온보딩1~4 (건너뛰기/도트/버튼 고정, 내용만 드래그) -->
   <div class="page active" id="page-intro">
-    <div class="status-bar-simple"></div>
     <div class="skip-row">
       <button type="button" data-external="main.html">
         <span>건너뛰기</span>
-        <span class="gicon" role="img" aria-label="">arrow_forward_ios</span>
+        <span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span>
       </button>
     </div>
 
@@ -285,7 +315,7 @@
       <!-- 1. 온보딩1 -->
       <div class="content-slide">
         <div class="circle-bg" style="left:63px;"><img src="assets/img/icons/onboarding-circle-bg.svg" alt="" width="260" height="260" /></div>
-        <img class="hero-img" style="left:calc(50% - 164.001px); top:275px;" src="assets/img/hero-1.png" alt="필요한 뉴스만 빠르고 정확하게" />
+        <img class="hero-img" style="left:calc(50% - 164.001px); top:213px;" src="assets/img/hero-1.png" alt="필요한 뉴스만 빠르고 정확하게" />
         <div class="intro-text">
           <h1><span class="line-primary">필요한 뉴스만</span><span class="line-accent">빠르고 정확하게</span></h1>
           <p>AI가 복잡한 경제 뉴스를 핵심만 정리해드립니다.</p>
@@ -295,7 +325,7 @@
       <!-- 2. 온보딩2 -->
       <div class="content-slide">
         <div class="circle-bg" style="left:71px;"><img src="assets/img/icons/onboarding-circle-bg.svg" alt="" width="260" height="260" /></div>
-        <img class="hero-img" style="left:calc(50% - 141.001px); top:265px;" src="assets/img/hero-2.png" alt="어려운 경제도 쉽게 이해하세요" />
+        <img class="hero-img" style="left:calc(50% - 141.001px); top:203px;" src="assets/img/hero-2.png" alt="어려운 경제도 쉽게 이해하세요" />
         <div class="intro-text">
           <h1><span class="line-primary">어려운 경제도</span><span class="line-accent">쉽게 이해하세요</span></h1>
           <p>AI 요약과 용어 설명으로 경제를<br />더욱 쉽게 이해할 수 있습니다.</p>
@@ -305,7 +335,7 @@
       <!-- 3. 온보딩3 -->
       <div class="content-slide">
         <div class="circle-bg" style="left:74px;"><img src="assets/img/icons/onboarding-circle-bg.svg" alt="" width="260" height="260" /></div>
-        <img class="hero-img" style="left:calc(50% - 141.001px); top:252px;" src="assets/img/hero-3.png" alt="AI가 대신 분석하는 Deep Research" />
+        <img class="hero-img" style="left:calc(50% - 141.001px); top:190px;" src="assets/img/hero-3.png" alt="AI가 대신 분석하는 Deep Research" />
         <div class="intro-text">
           <h1><span class="line-primary">AI가 대신 분석하는</span><span class="line-accent">Deep Research</span></h1>
           <p>여러 자료를 종합 분석해<br />시장 영향까지 깊이 있게 제공합니다.</p>
@@ -315,7 +345,7 @@
       <!-- 4. 온보딩4 -->
       <div class="content-slide">
         <div class="circle-bg" style="left:71px;"><img src="assets/img/icons/onboarding-circle-bg.svg" alt="" width="260" height="260" /></div>
-        <img class="hero-img" style="left:calc(50% - 141.001px); top:252px;" src="assets/img/hero-4.png" alt="관심 키워드로 맞춤 뉴스를 받아보세요" />
+        <img class="hero-img" style="left:calc(50% - 141.001px); top:190px;" src="assets/img/hero-4.png" alt="관심 키워드로 맞춤 뉴스를 받아보세요" />
         <div class="intro-text">
           <h1><span class="line-primary">관심 키워드로</span><span class="line-accent">맞춤 뉴스를 받아보세요</span></h1>
           <p>관심 분야를 선택하면<br />AI가 맞춤 뉴스를 추천해드립니다.</p>
@@ -330,15 +360,15 @@
       <span class="dot"></span>
       <span class="dot"></span>
     </div>
-    <div class="cta"><button type="button" data-external="main.html">로그인 / 회원가입</button></div>
+    <div class="cta"><button type="button" data-goto="keywords">로그인 / 회원가입</button></div>
   </div>
 
   <!-- Page 2: 온보딩5 - 키워드 선택 -->
   <div class="page" id="page-keywords">
-    <div class="status-bar-simple"></div>
     <div class="keyword-title">
       <h1>관심있는 키워드를<br />선택해주세요</h1>
     </div>
+    <div class="keyword-subtitle" id="keyword-count">5개 중 <strong><span id="keyword-count-num">2</span>개</strong> 선택</div>
     <div class="keyword-grid">
       <div class="keyword-row">
         <button type="button" class="pill regular">증시</button>
@@ -361,13 +391,18 @@
         <button type="button" class="pill">물가</button>
       </div>
     </div>
-    <button type="button" class="skip-later" data-goto="intro">다음에 설정하기</button>
+    <button type="button" class="skip-later" data-external="main.html">다음에 설정하기</button>
     <div class="cta"><button type="button" data-external="main.html">저장하기</button></div>
     <div class="home-indicator"></div>
   </div>
 
 </div>
+</div>
+</div>
+</div>
+</div>
 
+<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
@@ -478,11 +513,24 @@
       });
     });
 
+    var keywordMax = 5;
+    var keywordCountNum = document.getElementById('keyword-count-num');
+
+    function updateKeywordCount() {
+      var selected = document.querySelectorAll('.keyword-grid .pill.active').length;
+      if (keywordCountNum) keywordCountNum.textContent = selected;
+    }
+
     document.querySelectorAll('.keyword-grid .pill').forEach(function (el) {
       el.addEventListener('click', function () {
+        var selected = document.querySelectorAll('.keyword-grid .pill.active').length;
+        if (!el.classList.contains('active') && selected >= keywordMax) return;
         el.classList.toggle('active');
+        updateKeywordCount();
       });
     });
+
+    updateKeywordCount();
 
     goToContentSlide(0, false);
   })();

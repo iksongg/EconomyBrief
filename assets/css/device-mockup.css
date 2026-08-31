@@ -1,0 +1,220 @@
+/*
+  EconomyBrief — desktop portfolio device mockup.
+
+  Adds a decorative iPhone 16 frame + iOS status bar + Dynamic Island
+  around every page's existing `.device` (untouched) for desktop portfolio
+  viewing, modeled on the Figma reference "iPhone 16 Plus Light"
+  (figma.com file XdLJc2p9IBvdC0L3PfFjKP, node 5151:81287). That file's
+  own layer structure is 3 explicit shells around the content —
+  titanium-frame → screen-border (black) → screen-here (display) — so
+  this CSS reproduces the same 3-layer nesting instead of a single
+  border. Structure added around each page's body:
+
+    body
+     └─ .portfolio-stage
+         └─ .iphone-device        (1: light titanium outer shell)
+             └─ .device-bezel     (2: thin black display bezel)
+                 └─ .app-screen   (3: the actual display)
+                     ├─ .dynamic-island
+                     ├─ .ios-status-bar   (time + signal/wifi/battery)
+                     └─ .device            <- existing app, unchanged
+
+  Below MOBILE_BREAKPOINT (see assets/js/device-mockup.js, kept in sync at
+  700px) every wrapper collapses via `display: contents` — the wrapper
+  divs are removed from the box tree entirely, so `.device` becomes body's
+  effective flex child exactly as before this file existed. Real phones
+  therefore render identically to the pre-mockup layout; only wide desktop
+  viewports get the frame.
+*/
+
+.portfolio-stage,
+.iphone-device,
+.device-bezel,
+.app-screen {
+  display: contents;
+}
+
+.ios-status-bar,
+.dynamic-island {
+  display: none;
+}
+
+/* Cursor feedback for the mouse-drag-to-scroll gesture added in
+   device-mockup.js (any row the app already made overflow-x: auto). Only
+   changes the cursor — never the row's own layout/size/content. */
+.eb-drag-scrollable {
+  cursor: grab;
+}
+.eb-drag-scrollable.eb-drag-scrolling {
+  cursor: grabbing;
+  scroll-snap-type: none !important;
+  user-select: none;
+}
+
+@media (min-width: 700px) {
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .portfolio-stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100dvh;
+    padding: 24px;
+    background: #E9EAEE;
+  }
+
+  /* Layer 1 — light titanium outer shell. Figma's titanium-frame is
+     ~0.98% of the device width thick (4.09px of a 417.73px-wide frame);
+     at our 426px device width that's ~4px, so the metal itself reads as
+     a slim bright edge, not a case. */
+  .iphone-device {
+    display: block;
+    position: relative;
+    flex-shrink: 0;
+    width: 426px;
+    height: 898px;
+    padding: 4px;
+    background: linear-gradient(135deg, #F1F0EC 0%, #E4E2DD 22%, #CFCDC8 50%, #E0DEDA 74%, #F4F2EF 100%);
+    border-radius: 58px;
+    box-shadow:
+      0 30px 60px rgba(0, 0, 0, 0.16),
+      0 8px 20px rgba(0, 0, 0, 0.10),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.7),
+      inset 0 0 0 2px rgba(0, 0, 0, 0.04);
+    transform-origin: center center;
+  }
+
+  /* Physical buttons — right: power; left: action + volume up/down.
+     Positions read off the same Figma frame (percentages of its 861px
+     height), applied to our 898px device height. Pure CSS (pseudo-
+     elements + box-shadow copies) so no markup changes are needed. */
+  .iphone-device::before,
+  .iphone-device::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(180deg, #E4E2DD, #B9B7B2);
+  }
+  .iphone-device::before {
+    right: -2.5px;
+    top: 368px;
+    width: 2.5px;
+    height: 107px;
+    border-radius: 2px 0 0 2px;
+  }
+  .iphone-device::after {
+    left: -2.5px;
+    top: 159px;
+    width: 2.5px;
+    height: 36px;
+    border-radius: 0 2px 2px 0;
+    box-shadow:
+      0 64px 0 0 #cecbc6,
+      0 142px 0 0 #cecbc6;
+  }
+
+  /* Layer 2 — thin black display bezel, the part actually missing from
+     the previous version. Figma's screen-border ring is ~1.96% of the
+     device width thick (8.17px of 417.73px); at 426px that's ~8px —
+     thin, but a clearly separate dark ring between the metal and the
+     display, matching the reference instead of the metal running
+     straight into the white app screen. */
+  .device-bezel {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
+    background: #000000;
+    border-radius: 54px;
+  }
+
+  /* Layer 3 — the actual display, fixed at 402x874: the true iPhone 16
+     Pro screen size, not just the app content's height. (Width was
+     already exactly right via the 100%/100% chain above; only the
+     height needed pinning — it used to resolve to 920px, i.e. 874 of
+     app content plus 46 of status bar stacked on top of that, instead
+     of the status bar living inside the 874.) */
+  .app-screen {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 874px;
+    background: #fff;
+    border-radius: 46px;
+    overflow: hidden;
+  }
+
+  /* Lock the existing app to exactly 402x828 inside the screen cutout —
+     828 = the 874px screen minus the 46px .ios-status-bar sitting above
+     it, so status bar + device together exactly fill .app-screen with no
+     overflow. Overrides any page-specific `.device { height: ... }` rule
+     by selector specificity (kept !important as a robustness margin since
+     several pages set height inline via their own <style> block).
+     min-height/max-height must be reset too: common.css's base `.device`
+     rule sets `min-height: 100dvh`, and min-height always wins over a
+     smaller `height` regardless of !important — on a desktop window taller
+     than 874px that silently stretched `.device` past the screen cutout,
+     pushing the bottom GNB tab bar (position:absolute; bottom:0) out past
+     `.app-screen`'s overflow:hidden edge so it disappeared. */
+  .iphone-device .device {
+    width: 402px !important;
+    max-width: 402px !important;
+    height: 828px !important;
+    min-height: 828px !important;
+    max-height: 828px !important;
+  }
+
+  .ios-status-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 46px;
+    padding: 0px 39px;
+    background: #ffffff;
+  }
+  .ios-status-bar .status-time {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', var(--font-family-base, 'Pretendard'), system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    letter-spacing: -0.1px;
+    color: #000000;
+  }
+  .ios-status-bar .status-icons {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #000000;
+  }
+  .ios-status-bar .status-icons svg { display: block; }
+  /* The combined cellular/wifi/battery glyph exported straight from the
+     Figma status bar (node 4909:38502's "Levels" asset) — see
+     assets/img/icons/status-bar-levels.svg. Kept at its native 100x22 so
+     none of it is rescaled/redrawn. */
+  .ios-status-bar .status-icons img { display: block; height: 22px; width: auto; }
+
+  /* Dynamic Island — sized off the same Figma frame: island width is
+     28.8% of the display width (113.37 / 393.22 in the reference), height
+     keeps that pill's aspect ratio. It's a child of .app-screen (the
+     display itself, not the outer metal) so "top" is measured directly
+     from the display's own top edge — 11px, matching the real iPhone
+     16-series Dynamic Island inset — regardless of how thick the metal
+     frame or black bezel around it are. */
+  .dynamic-island {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 11px;
+    transform: translateX(-50%);
+    width: 116px;
+    height: 32px;
+    background: #000000;
+    border-radius: 16px;
+    z-index: 20;
+    pointer-events: none;
+  }
+}

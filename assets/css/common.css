@@ -10,6 +10,7 @@
 .gicon {
   font-family: 'Material Symbols Rounded';
   font-weight: normal;
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
   font-style: normal;
   display: inline-flex;
   align-items: center;
@@ -26,6 +27,29 @@
   flex-shrink: 0;
   overflow: hidden;
 }
+
+/* ---- small trailing chevron icon ("더보기 >", "전체 내역 >", row-item
+   arrows, etc.) — a real Material Symbols glyph (arrow_forward_ios) like
+   every other icon in the app, sized uniformly wherever it's used. Each
+   page still sets its own color via its own context selector. ---- */
+.chev-icon { font-size: 24px; width: 24px; height: 24px; }
+
+/* ---- placeholder shown instead of a missing article thumbnail/logo (see
+   EB.media in common.js) — for anything data/news.json hasn't gotten a
+   real image/logo asset for yet. Every page using EB.media.apply() gets
+   this same look; each page still sets its own width/height on these two
+   classes to match its own thumb/logo size (e.g. `.eb-thumb-placeholder {
+   width: 61px; height: 61px; }`), the way it already sizes the real
+   .thumb/.tl-thumb image these replace. ---- */
+.eb-thumb-placeholder {
+  background: #F1F2F5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.eb-thumb-placeholder .gicon { font-size: 22px; width: 22px; height: 22px; color: #C2C6D1; }
+.eb-logo-placeholder { width: 16px; height: 16px; border-radius: 4px; background: #E2E4E9; flex-shrink: 0; display: inline-block; }
 
 /* ---- device frame (shared page shell) ---- */
 .device {

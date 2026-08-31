@@ -33,16 +33,14 @@
   var GLYPH_MAP = {
     'home-fill': ['home', 1],
     'home-line': ['home', 0],
-    'newsmode-fill': ['news', 1],
-    'newsmode-line': ['news', 0],
-    'newsmode-badge-blue': ['news', 0],
-    'newsmode-badge-blue2': ['news', 0],
-    'newsmode-badge-gray': ['news', 0],
+    'newsmode-fill': ['newsmode', 1],
+    'newsmode-line': ['newsmode', 0],
+    'newsmode-badge-blue': ['newsmode', 0],
+    'newsmode-badge-blue2': ['newsmode', 0],
+    'newsmode-badge-gray': ['newsmode', 0],
     'account-circle-fill': ['account_circle', 1],
     'account-circle-line': ['account_circle', 0],
     'arrow-back-ios-new': ['arrow_back_ios_new', 0],
-    'arrow-forward-ios': ['arrow_forward_ios', 0],
-    'arrow-forward-ios-light': ['arrow_forward_ios', 0],
     'bookmark': ['bookmark', 0],
     'bookmark-fill': ['bookmark', 1],
     'bookmark-blue': ['bookmark', 1],
@@ -99,8 +97,7 @@
     'source-banner-icon': ['verified_user', 0],
     'status-cellular': ['signal_cellular_alt', 0],
     'status-wifi': ['wifi', 0],
-    'status-battery': ['battery_full', 1],
-    'toggle-switch': ['toggle_on', 1]
+    'status-battery': ['battery_full', 1]
   };
 
   // Remaining entries: genuine custom artwork (composite/multi-color compounds,
@@ -131,7 +128,9 @@
     'token-charge-badge': 'token-charge-badge.svg',
     'dot-active': 'dot-active.svg',
     'dot-inactive': 'dot-inactive.svg',
-    'badge-target': 'badge-target.svg'
+    'badge-target': 'badge-target.svg',
+    'arrow-forward-ios': 'arrow-forward-ios.svg',
+    'notify-toggle': 'notify-toggle.svg'
   };
 
   // Natural [width, height] read directly from each SVG's own viewBox — the source of
@@ -150,7 +149,9 @@
     'camera-badge-bg': [14, 14],
     'token-charge-badge': [14, 14],
     'play-button-bg': [50, 50],
-    'badge-target': [13.4583, 13.4583]
+    'badge-target': [13.4583, 13.4583],
+    'arrow-forward-ios': [10, 24],
+    'notify-toggle': [35, 48]
   };
 
   function iconSrc(name) {

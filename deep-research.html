@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
+<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -41,8 +42,8 @@
   .progress-card .ring-pct .num { font-weight: var(--font-weight-semibold); font-size: 24px; }
   .progress-card .ring-pct .pct { font-weight: var(--font-weight-semibold); font-size: 16px; }
   .progress-card .info { display: flex; flex-direction: column; gap: 12px; color: #fff; }
-  .progress-card .info .status-row { display: flex; align-items: center; gap: 4px; }
-  .progress-card .info .status-row img { width: 19px; height: 19px; }
+  .progress-card .info .status-row { display: flex; align-items: center; gap: 2px; }
+  .progress-card .info .status-row img { width: 14.25px; height: 14.25px; }
   .progress-card .info .status-row span { font-weight: var(--font-weight-semibold); font-size: 14px; text-transform: uppercase; }
   .progress-card .eta-label { font-weight: var(--font-weight-semibold); font-size: 12px; }
   .progress-card .eta-value { font-weight: var(--font-weight-bold); font-size: 18px; margin-top: 4px; }
@@ -52,19 +53,17 @@
   .task-card { background: #fff; border: 1px solid #E6E9F0; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
   .task-card .task-title { font-weight: var(--font-weight-semibold); font-size: 18px; color: #000; text-transform: uppercase; }
   .task-list { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 0; }
-  .task-list::before {
-    content: ''; position: absolute; left: 11.5px; top: 12px; bottom: 12px;
-    border-left: 1.5px dashed #A8C5FD; z-index: -1;
-  }
+  /* height/position set by JS so it only spans between analyzed (done) steps, never into the not-yet-analyzed ones */
+  .task-line { position: absolute; left: 11.5px; width: 0; border-left: 1.5px dashed #A8C5FD; z-index: -1; display: none; }
   .task-item { display: flex; align-items: center; gap: 12px; }
   .task-item .mark { width: 24px; height: 24px; border-radius: 29px; background: #DCE9FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .task-item .mark .gicon { font-size: 15px; width: 15px; height: 15px; color: var(--color-brand-600); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .task-item .mark .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-brand-600); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
   .task-item .mark.pending-active {
     width: 23.941px; height: 23.941px; background: #fff; border: 2.817px dashed var(--color-brand-600); border-radius: 11.97px;
     animation: dr-spin 1.1s linear infinite;
   }
   /* not-yet-analyzed: no fill, gray outline — design system Text/Disabled token */
-  .task-item .mark.pending { width: 23.941px; height: 23.941px; background: none; border: 2.817px solid var(--color-text-disabled); border-radius: 11.97px; }
+  .task-item .mark.pending { width: 23.941px; height: 23.941px; background: none; border: 2.817px solid #E6E9F0; border-radius: 11.97px; }
   @keyframes dr-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
   .task-item p { font-size: 12px; color: #5B5E73; text-transform: uppercase; line-height: 1.3; }
 
@@ -76,13 +75,13 @@
   .preview-point .pp-icon { width: 34px; height: 34px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .preview-point .pp-icon .gicon { font-size: 21.667px; width: 21.667px; height: 21.667px; }
   .preview-point .pp-text p:first-child { font-weight: var(--font-weight-semibold); font-size: 14px; text-transform: uppercase; }
-  .preview-point .pp-text p:last-child { font-weight: var(--font-weight-regular); font-size: 12px; color: #5B5E73; margin-top: 2px; }
+  .preview-point .pp-text p:last-child { font-weight: var(--font-weight-regular); font-size: 12px; color: #5B5E73; margin-top: 0; }
 
   .notify-bar { background: #fff; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
   .notify-bar .left { display: flex; align-items: center; gap: 8px; }
   .notify-bar .left .gicon { font-size: 20px; width: 20px; height: 20px; color: var(--color-brand-600); }
   .notify-bar .left span { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-brand-600); text-transform: uppercase; }
-  .notify-bar .gicon.toggle { font-size: 40px; width: 40px; height: 40px; color: var(--color-brand-600); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 40; }
+  .notify-bar img.toggle { width: 35px; height: 48px; display: block; }
 
   /* ===== report screen ===== */
   .tab-bar { background: #fff; display: flex; height: 48px; }
@@ -100,7 +99,7 @@
   .section-title-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
   .section-title-row h3 { font-weight: var(--font-weight-bold); font-size: 16px; color: #0D0D14; }
   .more-link { display: flex; align-items: center; gap: 0; font-size: 12px; color: #353535; }
-  .more-link .gicon { font-size: 18px; width: 18px; height: 18px; color: #353535; }
+  .more-link .gicon { color: #353535; }
 
   .summary-box { background: #F7F9F8; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
   .summary-box .sb-head { display: flex; align-items: center; gap: 4px; }
@@ -119,9 +118,13 @@
   .stat-card .sc-value { font-weight: var(--font-weight-bold); font-size: 24px; color: #0D0D14; }
   .stat-card .sc-value.lg { font-size: 26px; }
   .stat-card .sc-sub { font-size: 12px; color: #99A1AB; }
-  .stat-card .sc-delta { display: flex; align-items: center; gap: 2px; background: rgba(239,68,68,0.05); border-radius: 999px; padding: 2px 8px; }
-  .stat-card .sc-delta .gicon { font-size: 14px; width: 14px; height: 14px; color: #EF4444; }
-  .stat-card .sc-delta span { font-size: 12px; color: #EF4444; }
+  .stat-card .sc-delta { display: flex; align-items: center; gap: 2px; border-radius: 999px; padding: 2px 8px; }
+  .stat-card .sc-delta .gicon { font-size: 14px; width: 14px; height: 14px; }
+  .stat-card .sc-delta span { font-size: 12px; }
+  .stat-card .sc-delta.up { background: var(--color-status2-green-bg); }
+  .stat-card .sc-delta.up .gicon, .stat-card .sc-delta.up span { color: var(--color-status2-green-fill); }
+  .stat-card .sc-delta.down { background: var(--color-status2-red-bg); }
+  .stat-card .sc-delta.down .gicon, .stat-card .sc-delta.down span { color: var(--color-status2-red-fill); }
   .stat-card .sc-spark { width: 100%; max-width: 136px; height: 40px; margin-top: 2px; }
 
   .ai-insight-box { background: #F4F6FE; border-radius: 14px; padding: 16px; display: flex; gap: 4px; margin-top: 12px; }
@@ -149,18 +152,32 @@
   .impact-card { background: #FBFCFE; border: 1px solid #E8EBF0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
   .impact-card .ic-head { display: flex; align-items: center; gap: 4px; }
   .impact-card .ic-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-status2-green-fill); }
+  .impact-card.negative .ic-head .gicon { color: var(--color-status2-red-fill); }
   .impact-card .ic-head span { font-weight: var(--font-weight-semibold); font-size: 12px; color: #6B7380; }
-  .impact-card .ic-title { font-weight: var(--font-weight-bold); font-size: 16px; color: #0D0D14; }
-  .impact-card .ic-desc { font-size: 12px; color: #6B7380; margin-top: 2px; }
-  .impact-card .ic-badge { display: inline-flex; align-items: center; align-self: flex-start; background: #E4ECFF; border-radius: 999px; padding: 4px 10px; font-weight: var(--font-weight-medium); font-size: 12px; color: var(--color-brand-600); margin-top: 8px; }
-  .impact-card .ic-badge.green { background: #ECF8F1; color: var(--color-status2-green-fill); }
+  .impact-card .ic-title { font-weight: var(--font-weight-bold); font-size: 16px; line-height: 1.3; color: #0D0D14; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  /* Fixed to always reserve 2 lines of space (short text just leaves blank room, long text gets ellipsis-truncated at 2 lines)
+     so every card's content block is the same height and the badge below always lands in the same spot, regardless of
+     how long each card's own description happens to be. */
+  .impact-card .ic-desc {
+    font-size: 14px; line-height: 22px; letter-spacing: -0.01em; color: #6B7380; margin-top: 2px;
+    display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
+    min-height: calc(22px * 2);
+  }
+  .impact-card .ic-badge { display: inline-flex; align-items: center; align-self: flex-start; background: #E4ECFF; border-radius: 999px; padding: 4px 10px; font-weight: var(--font-weight-medium); font-size: 12px; color: var(--color-brand-600); margin-top: auto; }
+  .impact-card .ic-badge.green { background: var(--color-status2-green-bg); color: var(--color-status2-green-fill); }
+  .impact-card .ic-badge.red { background: var(--color-status2-red-bg); color: var(--color-status2-red-fill); }
 
   .detail-item { padding: 15px 0; border-top: 1px solid var(--color-border-default); }
   .detail-item:first-child { border-top: none; }
   .detail-item .di-head { display: flex; align-items: center; gap: 4px; cursor: pointer; user-select: none; }
-  .detail-item .di-body { display: none; }
-  .detail-item.expanded .di-body { display: block; }
-  .detail-item .di-num { width: 22px; height: 22px; border-radius: 85px; background: #E7F9EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: var(--font-weight-semibold); font-size: 10px; color: #0FB880; }
+  .detail-item .di-body {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, opacity 0.3s ease;
+  }
+  .detail-item.expanded .di-body { max-height: 500px; opacity: 1; }
+  .detail-item .di-num { width: 22px; height: 22px; border-radius: 85px; background: #E7F9EF; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: var(--font-weight-semibold); font-size: 12px; color: #0FB880; }
   .detail-item .di-title { flex: 1; font-weight: var(--font-weight-semibold); font-size: 16px; color: #0D0D14; }
   .detail-item .di-head .gicon.chev { font-size: 22px; width: 22px; height: 22px; color: #8C949E; }
   .detail-item ul { padding-left: 21px; list-style: disc; margin-top: 4px; }
@@ -239,8 +256,8 @@
   .source-item .src-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
   .source-item .src-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
   .source-item .src-title { font-weight: var(--font-weight-bold); font-size: 14px; color: #000; }
-  .source-item .src-badge { background: #E5F2FF; border-radius: 100px; padding: 4px 8px; font-weight: var(--font-weight-medium); font-size: 11px; color: #1C61D9; white-space: nowrap; flex-shrink: 0; }
-  .source-item .src-desc { font-size: 13px; color: #6B7380; line-height: 1.6; }
+  .source-item .src-badge { background: #E5F2FF; border-radius: 100px; padding: 4px 8px; font-weight: var(--font-weight-medium); font-size: 12px; color: #1C61D9; white-space: nowrap; flex-shrink: 0; }
+  .source-item .src-desc { font-size: 14px; color: #6B7380; line-height: 1.6; }
   .source-item .src-meta { font-size: 12px; color: #99A1AB; }
   .more-sources-btn {
     display: flex;
@@ -272,18 +289,29 @@
 </head>
 <body>
 
+<div class="portfolio-stage">
+<div class="iphone-device">
+<div class="device-bezel">
+<div class="app-screen">
+<div class="dynamic-island"></div>
+<div class="ios-status-bar">
+  <span class="status-time">9:41</span>
+  <div class="status-icons">
+    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
+  </div>
+</div>
+
 <div class="device">
   <div class="scroll-area" id="scroll-area">
 
     <!-- ============ LOADING SCREEN ============ -->
     <div class="screen active" id="screen-loading">
-      <div class="status-bar-dynamic"></div>
       <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="bookmark"></div>
 
       <div class="report-header">
         <div class="rh-left">
-          <div class="rh-title">AI 데이터센터 투자 확대가 국내 반도체 산업에 미치는 영향은?</div>
-          <div class="rh-tags"><span>AI</span><span>반도체</span><span>HBM</span></div>
+          <div class="rh-title" id="loading-title">AI 데이터센터 투자 확대가 국내 반도체 산업에 미치는 영향은?</div>
+          <div class="rh-tags" id="loading-tags"><span>AI</span><span>반도체</span><span>HBM</span></div>
         </div>
         <img class="rh-illust" src="assets/img/dr-analyzing-illust.png" alt="" />
       </div>
@@ -313,6 +341,7 @@
       <div class="task-card">
         <div class="task-title">지금 하고 있는 일</div>
         <div class="task-list" id="task-list">
+          <div class="task-line" id="task-line"></div>
           <div class="task-item"><div class="mark pending"><span class="gicon" style="display:none;" role="img" aria-label="">check</span></div><p>사용자의 질문 의도와 핵심 키워드를 분석했습니다.</p></div>
           <div class="task-item"><div class="mark pending"><span class="gicon" style="display:none;" role="img" aria-label="">check</span></div><p>국내외 경제 뉴스와 산업 동향을 종합 분석했습니다.</p></div>
           <div class="task-item"><div class="mark pending"><span class="gicon" style="display:none;" role="img" aria-label="">check</span></div><p>AI 투자와 반도체 시장 데이터를 비교 분석했습니다.</p></div>
@@ -323,7 +352,7 @@
 
       <div class="preview-card">
         <div class="pv-title">미리 보는 분석 포인트</div>
-        <div class="preview-points">
+        <div class="preview-points" id="preview-points">
           <div class="preview-point"><div class="pp-icon" style="background:#F1F1F1;"><span class="gicon" style="color:#5F738C;" role="img" aria-label="">lightbulb</span></div><div class="pp-text"><p>AI 투자 확대</p><p>글로벌 빅테크의 AI 인프라 투자 동향 분석</p></div></div>
           <div class="preview-point" style="background:#F9FBFA;"><div class="pp-icon" style="background:#ECF8F1;"><span class="gicon" style="color:#4B8C6B;" role="img" aria-label="">trending_up</span></div><div class="pp-text"><p style="color:#4B8C6B;">HBM 시장 성장</p><p>고성능 메모리 수요 증가와 시장 전망 분석</p></div></div>
           <div class="preview-point" style="background:#FAFAFC;"><div class="pp-icon" style="background:#DDE1FF;"><span class="gicon" style="color:#591BAF;" role="img" aria-label="">query_stats</span></div><div class="pp-text"><p style="color:#591BAF;">국내 반도체 영향</p><p>관련 기업 실적과 산업 성장 가능성 분석</p></div></div>
@@ -332,19 +361,18 @@
 
       <div class="notify-bar">
         <div class="left"><span class="gicon" role="img" aria-label="">notifications</span><span>분석이 완료되면 알림을 보내드릴게요</span></div>
-        <span class="gicon toggle" role="img" aria-label="">toggle_on</span>
+        <img class="toggle" src="assets/img/icons/notify-toggle.svg" alt="" />
       </div>
     </div>
 
     <!-- ============ REPORT SCREEN ============ -->
     <div class="screen" id="screen-report">
-      <div class="status-bar-dynamic"></div>
       <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="bookmark"></div>
 
       <div class="report-header">
         <div class="rh-left">
-          <div class="rh-title">ai 데이터센터 투자 확대,<br />국내 반도체 수혜 기대</div>
-          <div class="rh-meta">완료 시간 2026.07.26 09:43&nbsp;&nbsp;|&nbsp;&nbsp;분석 시간 2분 18초</div>
+          <div class="rh-title" id="report-title">ai 데이터센터 투자 확대,<br />국내 반도체 수혜 기대</div>
+          <div class="rh-meta" id="report-meta">완료 시간 2026.07.26 09:43&nbsp;&nbsp;|&nbsp;&nbsp;분석 시간 2분 18초</div>
         </div>
         <img class="rh-illust done" src="assets/img/dr-complete-illust.png" alt="" />
       </div>
@@ -362,7 +390,7 @@
         <div class="section-white tight">
           <div class="summary-box">
             <div class="sb-head"><span class="gicon" style="background:#ECF8F1;border-radius:8px;padding:3px;box-sizing:border-box;" role="img" aria-label="">lightbulb</span><span>핵심요약</span></div>
-            <div>
+            <div id="core-summary-rows">
               <div class="numbered-row">
                 <div class="num-avatar"><img src="assets/img/1.png" alt="" /></div>
                 <div class="num-text"><p>AI 인프라 투자가 반도체 시장 성장</p><p>글로벌 기업들의 데이터 투자가 AI 반도체와 HBM 수요 증가로 이어지고 있습니다.</p></div>
@@ -380,8 +408,8 @@
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3>주요 데이터 요약</h3><div class="more-link"><span>더 보기</span><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></div></div>
-          <div class="stat-grid">
+          <div class="section-title-row"><h3>주요 데이터 요약</h3><div class="more-link"><span>더 보기</span><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></div></div>
+          <div class="stat-grid" id="core-stat-grid">
             <div class="stat-card"><div class="sc-label">AI 서버 투자 증가율</div><div class="sc-value lg">28%</div><div class="sc-sub">전년 대비</div><img class="sc-spark" src="assets/img/icons/sparkline-1.svg" alt="" /></div>
             <div class="stat-card"><div class="sc-label">HBM 시장 성장률</div><div class="sc-value lg">+35%</div><div class="sc-sub">연평균 전망</div><img class="sc-spark" src="assets/img/icons/sparkline-1.svg" alt="" /></div>
             <div class="stat-card"><div class="sc-label">AI 반도체 수요</div><div class="sc-value lg">증가세</div><div class="sc-sub">시장 전망</div><img class="sc-spark" src="assets/img/icons/sparkline-1.svg" alt="" /></div>
@@ -390,14 +418,14 @@
           <div class="ai-insight-box">
             <div>
               <div class="aib-head"><div class="ai-badge">AI</div><span>AI 인사이트</span></div>
-              <p>AI 분석 결과, 데이터센터 투자가 확대될수록 HBM과 첨단 패키징 기술을 보유한 기업의 성장 가능성이 높아질 것으로 분석됩니다.</p>
+              <p id="core-insight-text">AI 분석 결과, 데이터센터 투자가 확대될수록 HBM과 첨단 패키징 기술을 보유한 기업의 성장 가능성이 높아질 것으로 분석됩니다.</p>
             </div>
           </div>
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3>시장 전망 데이터</h3><div class="more-link"><span>더 보기</span><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></div></div>
-          <div class="stat-grid">
+          <div class="section-title-row"><h3>시장 전망 데이터</h3><div class="more-link"><span>더 보기</span><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></div></div>
+          <div class="stat-grid" id="core-size-grid">
             <div class="stat-card"><div class="sc-label">AI 서버 시장 규모</div><div class="sc-value">4,320억 달러</div><div class="sc-sub">2030년 전망</div><img class="sc-spark" src="assets/img/icons/sparkline-1.svg" alt="" /></div>
             <div class="stat-card"><div class="sc-label">HBM 시장 규모</div><div class="sc-value">580억 달러</div><div class="sc-sub">2030년 전망</div><img class="sc-spark" src="assets/img/icons/sparkline-2.svg" alt="" /></div>
           </div>
@@ -412,7 +440,7 @@
       <!-- TAB: 시장 -->
       <div class="tab-panel" id="tab-market">
         <div class="section-white">
-          <div class="impact-grid">
+          <div class="impact-grid" id="market-impact-grid">
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체</span></div><div><div class="ic-title">상승 기대</div><div class="ic-desc">AI 데이터센터 투자 확대</div></div><div class="ic-badge">긍정적</div></div>
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>메모리 시장</span></div><div><div class="ic-title">수요 증가</div><div class="ic-desc">HBM 공급 확대 기대</div></div><div class="ic-badge">긍정적</div></div>
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>데이터센터</span></div><div><div class="ic-title">투자 확대</div><div class="ic-desc">AI 인프라 구축 지속</div></div><div class="ic-badge">긍정적</div></div>
@@ -420,12 +448,12 @@
           </div>
           <div class="ai-insight-box plain" style="margin-top:0;">
             <div class="ai-badge">AI</div>
-            <p>AI 데이터센터 투자가 확대되면서 반도체와 전력 인프라 중심의 성장세가 이어질 가능성이 높습니다. 다만 투자 확대에 따른 경쟁 심화와 공급 증가 여부는 지속적으로 확인할 필요가 있습니다.</p>
+            <p id="market-insight-text">AI 데이터센터 투자가 확대되면서 반도체와 전력 인프라 중심의 성장세가 이어질 가능성이 높습니다. 다만 투자 확대에 따른 경쟁 심화와 공급 증가 여부는 지속적으로 확인할 필요가 있습니다.</p>
           </div>
         </div>
 
-        <div class="section-white">
-          <div class="section-title-row"><h3>상세 분석</h3><div class="more-link"><span>더 보기</span><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></div></div>
+        <div class="section-white" id="market-detail-list">
+          <div class="section-title-row"><h3>상세 분석</h3><div class="more-link"><span>더 보기</span><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></div></div>
           <div class="detail-item"><div class="di-head"><div class="di-num">01</div><div class="di-title">AI 인프라 투자 확대</div><span class="gicon chev" role="img" aria-label="">keyboard_arrow_down</span></div><div class="di-body"><ul><li>글로벌 빅테크의 데이터센터 투자 증가</li><li>AI 서버 구축 수요 지속 확대</li></ul></div></div>
           <div class="detail-item"><div class="di-head"><div class="di-num">02</div><div class="di-title">HBM 수요 증가</div><span class="gicon chev" role="img" aria-label="">keyboard_arrow_down</span></div><div class="di-body"><ul><li>AI 서버용 메모리 수요 확대</li><li>고부가 메모리 시장 성장 기대</li></ul></div></div>
           <div class="detail-item"><div class="di-head"><div class="di-num">03</div><div class="di-title">국내 반도체 영향</div><span class="gicon chev" role="img" aria-label="">keyboard_arrow_down</span></div><div class="di-body"><ul><li>메모리 기업 실적 개선 기대</li><li>첨단 패키징 투자 확대 전망</li></ul></div></div>
@@ -433,8 +461,8 @@
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3>시장 성장 전망</h3><div class="more-link"><span>더 보기</span><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></div></div>
-          <div class="stat-grid">
+          <div class="section-title-row"><h3>시장 성장 전망</h3><div class="more-link"><span>더 보기</span><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></div></div>
+          <div class="stat-grid" id="market-growth-grid">
             <div class="stat-card">
               <div class="sc-label">AI 서버 투자</div>
               <div class="sc-value-row"><div class="sc-value lg">28%</div><div class="sc-delta"><span class="gicon" role="img" aria-label="">arrow_drop_up</span><span>0.4%p</span></div></div>
@@ -445,7 +473,7 @@
           <div class="ai-insight-box">
             <div>
               <div class="aib-head"><div class="ai-badge">AI</div><span>AI 인사이트</span></div>
-              <p>AI 분석 결과, 데이터센터 투자 확대는 반도체와 AI 인프라 산업 전반의 성장으로 이어질 가능성이 높습니다.</p>
+              <p id="market-insight2-text">AI 분석 결과, 데이터센터 투자 확대는 반도체와 AI 인프라 산업 전반의 성장으로 이어질 가능성이 높습니다.</p>
             </div>
           </div>
         </div>
@@ -461,7 +489,7 @@
 
       <!-- TAB: 상세 -->
       <div class="tab-panel" id="tab-detail">
-        <div class="section-white">
+        <div class="section-white" id="detail-accordion-list">
           <div class="section-title-row" style="margin-bottom:0;"><h3>상세 분석</h3></div>
           <div class="detail-item expanded" style="border-top:none;">
             <div class="di-head"><div class="di-num">01</div><div class="di-title">AI 투자 확대 배경</div><span class="gicon chev" role="img" aria-label="">keyboard_arrow_up</span></div>
@@ -524,7 +552,7 @@
           <div class="ai-insight-box" style="margin-top:0;">
             <div>
               <div class="aib-head"><div class="ai-badge">AI</div><span>AI 분석 결과</span></div>
-              <p>AI 데이터센터 투자는 단순한 설비 확장이 아니라 반도체, 메모리, 네트워크까지 영향을 미치는 핵심 성장 동력으로 분석됩니다.</p>
+              <p id="detail-summary-text">AI 데이터센터 투자는 단순한 설비 확장이 아니라 반도체, 메모리, 네트워크까지 영향을 미치는 핵심 성장 동력으로 분석됩니다.</p>
             </div>
           </div>
         </div>
@@ -537,7 +565,7 @@
             <div><div class="ih-title">주요 경제 지표<span class="gicon" role="img" aria-label="">question_mark</span></div><div class="ih-sub">AI가 분석한 관련 경제 지표입니다.</div></div>
             <div class="view-toggle"><button type="button" class="active">차트</button><button type="button">표</button></div>
           </div>
-          <div class="impact-grid" style="margin-bottom:0;">
+          <div class="impact-grid" id="related-indicator-grid" style="margin-bottom:0;">
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 서버 투자 규모</span></div><div><div class="ic-title">4,320억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>HBM 시장 성장률</span></div><div><div class="ic-title">연평균 35%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">확대</div></div>
             <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체 시장 규모</span></div><div><div class="ic-title">2,180억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
@@ -550,37 +578,39 @@
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-status2-green-fill);" role="img" aria-label="">pie_chart</span>AI 인프라 투자 구성 (2030 전망)</h3></div>
+          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-status2-green-fill);" role="img" aria-label="">pie_chart</span><span id="related-donut-section-title">AI 인프라 투자 구성 (2030 전망)</span></h3></div>
           <div class="donut-section">
             <div class="donut-row">
               <div class="donut-wrap">
                 <img src="assets/img/icons/donut-chart.svg" alt="" />
-                <div class="donut-label">AI 인프라<br />투자 구성</div>
+                <div class="donut-label" id="related-donut-title">AI 인프라<br />투자 구성</div>
               </div>
-              <div class="legend-list">
+              <div class="legend-list" id="related-donut-legend">
                 <div class="legend-row"><div class="l-left"><img src="assets/img/icons/legend-dot-1.svg" alt="" /><span>AI 데이터센터</span></div><span>38%</span></div>
                 <div class="legend-row"><div class="l-left"><img src="assets/img/icons/legend-dot-2.svg" alt="" /><span>HBM 메모리</span></div><span>14%</span></div>
                 <div class="legend-row"><div class="l-left"><img src="assets/img/icons/legend-dot-3.svg" alt="" /><span>AI 서버</span></div><span>29%</span></div>
                 <div class="legend-row"><div class="l-left"><img src="assets/img/icons/legend-dot-4.svg" alt="" /><span>GPU</span></div><span>13%</span></div>
               </div>
             </div>
-            <div class="donut-total"><span class="dt-label">전체 AI 인프라 투자</span><span class="dt-value">4,320억 달러</span></div>
+            <div class="donut-total"><span class="dt-label" id="related-donut-total-label">전체 AI 인프라 투자</span><span class="dt-value" id="related-donut-total-value">4,320억 달러</span></div>
           </div>
         </div>
 
         <div class="section-white">
           <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-status2-green-fill);" role="img" aria-label="">finance_mode</span>핵심 시장 성장률</h3></div>
+          <div id="related-growth-list">
           <div class="growth-row"><div class="g-label">HBM 시장</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:56.5%;"></div></div><div class="g-pct">+65%</div></div></div>
           <div class="growth-row"><div class="g-label">AI 서버</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:28%;"></div></div><div class="g-pct">+28%</div></div></div>
           <div class="growth-row"><div class="g-label">AI 반도체</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:24.5%;"></div></div><div class="g-pct">+26%</div></div></div>
           <div class="growth-row"><div class="g-label">첨단 패키징</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:10.5%;"></div></div><div class="g-pct">+10%</div></div></div>
+          </div>
         </div>
 
         <div class="section-white">
           <div class="ai-insight-box" style="margin-top:0;">
             <div>
               <div class="aib-head"><span class="gicon" style="background:#DDE1FF;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">mindfulness</span><span>지표해석</span></div>
-              <ul>
+              <ul id="related-insight-list">
                 <li>AI 데이터센터 투자 확대는 AI 서버와 HBM 수요 증가를 함께 견인하고 있습니다.</li>
                 <li>AI 반도체 시장은 데이터센터 구축 확대와 함께 중장기 성장세가 이어질 가능성이 높습니다.</li>
                 <li>첨단 패키징과 전력 인프라 투자 확대는 관련 산업 전반의 성장 동력으로 작용할 것으로 분석됩니다.</li>
@@ -603,11 +633,11 @@
         <div class="section-white">
           <div class="source-banner">
             <span class="gicon" role="img" aria-label="">verified_user</span>
-            <p>AI가 신뢰할 수 있는 24개의 출처를 분석해 리포트를 작성했습니다. 최신성과 신뢰도, 질문과의 연관성을 기준으로 자료를 선별했습니다.</p>
+            <p id="source-banner-text">AI가 신뢰할 수 있는 24개의 출처를 분석해 리포트를 작성했습니다. 최신성과 신뢰도, 질문과의 연관성을 기준으로 자료를 선별했습니다.</p>
           </div>
 
-          <div class="section-title-row" style="margin-top:20px; margin-bottom:0;"><h3>주요 분석 출처 (24)</h3></div>
-          <div class="filter-pills">
+          <div class="section-title-row" style="margin-top:20px; margin-bottom:0;"><h3 id="source-count-title">주요 분석 출처 (24)</h3></div>
+          <div class="filter-pills" id="source-filter-pills">
             <button type="button" class="active">전체(24)</button>
             <button type="button">뉴스/기사(12)</button>
             <button type="button">공식보고서(6)</button>
@@ -688,122 +718,17 @@
 
   </div>
 </div>
+</div>
+</div>
+</div>
+</div>
 
+<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
-<script>
-  (function () {
-    // ---- loading -> report simulation ----
-    var pctEl = document.getElementById('progress-pct-num');
-    var etaEl = document.getElementById('eta-value');
-    var ringFill = document.getElementById('progress-ring-fill');
-    var ringCircumference = 226.195;
-    var taskItems = document.querySelectorAll('#task-list .task-item');
-
-    function setTaskState(index, state) {
-      var mark = taskItems[index].querySelector('.mark');
-      var img = mark.querySelector('.gicon');
-      mark.classList.remove('pending', 'pending-active');
-      if (state === 'done') {
-        img.style.display = 'flex';
-      } else {
-        img.style.display = 'none';
-        mark.classList.add(state === 'active' ? 'pending-active' : 'pending');
-      }
-    }
-
-    // start state: 0%, ring empty, first task analyzing, the rest untouched
-    ringFill.style.strokeDashoffset = ringCircumference;
-    for (var s = 0; s < taskItems.length; s++) setTaskState(s, s === 0 ? 'active' : 'pending');
-
-    var etaSeconds = 6; // compressed demo timer (design says "1분 30초" — sped up for a usable demo)
-    var totalTicks = 24;
-    var tick = 0;
-
-    var timer = setInterval(function () {
-      tick++;
-      var f = tick / totalTicks;
-      var pct = Math.min(100, Math.round(f * 100));
-
-      pctEl.textContent = pct;
-      ringFill.style.strokeDashoffset = ringCircumference * (1 - pct / 100);
-
-      var remaining = Math.max(0, Math.round(etaSeconds * (1 - f)));
-      etaEl.textContent = remaining + '초 후';
-
-      var doneCount = Math.min(taskItems.length, Math.floor(f * taskItems.length));
-      for (var i = 0; i < taskItems.length; i++) {
-        if (i < doneCount) setTaskState(i, 'done');
-        else if (i === doneCount) setTaskState(i, 'active');
-        else setTaskState(i, 'pending');
-      }
-
-      if (tick >= totalTicks) {
-        clearInterval(timer);
-        for (var j = 0; j < taskItems.length; j++) setTaskState(j, 'done');
-        setTimeout(function () {
-          document.getElementById('screen-loading').classList.remove('active');
-          document.getElementById('screen-report').classList.add('active');
-          document.getElementById('scroll-area').scrollTop = 0;
-        }, 500);
-      }
-    }, 250);
-
-    // ---- tabs ----
-    document.querySelectorAll('#tab-bar button').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('#tab-bar button').forEach(function (b) { b.classList.remove('active'); });
-        document.querySelectorAll('.tab-panel').forEach(function (p) { p.classList.remove('active'); });
-        btn.classList.add('active');
-        document.getElementById('tab-' + btn.getAttribute('data-tab')).classList.add('active');
-        document.getElementById('scroll-area').scrollTop = 0;
-      });
-    });
-
-    document.querySelectorAll('.filter-pills button').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-      });
-    });
-    document.querySelectorAll('.view-toggle button').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        btn.parentElement.querySelectorAll('button').forEach(function (b) { b.classList.remove('active'); });
-        btn.classList.add('active');
-      });
-    });
-
-    // ---- 출처 더 보기 ----
-    var sourceList = document.querySelector('.source-list');
-    var moreSourcesLabel = document.getElementById('more-sources-label');
-    var moreSourcesIcon = document.getElementById('more-sources-icon');
-    document.getElementById('more-sources-btn').addEventListener('click', function () {
-      var expanded = sourceList.classList.toggle('expanded');
-      document.querySelectorAll('.source-list .source-item.more-item, .source-list .source-item.was-more-item').forEach(function (el) {
-        el.classList.toggle('more-item', !expanded);
-        el.classList.toggle('was-more-item', expanded);
-      });
-      moreSourcesLabel.textContent = expanded ? '출처 접기' : '출처 더 보기';
-      moreSourcesIcon.textContent = expanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
-    });
-
-    // ---- 상세 분석 accordion ----
-    document.querySelectorAll('.detail-item').forEach(function (item) {
-      var head = item.querySelector('.di-head');
-      var chev = item.querySelector('.chev');
-      head.addEventListener('click', function () {
-        var isExpanded = item.classList.toggle('expanded');
-        chev.textContent = isExpanded ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
-      });
-    });
-
-    document.getElementById('reanalyze-btn').addEventListener('click', function () {
-      document.getElementById('screen-report').classList.remove('active');
-      document.getElementById('screen-loading').classList.add('active');
-      window.location.reload();
-    });
-  })();
-</script>
+<script src="assets/js/news-data-source.js"></script>
+<script src="assets/js/news-data.js"></script>
+<script src="assets/js/deep-research-ai.js"></script>
 
 </body>
 </html>

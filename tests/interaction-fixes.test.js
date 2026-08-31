@@ -19,6 +19,10 @@ function loadCommonWithEmptyStorage() {
       getItem(key) { return storage.has(key) ? storage.get(key) : null; },
       setItem(key, value) { storage.set(key, value); }
     },
+    EB_ICONS: {
+      icon() { return ''; },
+      iconSrc() { return ''; }
+    },
     window: {}
   };
   context.window = context;
