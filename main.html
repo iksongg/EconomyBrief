@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
-<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -103,7 +102,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
-    width: 362px;
+    width: 100%;
   }
   .section-heading .section-title { align-self: stretch; }
 
@@ -112,12 +111,13 @@
     font-weight: var(--font-weight-bold);
     font-size: 20px;
     line-height: 1.3;
-    color: #000000;
+    color: #000;
+    text-transform: uppercase;
   }
   .ai-card {
     background: var(--color-brand-600);
     height: 120px;
-    width: 370px;
+    width: 100%;
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -127,7 +127,7 @@
   .ai-card .left { display: flex; flex-direction: column; gap: 20px; width: 240px; }
   .ai-card .dots { display: flex; gap: 4px; }
   .ai-card .dots span { width: 24px; height: 2px; background: rgba(255,255,255,0.5); }
-  .ai-card .dots span.filled { background: #ffffff; }
+  .ai-card .dots span:first-child { background: #ffffff; }
   .ai-card .headline { font-weight: var(--font-weight-semibold); font-size: 18px; line-height: 1.3; color: #ffffff; }
   .ai-card .subline { font-weight: var(--font-weight-regular); font-size: 14px; line-height: 1.3; color: rgba(255,255,255,0.76); margin-top: 4px; }
   .ai-card .play-btn {
@@ -150,7 +150,7 @@
     background: #FAFBFE;
     border-radius: 20px;
     padding: 16px 20px;
-    width: 362px;
+    width: 100%;
     flex-shrink: 0;
     scroll-snap-align: start;
     display: flex;
@@ -172,7 +172,7 @@
     color: #101112;
     margin-top: 6px;
   }
-  .news-highlight .tags { display: flex; gap: 6px; margin-top: 16px; }
+  .news-highlight .tags { display: flex; gap: 6px; margin-top: 6px; }
   .news-highlight .tags span {
     background: #E8F1FF;
     border-radius: 999px;
@@ -237,7 +237,7 @@
     align-items: center;
     justify-content: center;
     height: 48px;
-    width: 364px;
+    width: 100%;
     border: 1px solid var(--color-border-default);
     border-radius: var(--radius-full);
     background: none;
@@ -252,7 +252,7 @@
     display: flex;
     gap: var(--space-md);
     overflow-x: auto;
-    width: calc(100% + 20px);
+    width: 100%;
   }
   .trend-row::-webkit-scrollbar { display: none; }
   .trend-card { width: 309px; flex-shrink: 0; display: flex; flex-direction: column; gap: 12px; }
@@ -279,7 +279,7 @@
     background: rgba(44, 62, 80, 0.5);
     border-radius: 50px;
     padding: 6px 9px;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: var(--font-weight-regular);
     color: #ffffff;
   }
@@ -288,30 +288,9 @@
   .trend-card .byline img { width: 16px; height: 16px; object-fit: contain; }
   .trend-card .byline span { font-weight: var(--font-weight-regular); font-size: 12px; color: #000000; }
 
-  /* placeholder sizing for this page's two thumb contexts (base look is
-     shared via .eb-thumb-placeholder/.eb-logo-placeholder in common.css) —
-     see assets/img/news/ and assets/img/logos/ for where the real files go */
-  .eb-thumb-placeholder { width: 84px; height: 84px; border-radius: 5.526px; }
-  .trend-card .image-wrap.eb-placeholder { background: #F1F2F5; }
-  .trend-card .image-wrap.eb-placeholder .eb-thumb-placeholder {
-    position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 0; background: none;
-  }
-
 </style>
 </head>
 <body>
-
-<div class="portfolio-stage">
-<div class="iphone-device">
-<div class="device-bezel">
-<div class="app-screen">
-<div class="dynamic-island"></div>
-<div class="ios-status-bar">
-  <span class="status-time">9:41</span>
-  <div class="status-icons">
-    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
-  </div>
-</div>
 
 <div class="device">
   <div class="scroll-area">
@@ -331,10 +310,10 @@
     </div>
 
     <div class="card-section ai-section">
-      <div class="ai-title">AI가 선별한<br />현우님 맞춤 새 소식</div>
+      <div class="ai-title">ai가 선별한<br />현우님 맞춤 새 소식</div>
       <div class="ai-card">
         <div class="left">
-          <div class="dots" id="ai-briefing-dots"><span class="filled"></span><span></span><span></span><span></span><span></span></div>
+          <div class="dots"><span></span><span></span><span></span><span></span><span></span></div>
           <div>
             <div class="headline">AI 2건 · 반도체 2건 · 금리 1건</div>
             <div class="subline">총 5건 예상 13분</div>
@@ -356,35 +335,35 @@
         <div class="section-title">오늘의 핵심 요약 뉴스</div>
       </div>
       <div class="news-highlight-row" id="news-highlight-row">
-        <div class="news-highlight" data-article-id="ai-data-investment">
+        <div class="news-highlight">
           <div>
             <div class="headline">AI 데이터 투자 확대, 국내 반도체 수혜 기대</div>
             <div class="body">글로벌 빅테크 기업들이 생성형 AI 서비스 확대를 위해 데이터센터 투자를 지속하면서 AI 반도체 수요도 빠르게 증가하고 있습니다.</div>
             <div class="tags"><span>#AI</span><span>#반도체</span><span>#HBM</span></div>
           </div>
         </div>
-        <div class="news-highlight" data-article-id="kospi-2700">
+        <div class="news-highlight">
           <div>
             <div class="headline">코스피 2,700선 돌파, 외국인 매수세 확대</div>
             <div class="body">외국인 투자자의 순매수세가 이어지며 코스피가 연중 최고치를 경신했습니다. 반도체와 이차전지 업종이 상승세를 주도했습니다.</div>
             <div class="tags"><span>#코스피</span><span>#외국인매수</span><span>#반도체</span></div>
           </div>
         </div>
-        <div class="news-highlight" data-article-id="bok-rate-350">
+        <div class="news-highlight">
           <div>
             <div class="headline">한국은행 기준금리 동결, 인하 시점에 쏠린 관심</div>
             <div class="body">한국은행이 기준금리를 3.50%로 동결했습니다. 시장에서는 하반기 인하 가능성에 무게를 두는 분위기입니다.</div>
             <div class="tags"><span>#기준금리</span><span>#한국은행</span><span>#통화정책</span></div>
           </div>
         </div>
-        <div class="news-highlight" data-article-id="krw-usd-1380">
+        <div class="news-highlight">
           <div>
             <div class="headline">원·달러 환율 1,380원대, 수입물가 부담 커져</div>
             <div class="body">미국 강달러 기조가 이어지며 원화 약세가 지속되고 있습니다. 수입 원자재 가격 상승으로 기업들의 부담이 커지고 있습니다.</div>
             <div class="tags"><span>#환율</span><span>#원달러</span><span>#수입물가</span></div>
           </div>
         </div>
-        <div class="news-highlight" data-loop-clone="true" aria-hidden="true" data-article-id="ai-data-investment">
+        <div class="news-highlight" data-loop-clone="true" aria-hidden="true">
           <div>
             <div class="headline">AI 데이터 투자 확대, 국내 반도체 수혜 기대</div>
             <div class="body">글로벌 빅테크 기업들이 생성형 AI 서비스 확대를 위해 데이터센터 투자를 지속하면서 AI 반도체 수요도 빠르게 증가하고 있습니다.</div>
@@ -410,7 +389,7 @@
       </div>
 
       <div class="news-list">
-        <div class="item" data-article-id="bok-rate-325">
+        <div class="item">
           <div class="info">
             <div>
               <div class="title">한국은행, 기준금리 3.25%로 동결</div>
@@ -423,7 +402,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-1.png" alt="" />
         </div>
-        <div class="item" data-article-id="samsung-hbm4">
+        <div class="item">
           <div class="info">
             <div>
               <div class="title">삼성전자, HBM4 양산 AI 메모리 경쟁</div>
@@ -436,7 +415,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-2.png" alt="" />
         </div>
-        <div class="item" data-article-id="seoul-apt-price">
+        <div class="item">
           <div class="info">
             <div>
               <div class="title">서울 아파트값 3주 연속 상승, 강남권 주도</div>
@@ -449,7 +428,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-3.png" alt="" />
         </div>
-        <div class="item" data-article-id="fed-rate-cut-sep">
+        <div class="item">
           <div class="info">
             <div>
               <div class="title">美연준, 9월 금리 인하 시사, 시장 환호</div>
@@ -462,7 +441,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-4.png" alt="" />
         </div>
-        <div class="item more-item" data-article-id="krw-usd-export">
+        <div class="item more-item">
           <div class="info">
             <div>
               <div class="title">원달러 환율 1,380원대 안착, 수출기업 훈풍</div>
@@ -475,7 +454,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-1.png" alt="" />
         </div>
-        <div class="item more-item" data-article-id="skhynix-hbm-earnings">
+        <div class="item more-item">
           <div class="info">
             <div>
               <div class="title">SK하이닉스, HBM 공급 확대로 실적 서프라이즈</div>
@@ -488,7 +467,7 @@
           </div>
           <img class="thumb" src="assets/img/news-thumb-2.png" alt="" />
         </div>
-        <div class="item more-item" data-article-id="ai-semi-etf-inflow">
+        <div class="item more-item">
           <div class="info">
             <div>
               <div class="title">AI 반도체 ETF에 자금 유입 지속, 개인 투자 확대</div>
@@ -518,7 +497,7 @@
         <div class="section-title">대한민국 트렌드 픽</div>
       </div>
       <div class="trend-row">
-        <div class="trend-card" data-article-id="jeonse-fraud-support">
+        <div class="trend-card">
           <div class="image-wrap">
             <img class="bg" src="assets/img/trend-pick-1.png" alt="" />
             <div class="tags"><span>#전세사기</span><span>#임대차법</span><span>#주거안정</span></div>
@@ -531,7 +510,7 @@
             </div>
           </div>
         </div>
-        <div class="trend-card" data-article-id="dining-cost-inflation">
+        <div class="trend-card">
           <div class="image-wrap">
             <img class="bg" src="assets/img/trend-pick-2.png" alt="" />
             <div class="tags"><span>#외식물가</span><span>#장바구니물가</span><span>#소비자심리</span></div>
@@ -544,7 +523,7 @@
             </div>
           </div>
         </div>
-        <div class="trend-card" data-article-id="electric-bill-hike">
+        <div class="trend-card">
           <div class="image-wrap">
             <img class="bg" src="assets/img/trend-pick-change.png" alt="" />
             <div class="tags"><span>#전기요금</span><span>#에너지물가</span><span>#서민경제</span></div>
@@ -557,7 +536,7 @@
             </div>
           </div>
         </div>
-        <div class="trend-card" data-article-id="household-debt-1900t">
+        <div class="trend-card">
           <div class="image-wrap">
             <img class="bg" src="assets/img/trend-pick-change-2.png" alt="" />
             <div class="tags"><span>#가계부채</span><span>#대출규제</span><span>#DSR</span></div>
@@ -570,7 +549,7 @@
             </div>
           </div>
         </div>
-        <div class="trend-card" data-article-id="youth-unemployment-record">
+        <div class="trend-card">
           <div class="image-wrap">
             <img class="bg" src="assets/img/trend-pick-change-3.png" alt="" />
             <div class="tags"><span>#청년실업</span><span>#고용시장</span><span>#일자리</span></div>
@@ -590,48 +569,17 @@
 
   <div data-eb="tab-bar" data-active="home"></div>
 </div>
-</div>
-</div>
-</div>
-</div>
 
-<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
-<script src="assets/js/news-data-source.js"></script>
-<script src="assets/js/news-data.js"></script>
 <script>
-  // Keep card thumbnails/logos in sync with each article's `image` /
-  // `sourceLogo` field in data/news.json — the same fields article.html
-  // uses for its hero image — so dropping a new file into assets/img/news/
-  // or assets/img/logos/ and updating that one path updates it everywhere
-  // it appears. Articles with no real image/logo yet get a gray placeholder
-  // instead of a mismatched stock photo or logo — see EB.media in common.js.
-  window.EBNews.loadArticles().then(function (articles) {
-    var byId = {};
-    articles.forEach(function (a) { byId[a.id] = a; });
-    document.querySelectorAll('[data-article-id]').forEach(function (el) {
-      var article = byId[el.getAttribute('data-article-id')];
-      if (article) EB.media.apply(el, article);
-    });
-  });
-
   document.getElementById('play-briefing-btn').addEventListener('click', function () {
     window.location.href = 'daily-briefing.html';
   });
 
-  (function () {
-    var progress = EB.appState.load().briefingProgress;
-    if (!progress) return;
-    var dots = document.querySelectorAll('#ai-briefing-dots span');
-    var filledCount = Math.round((progress.current / progress.total) * dots.length);
-    dots.forEach(function (dot, i) { dot.classList.toggle('filled', i < filledCount); });
-  })();
-
   document.querySelectorAll('.news-highlight, .news-list .item, .trend-card').forEach(function (el) {
     el.addEventListener('click', function () {
-      var articleId = el.getAttribute('data-article-id');
-      window.location.href = articleId ? 'article.html?id=' + encodeURIComponent(articleId) : 'article.html';
+      window.location.href = 'article.html';
     });
   });
 

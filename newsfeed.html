@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
-<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -47,28 +46,20 @@
   .trending-card .tc-item .tc-left { display: flex; align-items: center; gap: 8px; flex: 1; min-width: 0; }
   .trending-card .tc-num { width: 18px; height: 18px; border-radius: 4px; background: var(--color-brand-600); color: #fff; font-weight: var(--font-weight-bold); font-size: 14px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
   .trending-card .tc-text { font-weight: var(--font-weight-medium); font-size: 16px; color: #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .trending-card .tc-item .gicon { color: #000; }
+  .trending-card .tc-item .gicon { font-size: 20px; width: 20px; height: 20px; flex-shrink: 0; color: #000; }
 
   .timeline-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; }
   .timeline-head .th-title { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; }
   .timeline-head .th-sort { display: flex; align-items: center; gap: 4px; font-size: 14px; color: #000; }
-  .timeline-head .th-sort .gicon { font-size: 24px; width: 24px; height: 24px; color: #000; }
+  .timeline-head .th-sort .gicon { font-size: 18px; width: 18px; height: 18px; color: #000; }
 
-  .timeline-list { position: relative; padding: 0 23px 20px 51px; display: flex; flex-direction: column; gap: 20px; }
-  .timeline-line {
-    position: absolute;
-    left: 25.5px;
-    top: 26px;
-    bottom: 26px;
-    width: 1.4px;
-    /* CSS `border-style: dashed` can't guarantee the pattern ends on a "dash" —
-       depending on the total length, it can just as easily end on a gap, which
-       is what made the line look like it stopped short of the last dot. Using
-       a background gradient instead lets JS below size the repeat so a dash
-       always lands exactly at the bottom. */
-    background-image: linear-gradient(to bottom, transparent 50%, #82B0F9 50%);
-    background-repeat: repeat-y;
-  }
+  .timeline-list { position: relative; padding: 0 20px 20px 51px; display: flex; flex-direction: column; gap: 20px; }
+  /* top/height are set by JS to span exactly from the first dot's center to the
+     last dot's center — card heights vary with content, so a fixed top/bottom
+     guess either goes invisible (sub-pixel border-left on some mobile browsers)
+     or overshoots past the last dot. background-image (not border) renders the
+     dashes reliably at any DPI. */
+  .timeline-line { position: absolute; left: 24.5px; top: 0; width: 2px; height: 0; background-image: repeating-linear-gradient(to bottom, #82B0F9 0, #82B0F9 4px, transparent 4px, transparent 8px); }
   .timeline-card {
     position: relative; border: 1px solid #E6E9F0; border-radius: 16px; padding: 16px;
     display: flex; flex-direction: column; gap: 12px;
@@ -86,24 +77,9 @@
   .timeline-card .tl-tags { display: flex; gap: 4px; flex-wrap: wrap; }
   .timeline-card .tl-tags span { border: 1px solid var(--color-border-default); border-radius: 999px; padding: 8px 12px; font-size: 10px; color: #000; }
   .timeline-card .tl-thumb { width: 61px; height: 61px; border-radius: 5.526px; object-fit: cover; flex-shrink: 0; }
-  /* placeholder sizing for this page's thumb (base look is shared via
-     .eb-thumb-placeholder in common.css) */
-  .eb-thumb-placeholder { width: 61px; height: 61px; border-radius: 5.526px; }
 </style>
 </head>
 <body>
-
-<div class="portfolio-stage">
-<div class="iphone-device">
-<div class="device-bezel">
-<div class="app-screen">
-<div class="dynamic-island"></div>
-<div class="ios-status-bar">
-  <span class="status-time">9:41</span>
-  <div class="status-icons">
-    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
-  </div>
-</div>
 
 <div class="device">
   <div class="scroll-area">
@@ -123,17 +99,17 @@
       <div class="tc-label">지금 뜨는 뉴스</div>
       <div class="tc-viewport" id="tc-viewport">
         <div class="tc-track" id="tc-track">
-          <button type="button" class="tc-item" data-article-id="us-cpi-april"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="kospi-2750-close"><div class="tc-left"><span class="tc-num">2</span><span class="tc-text">코스피 2,750선 회복 마감</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="nvidia-next-ai-chip"><div class="tc-left"><span class="tc-num">3</span><span class="tc-text">엔비디아, 차세대 AI칩 공개</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="krw-usd-1379"><div class="tc-left"><span class="tc-num">4</span><span class="tc-text">원·달러 환율 1,379원 돌파</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="bok-rate-hold-timeline"><div class="tc-left"><span class="tc-num">5</span><span class="tc-text">한국은행 기준금리 3.25%로 동결</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="oil-85-dollar"><div class="tc-left"><span class="tc-num">6</span><span class="tc-text">국제유가 배럴당 85달러 상승</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="samsung-3nm-foundry"><div class="tc-left"><span class="tc-num">7</span><span class="tc-text">삼성전자 3나노 파운드리 수주 확대</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="tesla-earnings-volatility"><div class="tc-left"><span class="tc-num">8</span><span class="tc-text">테슬라 실적 발표 앞두고 주가 변동성 확대</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="china-export-miss"><div class="tc-left"><span class="tc-num">9</span><span class="tc-text">중국 4월 수출 예상치 하회</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" data-article-id="fed-hike-signal"><div class="tc-left"><span class="tc-num">10</span><span class="tc-text">美 연준 위원, 추가 금리인상 가능성 시사</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" aria-hidden="true" tabindex="-1" data-article-id="us-cpi-april"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">2</span><span class="tc-text">코스피 2,750선 회복 마감</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">3</span><span class="tc-text">엔비디아, 차세대 AI칩 공개</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">4</span><span class="tc-text">원·달러 환율 1,379원 돌파</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">5</span><span class="tc-text">한국은행 기준금리 3.25%로 동결</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">6</span><span class="tc-text">국제유가 배럴당 85달러 상승</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">7</span><span class="tc-text">삼성전자 3나노 파운드리 수주 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">8</span><span class="tc-text">테슬라 실적 발표 앞두고 주가 변동성 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">9</span><span class="tc-text">중국 4월 수출 예상치 하회</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">10</span><span class="tc-text">美 연준 위원, 추가 금리인상 가능성 시사</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" aria-hidden="true" tabindex="-1"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
         </div>
       </div>
     </div>
@@ -146,7 +122,7 @@
     <div class="timeline-list">
       <div class="timeline-line"></div>
 
-      <button type="button" class="timeline-card first" data-article-id="bok-rate-hold-timeline">
+      <button type="button" class="timeline-card first" data-article="1">
         <div class="tl-time">09:32</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -160,7 +136,7 @@
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article-id="nvidia-next-ai-chip">
+      <button type="button" class="timeline-card" data-article="2">
         <div class="tl-time">09:12</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -174,7 +150,7 @@
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article-id="krw-usd-1379">
+      <button type="button" class="timeline-card" data-article="3">
         <div class="tl-time">08:45</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -188,7 +164,7 @@
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article-id="bok-rate-hold-2">
+      <button type="button" class="timeline-card" data-article="4">
         <div class="tl-time">08:32</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -202,7 +178,7 @@
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article-id="oil-price-up">
+      <button type="button" class="timeline-card" data-article="5">
         <div class="tl-time">07:15</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -221,31 +197,10 @@
 
   <div data-eb="tab-bar" data-active="feed"></div>
 </div>
-</div>
-</div>
-</div>
-</div>
 
-<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
-<script src="assets/js/news-data-source.js"></script>
-<script src="assets/js/news-data.js"></script>
 <script>
-  // Keep timeline thumbnails in sync with each article's `image` field in
-  // data/news.json — the same field article.html uses for its hero image.
-  // Articles with no real image yet get a gray placeholder instead of
-  // whatever generic image happened to be hardcoded in the markup — see
-  // EB.media in common.js.
-  window.EBNews.loadArticles().then(function (articles) {
-    var byId = {};
-    articles.forEach(function (a) { byId[a.id] = a; });
-    document.querySelectorAll('[data-article-id]').forEach(function (el) {
-      var article = byId[el.getAttribute('data-article-id')];
-      if (article) EB.media.apply(el, article);
-    });
-  });
-
   document.querySelectorAll('.filter-row button').forEach(function (btn) {
     btn.addEventListener('click', function () {
       document.querySelectorAll('.filter-row button').forEach(function (b) { b.classList.remove('active'); });
@@ -263,8 +218,7 @@
 
     items.forEach(function (el) {
       el.addEventListener('click', function () {
-        var articleId = el.getAttribute('data-article-id');
-        window.location.href = articleId ? 'article.html?id=' + encodeURIComponent(articleId) : 'article.html';
+        window.location.href = 'article.html';
       });
     });
 
@@ -283,35 +237,28 @@
   })();
   document.querySelectorAll('.timeline-card').forEach(function (el) {
     el.addEventListener('click', function () {
-      var articleId = el.getAttribute('data-article-id');
-      window.location.href = articleId ? 'article.html?id=' + encodeURIComponent(articleId) : 'article.html';
+      window.location.href = 'article.html';
     });
   });
 
-  // Cards aren't a fixed height (title/desc lengths vary), so the dashed line's
-  // fixed top/bottom CSS offsets drift out of sync with where the dots actually
-  // land. Measure the first and last dot and stretch the line between them.
   (function () {
     var list = document.querySelector('.timeline-list');
     var line = document.querySelector('.timeline-line');
-    var cards = list.querySelectorAll('.timeline-card');
-    if (!line || cards.length < 2) return;
-    var listTop = list.getBoundingClientRect().top;
-    var dotCenter = 24 + 11 / 2; // matches .timeline-card::before's top + half its height
-    var firstDotY = cards[0].getBoundingClientRect().top - listTop + dotCenter;
-    var lastDotY = cards[cards.length - 1].getBoundingClientRect().top - listTop + dotCenter;
-    var height = lastDotY - firstDotY;
-    line.style.top = firstDotY + 'px';
-    line.style.bottom = 'auto';
-    line.style.height = height + 'px';
+    var cards = document.querySelectorAll('.timeline-card');
+    if (!list || !line || cards.length < 2) return;
+    var DOT_CENTER = 24 + 11 / 2; // matches .timeline-card::before's top:24px, 11px circle
 
-    // Pick a repeat size that divides evenly into the line's height, so the
-    // gradient's dash (the second half of each repeat) always lands flush
-    // with the bottom edge instead of trailing off into a gap.
-    var targetPeriod = 8; // ~matches the old dashed border's visual density
-    var periods = Math.max(1, Math.round(height / targetPeriod));
-    var period = height / periods;
-    line.style.backgroundSize = '1.4px ' + period + 'px';
+    function layoutLine() {
+      var listTop = list.getBoundingClientRect().top;
+      var firstY = cards[0].getBoundingClientRect().top - listTop + DOT_CENTER;
+      var lastY = cards[cards.length - 1].getBoundingClientRect().top - listTop + DOT_CENTER;
+      line.style.top = firstY + 'px';
+      line.style.height = Math.max(0, lastY - firstY) + 'px';
+    }
+
+    layoutLine();
+    window.addEventListener('resize', layoutLine);
+    window.addEventListener('load', layoutLine);
   })();
 </script>
 

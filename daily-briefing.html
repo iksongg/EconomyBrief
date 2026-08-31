@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
-<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -31,7 +30,7 @@
   /* ---- progress block ---- */
   .progress-block {
     position: absolute;
-    top: 59px; left: 50%; transform: translateX(-50%);
+    top: 120px; left: 50%; transform: translateX(-50%);
     width: 362px;
     display: flex; flex-direction: column; gap: 10px;
     z-index: 3;
@@ -50,40 +49,32 @@
   }
 
   /* ---- card stack (reading state) ---- */
-  /* top matches Figma's actual frame spacing (card at absolute y=272 in a
-     874-tall frame) instead of the earlier 192px, which is why the reading
-     card's bottom (242+30+617=889) now runs 15px past .device's own 874px
-     edge — same overshoot Figma's own layout has. On desktop that overshoot
-     is clipped at the white display edge by .app-screen's own
-     overflow:hidden (assets/css/device-mockup.css), same as every other
-     screen; on mobile there's no such wrapper so it just extends harmlessly
-     past .device with no visible clipping. */
   .card-stack { position: absolute; top: 242px; left: 0; width: 402px; height: 632px; }
   /* peek sheets are the same tall "paper" shape as the front card, just offset up a
      little and dimmed, like the next A4 pages waiting underneath — not a stretchy pill */
   .peek-back {
-    position: absolute; background: #d9d9d9; opacity: 0.5; border-radius: 10px;
+    position: absolute; background: #ffffff; opacity: 0.55; border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.08);
     left: 27px; top: 14px; width: 342px; height: 617px;
     transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
   }
   .peek-front {
-    position: absolute; background: #dbdbdb; opacity: 1; border-radius: 10px;
+    position: absolute; background: #ffffff; opacity: 0.85; border-radius: 10px;
+    box-shadow: 0 0 6px rgba(0,0,0,0.1);
     left: 22px; top: 22px; width: 352px; height: 617px;
     transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
   }
   /* stack "advances": each sheet slides forward one slot, like flipping to the next A4 page */
-  .peek-back.advance { left: 22px; top: 22px; width: 352px; opacity: 1; }
+  .peek-back.advance { left: 22px; top: 22px; width: 352px; opacity: 0.85; }
   .peek-front.advance { left: 17px; top: 30px; width: 362px; opacity: 1; }
   .peek-back.no-anim, .peek-front.no-anim { transition: none !important; }
-  /* fewer sheets peek out as fewer articles remain behind the front card */
-  .peek-back.hidden, .peek-front.hidden { opacity: 0; }
 
   .reading-card {
     position: absolute;
     left: 17px; top: 30px; width: 362px; height: 617px;
     background: #ffffff; border-radius: 10px;
     box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
-    padding: 0 20px; overflow: hidden;
+    padding: 20px; overflow: hidden;
     display: flex; flex-direction: column; gap: 15px;
     cursor: grab;
     touch-action: pan-y;
@@ -118,7 +109,7 @@
   .related-list { display: flex; flex-direction: column; gap: 4px; width: 174px; }
   .related-list .related-item { display: flex; gap: 2px; align-items: center; }
   .related-list .gicon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: var(--color-brand-600); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-  .related-list span { font-size: 12px; color: #000; line-height: 1.6; white-space: nowrap; }
+  .related-list span { font-size: 12px; color: #000; line-height: 1.6; }
 
   /* ---- term tooltip popup ---- */
   .term-overlay {
@@ -184,9 +175,6 @@
   .summary-box p { font-weight: var(--font-weight-semibold); font-size: 20px; color: #000; line-height: 1.3; text-align: left; width: 100%; }
 
   /* ---- completion state ---- */
-  /* Figma's completion screen sits on white, unlike the #EAEBEF/#fafafa device
-     background the reading and summary states use. */
-  #screen-complete { background: #ffffff; }
   .completion-content {
     position: absolute; left: 50%; top: 226px; transform: translateX(-50%);
     width: 197px; display: flex; flex-direction: column; align-items: center; gap: 20px;
@@ -226,28 +214,16 @@
 </head>
 <body>
 
-<div class="portfolio-stage">
-<div class="iphone-device">
-<div class="device-bezel">
-<div class="app-screen">
-<div class="dynamic-island"></div>
-<div class="ios-status-bar">
-  <span class="status-time">9:41</span>
-  <div class="status-icons">
-    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
-  </div>
-</div>
-
 <div class="device">
 
   <!-- Screen 1: 읽기 (article stack, swipe to advance) -->
   <div class="screen active" id="screen-reading">
-    <div data-eb="nav-header" data-title="데일리브리핑" data-back="main.html" data-right="share" data-short="true"></div>
+    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
 
     <div class="progress-block">
       <div class="counter-row">
         <p><span class="count-current" id="count-current">1</span><span class="count-total"> / 5건</span></p>
-        <p class="eta">약 9분 남음</p>
+        <p class="eta">도착 9분 전</p>
       </div>
       <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       <ul>
@@ -288,7 +264,7 @@
 
   <!-- Screen 2: 요약 (완료!) -->
   <div class="screen" id="screen-summary">
-    <div data-eb="nav-header" data-title="데일리브리핑" data-back="main.html" data-right="share" data-short="true"></div>
+    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
 
     <div class="progress-block">
       <div class="counter-row end-only"><p class="done-label">완료!</p></div>
@@ -319,7 +295,7 @@
 
   <!-- Screen 3: 완료 -->
   <div class="screen" id="screen-complete">
-    <div data-eb="nav-header" data-back="main.html" data-right="share" data-short="true"></div>
+    <div data-eb="nav-header" data-right="share" data-short="true"></div>
 
     <div class="completion-content">
       <img class="wallet-img" src="assets/img/briefing-wallet-coins.png" alt="" />
@@ -336,12 +312,7 @@
   </div>
 
 </div>
-</div>
-</div>
-</div>
-</div>
 
-<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
@@ -461,14 +432,6 @@
     var peekBack = document.querySelector('.peek-back');
     var peekFront = document.querySelector('.peek-front');
 
-    // The peek sheets stand in for the articles still queued up behind the
-    // current card, so only show as many as are actually left to read.
-    function updatePeekStack(i) {
-      var remaining = articles.length - 1 - i;
-      peekBack.classList.toggle('hidden', remaining < 2);
-      peekFront.classList.toggle('hidden', remaining < 1);
-    }
-
     function snapInstantly(el, apply) {
       el.classList.add('no-anim');
       apply();
@@ -508,7 +471,6 @@
           snapInstantly(peekFront, function () { peekFront.classList.remove('advance'); });
           snapInstantly(peekBack, function () { peekBack.classList.remove('advance'); });
           updateProgress(currentIndex);
-          updatePeekStack(currentIndex);
         }, 300);
       });
     }
@@ -588,17 +550,8 @@
     });
     document.getElementById('more-news-btn').addEventListener('click', function () { window.location.href = 'main.html'; });
 
-    // Delegated on document: nav-header's back link is injected by common.js's
-    // mount() after this script runs, so it doesn't exist yet at binding time.
-    document.addEventListener('click', function (e) {
-      var backLink = e.target.closest('.nav-header-common .icon-btn[href="main.html"]');
-      if (!backLink) return;
-      EB.appState.saveBriefingProgress({ current: currentIndex, total: articles.length });
-    });
-
     renderArticle(0);
     updateProgress(0);
-    updatePeekStack(0);
   })();
 </script>
 

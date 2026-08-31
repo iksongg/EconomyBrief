@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="design-system/tokens/typography.css" />
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
-<link rel="stylesheet" href="assets/css/device-mockup.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -23,23 +22,23 @@
   .scroll-area { padding-bottom: 90px; }
 
   .section-white { background: #ffffff; padding: 20px; }
-  .section-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .section-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
   .section-title-row h2 { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; }
   .link-more { display: flex; align-items: center; gap: 0; font-size: 14px; color: #5D5D5D; cursor: pointer; background: none; border: none; font-family: inherit; }
-  .chev-icon { color: #1C1B1F; }
+  .chev-icon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: #1C1B1F; }
 
   /* profile card */
   .profile-card { background: #F8F8FC; border-radius: 20px; padding: 16px; display: flex; align-items: center; gap: 12px; }
   .avatar-wrap { position: relative; width: 63px; height: 63px; flex-shrink: 0; }
   .avatar-wrap img.avatar-bg, .avatar-wrap img.avatar-photo { position: absolute; inset: 0; width: 63px; height: 63px; border-radius: 50%; object-fit: cover; }
-  .avatar-wrap .camera-badge { position: absolute; left: 47px; top: 47px; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; }
-  .avatar-wrap .camera-badge img { position: absolute; inset: 0; width: 14px; height: 14px; }
-  .avatar-wrap .camera-badge .gicon { position: relative; font-size: 9px; width: 9px; height: 9px; color: #000; }
-  .profile-info { display: flex; flex-direction: column; gap: 0; }
-  .profile-info .name { font-weight: var(--font-weight-semibold); font-size: 16px; line-height: 22px; color: #000; }
-  .profile-info .desc { font-weight: var(--font-weight-regular); font-size: 14px; line-height: 22px; color: #000; margin-top: 0; }
-  .profile-info .badge-row { display: flex; align-items: center; gap: 4px; margin-top: 5px; }
-  .profile-info .level-badge { background: #EFF6FF; border-radius: 999px; padding: 4px 10px; font-size: 12px; color: #000; }
+  .avatar-wrap .camera-badge { position: absolute; left: 41px; top: 41px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
+  .avatar-wrap .camera-badge img { position: absolute; inset: 0; width: 20px; height: 20px; }
+  .avatar-wrap .camera-badge .gicon { position: relative; font-size: 13px; width: 13px; height: 13px; color: #000; }
+  .profile-info { display: flex; flex-direction: column; gap: 5px; }
+  .profile-info .name { font-weight: var(--font-weight-semibold); font-size: 16px; color: #000; }
+  .profile-info .desc { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; margin-top: 2px; }
+  .profile-info .badge-row { display: flex; align-items: center; gap: 4px; margin-top: 3px; }
+  .profile-info .level-badge { background: #EFF6FF; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: #000; }
   .profile-info .stars { display: flex; align-items: center; }
   .profile-info .stars .gicon { font-size: 16px; width: 16px; height: 16px; color: var(--color-brand-600); }
 
@@ -49,14 +48,13 @@
   .stat-card .icon-badge { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .stat-card .icon-badge .gicon { font-size: 22.5px; width: 22.5px; height: 22.5px; }
   .stat-card .stat-value { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-brand-600); }
-  .stat-card .stat-label { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; margin-top: 0; }
+  .stat-card .stat-label { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; margin-top: 2px; }
 
   .icon-badge.purple { background: #DDE1FF; }
   .icon-badge.green { background: #ECF8F1; }
   .icon-badge.gray { background: #F1F1F1; }
   .icon-badge.blue { background: #DCE9FE; }
   .icon-badge.yellow { background: #FFF3E8; }
-  .stat-card .icon-badge.green, .stat-card .icon-badge.gray, .stat-card .icon-badge.blue { border-radius: 7px; }
   .icon-badge.purple .gicon { color: var(--color-status2-purple-fill); }
   .icon-badge.green .gicon { color: var(--color-status2-green-fill); }
   .icon-badge.gray .gicon { color: var(--color-status2-gray-fill); }
@@ -69,7 +67,7 @@
   .token-row-left .coin-frame { position: relative; width: 56px; height: 58px; overflow: hidden; flex-shrink: 0; }
   .token-row-left .coin-frame img.coin { position: absolute; left: -29.66%; top: -38.69%; width: 277.02%; height: 178.55%; max-width: none; }
   .token-row-left .token-label { font-weight: var(--font-weight-medium); font-size: 14px; color: #000; }
-  .token-row-left .token-amount { font-weight: var(--font-weight-semibold); font-size: 24px; color: #000; margin-top: 0; }
+  .token-row-left .token-amount { font-weight: var(--font-weight-semibold); font-size: 24px; color: #000; margin-top: 2px; }
   .charge-btn { background: var(--color-brand-600); border: none; border-radius: 8px; padding: 12px; color: #fff; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer; }
 
   .history-list { display: flex; flex-direction: column; padding-top: 12px; }
@@ -100,21 +98,10 @@
 </head>
 <body>
 
-<div class="portfolio-stage">
-<div class="iphone-device">
-<div class="device-bezel">
-<div class="app-screen">
-<div class="dynamic-island"></div>
-<div class="ios-status-bar">
-  <span class="status-time">9:41</span>
-  <div class="status-icons">
-    <img src="assets/img/icons/status-bar-levels.svg" alt="" width="100" height="22" />
-  </div>
-</div>
-
 <div class="device">
   <div class="scroll-area">
 
+    <div class="status-bar-simple"></div>
     <div data-eb="nav-header" data-title="마이페이지" data-back="main.html" data-right="share" data-short="true"></div>
 
     <div class="section-white">
@@ -145,7 +132,7 @@
     </div>
 
     <div class="section-white">
-      <div class="section-title-row" style="margin-bottom:14px;"><h2>AI 분석 활동</h2></div>
+      <div class="section-title-row"><h2>AI 분석 활동</h2></div>
       <div class="stats-grid">
         <div class="stat-card">
           <div class="icon-badge purple"><span class="gicon" role="img" aria-label="">mindfulness</span></div>
@@ -157,10 +144,10 @@
           <div class="stat-value">126개</div>
           <div class="stat-label">읽은 기사</div>
         </div>
-        <div class="stat-card" id="saved-terms-card" style="cursor:pointer;">
+        <div class="stat-card">
           <div class="icon-badge gray"><span class="gicon" style="font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;" role="img" aria-label="">bookmark</span></div>
-          <div class="stat-value" id="saved-terms-count">24개</div>
-          <div class="stat-label">저장한 용어</div>
+          <div class="stat-value">24개</div>
+          <div class="stat-label">저장한 기사</div>
         </div>
         <div class="stat-card">
           <div class="icon-badge blue"><span class="gicon" role="img" aria-label="">schedule</span></div>
@@ -203,7 +190,7 @@
     </div>
 
     <div class="section-white">
-      <div class="section-title-row" style="margin-bottom:12px;">
+      <div class="section-title-row">
         <h2>관심 키워드</h2>
         <button type="button" class="link-more" id="add-keyword-btn"><span>키워드 추가</span><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
       </div>
@@ -246,25 +233,16 @@
 
   <div data-eb="tab-bar" data-active="mypage"></div>
 </div>
-</div>
-</div>
-</div>
-</div>
 
-<script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
   document.getElementById('mypage-token-amount').textContent = EB.appState.load().tokens + '개';
-  document.getElementById('saved-terms-count').textContent = EB.glossary.count() + '개';
   document.getElementById('charge-btn').addEventListener('click', function () {
     window.location.href = 'token.html';
   });
   document.getElementById('all-history-btn').addEventListener('click', function () {
     window.location.href = 'token.html';
-  });
-  document.getElementById('saved-terms-card').addEventListener('click', function () {
-    window.location.href = 'glossary.html';
   });
 </script>
 
