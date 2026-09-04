@@ -330,6 +330,95 @@
       wrapper.innerHTML = html;
       el.replaceWith(wrapper.firstElementChild);
     });
+    wireHeaderActions();
+  }
+
+  // ---- shared nav-header 공유/북마크 버튼 ----
+  // nav-header()가 만드는 .icon-btn(공유/북마크)에는 클릭 핸들러가 전혀 붙어있지
+  // 않았음 — mount() 직후 한 번, aria-label로 두 버튼을 구분해 여기서 연결한다.
+  // 컴포넌트가 공용이라 이 한 곳만 고치면 이 컴포넌트를 쓰는 모든 화면에 반영됨.
+  var TOAST_TIMER = null;
+  function showToast(message) {
+    var el = document.getElementById('eb-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'eb-toast';
+      el.className = 'eb-toast';
+      // 고정 모바일 프레임(.device) 안쪽에 붙여서, 데스크톱 너비에서도 프레임 밖
+      // 회색 여백이 아니라 항상 앱 화면 안에 떠 있도록 한다.
+      (document.querySelector('.device') || document.body).appendChild(el);
+    }
+    el.textContent = message;
+    el.classList.add('visible');
+    clearTimeout(TOAST_TIMER);
+    TOAST_TIMER = setTimeout(function () { el.classList.remove('visible'); }, 1800);
+  }
+
+  function shareCurrentPage() {
+    var shareData = { title: document.title, url: location.href };
+    if (navigator.share) {
+      navigator.share(shareData).catch(function () { /* 사용자가 공유를 취소한 경우 등 — 조용히 무시 */ });
+      return;
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(location.href)
+        .then(function () { showToast('링크가 복사되었습니다'); })
+        .catch(function () { showToast('링크 복사에 실패했습니다'); });
+      return;
+    }
+    showToast('공유하기를 지원하지 않는 환경입니다');
+  }
+
+  // 저장(북마크)한 기사 id 목록 — glossary와 마찬가지로 새 상태관리 도구를 추가하지
+  // 않고 localStorage 배열 하나로 최소 구현.
+  var SAVED_ARTICLES_KEY = 'eb-saved-articles-v1';
+  function loadSavedArticles() {
+    try { return JSON.parse(localStorage.getItem(SAVED_ARTICLES_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function isArticleSaved(id) {
+    return loadSavedArticles().indexOf(id) !== -1;
+  }
+  function toggleSavedArticle(id) {
+    var list = loadSavedArticles();
+    var idx = list.indexOf(id);
+    var saved;
+    if (idx === -1) { list.push(id); saved = true; } else { list.splice(idx, 1); saved = false; }
+    try { localStorage.setItem(SAVED_ARTICLES_KEY, JSON.stringify(list)); } catch (e) { /* storage 사용 불가 시에도 saved 값은 그대로 반환 */ }
+    return saved;
+  }
+
+  function setBookmarkIconState(btn, saved) {
+    var glyph = btn.querySelector('.gicon');
+    if (!glyph) return;
+    // 브라우저가 style.fontVariationSettings를 읽어올 때 'FILL'을 "FILL"로 정규화해
+    // 돌려주는 경우가 있어(따옴표 종류가 달라짐), 작은따옴표/큰따옴표 둘 다 매치한다.
+    var settings = glyph.style.fontVariationSettings || '';
+    glyph.style.fontVariationSettings = settings.replace(/(["']FILL["']\s*)\d/, '$1' + (saved ? 1 : 0));
+    glyph.style.color = saved ? 'var(--color-brand-600)' : '';
+    btn.setAttribute('aria-pressed', saved ? 'true' : 'false');
+  }
+
+  function wireHeaderActions() {
+    document.querySelectorAll('.nav-header-common .icon-btn').forEach(function (btn) {
+      if (btn.dataset.ebWired) return;
+      btn.dataset.ebWired = 'true';
+      var glyph = btn.querySelector('.gicon');
+      var label = glyph ? glyph.getAttribute('aria-label') : '';
+
+      if (label === '공유') {
+        btn.addEventListener('click', shareCurrentPage);
+      } else if (label === '북마크') {
+        var articleId = window.EBNews && window.EBNews.resolveCurrentId ? window.EBNews.resolveCurrentId() : null;
+        if (articleId) setBookmarkIconState(btn, isArticleSaved(articleId));
+        btn.addEventListener('click', function () {
+          var id = window.EBNews && window.EBNews.resolveCurrentId ? window.EBNews.resolveCurrentId() : null;
+          if (!id) { showToast('저장할 기사를 찾을 수 없습니다'); return; }
+          var saved = toggleSavedArticle(id);
+          setBookmarkIconState(btn, saved);
+          showToast(saved ? '기사를 저장했습니다' : '저장을 취소했습니다');
+        });
+      }
+    });
   }
 
   // ---- per-article media (thumbnail + source logo), with a shared
@@ -397,6 +486,11 @@
       count: glossaryCount,
       save: glossarySave,
       remove: glossaryRemove
+    },
+    savedArticles: {
+      getAll: loadSavedArticles,
+      isSaved: isArticleSaved,
+      toggle: toggleSavedArticle
     },
     appState: {
       load: appStateLoad,

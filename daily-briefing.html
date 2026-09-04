@@ -218,7 +218,7 @@
 
   <!-- Screen 1: 읽기 (article stack, swipe to advance) -->
   <div class="screen active" id="screen-reading">
-    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
+    <div data-eb="nav-header" data-title="데일리브리핑" data-back="article.html" data-right="share" data-short="true"></div>
 
     <div class="progress-block">
       <div class="counter-row">
@@ -264,7 +264,7 @@
 
   <!-- Screen 2: 요약 (완료!) -->
   <div class="screen" id="screen-summary">
-    <div data-eb="nav-header" data-title="딥 리서치" data-back="article.html" data-right="share" data-short="true"></div>
+    <div data-eb="nav-header" data-title="데일리브리핑" data-back="article.html" data-right="share" data-short="true"></div>
 
     <div class="progress-block">
       <div class="counter-row end-only"><p class="done-label">완료!</p></div>
@@ -373,6 +373,7 @@
       var related = document.getElementById('article-related');
 
       if (a.image) {
+        img.loading = 'lazy';
         img.src = a.image;
         img.style.display = 'block';
       } else {
@@ -550,8 +551,24 @@
     });
     document.getElementById('more-news-btn').addEventListener('click', function () { window.location.href = 'main.html'; });
 
-    renderArticle(0);
-    updateProgress(0);
+    // 중간에 이탈(뒤로가기)했다가 다시 들어오면 처음부터가 아니라 보던 카드부터
+    // 이어서 보여준다 — EB.appState.saveBriefingProgress/briefingProgress는
+    // common.js에 이미 있었지만 실제로 호출/구독하는 곳이 없었음.
+    var savedProgress = EB.appState.load().briefingProgress;
+    var startIndex = (savedProgress && savedProgress.current >= 0 && savedProgress.current < articles.length)
+      ? savedProgress.current
+      : 0;
+    currentIndex = startIndex;
+    renderArticle(startIndex);
+    updateProgress(startIndex);
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var backLink = document.querySelector('#screen-reading .nav-header-common a.icon-btn');
+      if (!backLink) return;
+      backLink.addEventListener('click', function () {
+        EB.appState.saveBriefingProgress({ current: currentIndex, total: articles.length });
+      });
+    });
   })();
 </script>
 

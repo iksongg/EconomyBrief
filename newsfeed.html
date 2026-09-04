@@ -77,6 +77,8 @@
   .timeline-card .tl-tags { display: flex; gap: 4px; flex-wrap: wrap; }
   .timeline-card .tl-tags span { border: 1px solid var(--color-border-default); border-radius: 999px; padding: 8px 12px; font-size: 10px; color: #000; }
   .timeline-card .tl-thumb { width: 61px; height: 61px; border-radius: 5.526px; object-fit: cover; flex-shrink: 0; }
+  .timeline-card.filtered-out { display: none; }
+  .timeline-empty { display: none; padding: 40px 20px; text-align: center; font-size: 14px; color: #868686; }
 </style>
 </head>
 <body>
@@ -87,29 +89,29 @@
     <div data-eb="header-row-main"></div>
 
     <div class="filter-row">
-      <button type="button" class="active">전체</button>
-      <button type="button">AI추천</button>
-      <button type="button">반도체</button>
-      <button type="button">금리</button>
-      <button type="button">환율</button>
-      <button type="button">ETF</button>
+      <button type="button" class="active" data-category="all">전체</button>
+      <button type="button" data-category="AI추천">AI추천</button>
+      <button type="button" data-category="반도체">반도체</button>
+      <button type="button" data-category="금리">금리</button>
+      <button type="button" data-category="환율">환율</button>
+      <button type="button" data-category="ETF">ETF</button>
     </div>
 
     <div class="trending-card">
       <div class="tc-label">지금 뜨는 뉴스</div>
       <div class="tc-viewport" id="tc-viewport">
         <div class="tc-track" id="tc-track">
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">2</span><span class="tc-text">코스피 2,750선 회복 마감</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">3</span><span class="tc-text">엔비디아, 차세대 AI칩 공개</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">4</span><span class="tc-text">원·달러 환율 1,379원 돌파</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">5</span><span class="tc-text">한국은행 기준금리 3.25%로 동결</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">6</span><span class="tc-text">국제유가 배럴당 85달러 상승</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">7</span><span class="tc-text">삼성전자 3나노 파운드리 수주 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">8</span><span class="tc-text">테슬라 실적 발표 앞두고 주가 변동성 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">9</span><span class="tc-text">중국 4월 수출 예상치 하회</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item"><div class="tc-left"><span class="tc-num">10</span><span class="tc-text">美 연준 위원, 추가 금리인상 가능성 시사</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
-          <button type="button" class="tc-item" aria-hidden="true" tabindex="-1"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="us-cpi-april"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="kospi-2750-close"><div class="tc-left"><span class="tc-num">2</span><span class="tc-text">코스피 2,750선 회복 마감</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="nvidia-next-ai-chip"><div class="tc-left"><span class="tc-num">3</span><span class="tc-text">엔비디아, 차세대 AI칩 공개</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="krw-usd-1379"><div class="tc-left"><span class="tc-num">4</span><span class="tc-text">원·달러 환율 1,379원 돌파</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="bok-rate-hold-2"><div class="tc-left"><span class="tc-num">5</span><span class="tc-text">한국은행 기준금리 3.25%로 동결</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="oil-85-dollar"><div class="tc-left"><span class="tc-num">6</span><span class="tc-text">국제유가 배럴당 85달러 상승</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="samsung-3nm-foundry"><div class="tc-left"><span class="tc-num">7</span><span class="tc-text">삼성전자 3나노 파운드리 수주 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="tesla-earnings-volatility"><div class="tc-left"><span class="tc-num">8</span><span class="tc-text">테슬라 실적 발표 앞두고 주가 변동성 확대</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="china-export-miss"><div class="tc-left"><span class="tc-num">9</span><span class="tc-text">중국 4월 수출 예상치 하회</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="fed-hike-signal"><div class="tc-left"><span class="tc-num">10</span><span class="tc-text">美 연준 위원, 추가 금리인상 가능성 시사</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
+          <button type="button" class="tc-item" data-article-id="us-cpi-april" aria-hidden="true" tabindex="-1"><div class="tc-left"><span class="tc-num">1</span><span class="tc-text">미국 4월 CPI 발표</span></div><span class="gicon" role="img" aria-label="">arrow_forward_ios</span></button>
         </div>
       </div>
     </div>
@@ -119,10 +121,12 @@
       <button type="button" class="th-sort"><span>최근 추가순</span><span class="gicon" role="img" aria-label="">sync_alt</span></button>
     </div>
 
-    <div class="timeline-list">
+    <div class="timeline-empty" id="timeline-empty">해당 카테고리의 뉴스가 아직 없어요.</div>
+
+    <div class="timeline-list" id="timeline-list">
       <div class="timeline-line"></div>
 
-      <button type="button" class="timeline-card first" data-article="1">
+      <button type="button" class="timeline-card first" data-article="bok-rate-hold-timeline" data-category="물가">
         <div class="tl-time">09:32</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -132,11 +136,11 @@
             </div>
             <div class="tl-tags"><span>#물가</span><span>#CPI</span><span>#인플레이션</span></div>
           </div>
-          <img class="tl-thumb" src="assets/img/feed-thumb-1.png" alt="" />
+          <img class="tl-thumb" loading="lazy" src="assets/img/feed-thumb-1.png" alt="" />
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article="2">
+      <button type="button" class="timeline-card" data-article="nvidia-next-ai-chip" data-category="반도체">
         <div class="tl-time">09:12</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -146,11 +150,11 @@
             </div>
             <div class="tl-tags"><span>#엔비디아</span><span>#AI반도체</span></div>
           </div>
-          <img class="tl-thumb" src="assets/img/feed-thumb-2.png" alt="" />
+          <img class="tl-thumb" loading="lazy" src="assets/img/feed-thumb-2.png" alt="" />
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article="3">
+      <button type="button" class="timeline-card" data-article="krw-usd-1379" data-category="환율">
         <div class="tl-time">08:45</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -160,11 +164,11 @@
             </div>
             <div class="tl-tags"><span>#환율</span><span>#달러</span></div>
           </div>
-          <img class="tl-thumb" src="assets/img/feed-thumb-3.png" alt="" />
+          <img class="tl-thumb" loading="lazy" src="assets/img/feed-thumb-3.png" alt="" />
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article="4">
+      <button type="button" class="timeline-card" data-article="bok-rate-hold-2" data-category="금리">
         <div class="tl-time">08:32</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -174,11 +178,11 @@
             </div>
             <div class="tl-tags"><span>#한국은행</span><span>#금리</span></div>
           </div>
-          <img class="tl-thumb" src="assets/img/feed-thumb-4.png" alt="" />
+          <img class="tl-thumb" loading="lazy" src="assets/img/feed-thumb-4.png" alt="" />
         </div>
       </button>
 
-      <button type="button" class="timeline-card" data-article="5">
+      <button type="button" class="timeline-card" data-article="oil-price-up" data-category="에너지">
         <div class="tl-time">07:15</div>
         <div class="tl-body">
           <div class="tl-text">
@@ -188,7 +192,7 @@
             </div>
             <div class="tl-tags"><span>#유가</span><span>#에너지</span></div>
           </div>
-          <img class="tl-thumb" src="assets/img/feed-thumb-5.png" alt="" />
+          <img class="tl-thumb" loading="lazy" src="assets/img/feed-thumb-5.png" alt="" />
         </div>
       </button>
     </div>
@@ -201,12 +205,6 @@
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
 <script>
-  document.querySelectorAll('.filter-row button').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      document.querySelectorAll('.filter-row button').forEach(function (b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-    });
-  });
   (function () {
     var track = document.getElementById('tc-track');
     var items = track.querySelectorAll('.tc-item');
@@ -218,7 +216,8 @@
 
     items.forEach(function (el) {
       el.addEventListener('click', function () {
-        window.location.href = 'article.html';
+        var id = el.getAttribute('data-article-id');
+        window.location.href = id ? 'article.html?id=' + encodeURIComponent(id) : 'article.html';
       });
     });
 
@@ -237,29 +236,53 @@
   })();
   document.querySelectorAll('.timeline-card').forEach(function (el) {
     el.addEventListener('click', function () {
-      window.location.href = 'article.html';
+      var id = el.getAttribute('data-article');
+      window.location.href = id ? 'article.html?id=' + encodeURIComponent(id) : 'article.html';
     });
   });
 
-  (function () {
+  var layoutTimelineLine = (function () {
     var list = document.querySelector('.timeline-list');
     var line = document.querySelector('.timeline-line');
-    var cards = document.querySelectorAll('.timeline-card');
-    if (!list || !line || cards.length < 2) return;
+    if (!list || !line) return function () {};
     var DOT_CENTER = 24 + 11 / 2; // matches .timeline-card::before's top:24px, 11px circle
 
-    function layoutLine() {
+    return function layoutLine() {
+      var cards = Array.prototype.filter.call(document.querySelectorAll('.timeline-card'), function (c) {
+        return !c.classList.contains('filtered-out');
+      });
+      if (cards.length < 2) { line.style.height = '0px'; return; }
       var listTop = list.getBoundingClientRect().top;
       var firstY = cards[0].getBoundingClientRect().top - listTop + DOT_CENTER;
       var lastY = cards[cards.length - 1].getBoundingClientRect().top - listTop + DOT_CENTER;
       line.style.top = firstY + 'px';
       line.style.height = Math.max(0, lastY - firstY) + 'px';
-    }
-
-    layoutLine();
-    window.addEventListener('resize', layoutLine);
-    window.addEventListener('load', layoutLine);
+    };
   })();
+  layoutTimelineLine();
+  window.addEventListener('resize', layoutTimelineLine);
+  window.addEventListener('load', layoutTimelineLine);
+
+  // 카테고리 필터: 타임라인 카드의 실제 data-category를 기준으로 보이는 카드만
+  // 남기고 나머지는 filtered-out으로 숨긴다("전체"는 전부 표시). 매칭되는 카드가
+  // 하나도 없으면(예: 현재 목데이터에 없는 카테고리) 빈 상태 문구를 보여준다.
+  document.querySelectorAll('.filter-row button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.filter-row button').forEach(function (b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+
+      var category = btn.getAttribute('data-category');
+      var visibleCount = 0;
+      document.querySelectorAll('.timeline-card').forEach(function (card) {
+        var matches = category === 'all' || card.getAttribute('data-category') === category;
+        card.classList.toggle('filtered-out', !matches);
+        if (matches) visibleCount++;
+      });
+      document.getElementById('timeline-list').style.display = visibleCount ? '' : 'none';
+      document.getElementById('timeline-empty').style.display = visibleCount ? 'none' : 'block';
+      layoutTimelineLine();
+    });
+  });
 </script>
 
 </body>

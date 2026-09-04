@@ -146,7 +146,7 @@
         </div>
         <div class="stat-card">
           <div class="icon-badge gray"><span class="gicon" style="font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;" role="img" aria-label="">bookmark</span></div>
-          <div class="stat-value">24개</div>
+          <div class="stat-value" id="mypage-saved-articles-count">24개</div>
           <div class="stat-label">저장한 기사</div>
         </div>
         <div class="stat-card">
@@ -238,6 +238,7 @@
 <script src="assets/js/common.js"></script>
 <script>
   document.getElementById('mypage-token-amount').textContent = EB.appState.load().tokens + '개';
+  document.getElementById('mypage-saved-articles-count').textContent = EB.savedArticles.getAll().length + '개';
   document.getElementById('charge-btn').addEventListener('click', function () {
     window.location.href = 'token.html';
   });

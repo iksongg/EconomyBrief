@@ -53,7 +53,63 @@
     document.body.classList.add('article-missing');
   }
 
-  function renderArticle(article) {
+  // Real other articles (never invented content): "관련된 뉴스" pulls same-category
+  // articles first, "관심 키워드로 추천된 뉴스" fills from whatever's left — the same
+  // "exclude self, same category" pattern deep-research-ai.js's renderSourcesTab uses.
+  function renderNewsList(containerId, articles) {
+    var container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    articles.forEach(function (a) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'news-item';
+      btn.setAttribute('data-article-id', a.id);
+
+      var info = document.createElement('div');
+      info.className = 'news-info';
+      var titleEl = document.createElement('div');
+      titleEl.className = 'news-title';
+      titleEl.textContent = a.title;
+      var byline = document.createElement('div');
+      byline.className = 'news-byline';
+      byline.innerHTML = '<span></span><span>·</span><span></span>';
+      byline.children[0].textContent = a.source;
+      byline.children[2].textContent = a.date;
+      info.appendChild(titleEl);
+      info.appendChild(byline);
+
+      var thumb = document.createElement('img');
+      thumb.className = 'news-thumb';
+      thumb.alt = '';
+      thumb.loading = 'lazy';
+
+      btn.appendChild(info);
+      btn.appendChild(thumb);
+      container.appendChild(btn);
+
+      if (a.image) {
+        thumb.src = a.image;
+      } else {
+        EB.media.showThumbPlaceholder(thumb, a.imagePlaceholder);
+      }
+
+      btn.addEventListener('click', function () {
+        window.location.href = 'article.html?id=' + encodeURIComponent(a.id);
+      });
+    });
+  }
+
+  function renderRelatedNews(article, allArticles) {
+    var others = (allArticles || []).filter(function (a) { return a.id !== article.id; });
+    var related = others.filter(function (a) { return a.category === article.category; }).slice(0, 3);
+    var relatedIds = related.map(function (a) { return a.id; });
+    var recommend = others.filter(function (a) { return relatedIds.indexOf(a.id) === -1; }).slice(0, 3);
+    renderNewsList('related-news-list', related);
+    renderNewsList('recommend-news-list', recommend);
+  }
+
+  function renderArticle(article, allArticles) {
     document.title = '이코노미브리프 - ' + article.title;
     document.getElementById('article-title').textContent = article.title;
     document.getElementById('article-date').textContent = article.date;
@@ -70,7 +126,12 @@
       // imagePlaceholder (when set) names the file to drop into
       // assets/img/news/ later; article.image just needs to point at it.
       heroImage.style.display = 'none';
-      heroPlaceholder.style.display = '';
+      // .hero-placeholder's CSS default is display:none (so it stays hidden
+      // until JS decides it's needed) — clearing the inline style with ''
+      // just falls back to that none, never actually showing the box. It
+      // needs the explicit visible value (flex, matching its align/justify/
+      // flex-direction rules) to actually appear.
+      heroPlaceholder.style.display = 'flex';
       document.getElementById('article-hero-placeholder-filename').textContent = article.imagePlaceholder || '';
     }
 
@@ -177,6 +238,7 @@
       window.location.href = 'deep-research.html?id=' + encodeURIComponent(article.id);
     });
 
+    renderRelatedNews(article, allArticles);
     wireTermTooltips(currentTerms);
   }
 
@@ -219,13 +281,6 @@
     });
   }
 
-  document.querySelectorAll('.news-item').forEach(function (el) {
-    el.addEventListener('click', function () {
-      var id = el.getAttribute('data-article-id');
-      window.location.href = id ? 'article.html?id=' + encodeURIComponent(id) : 'article.html';
-    });
-  });
-
   // article.html?id=... is the normal entry point (clicked from a card
   // elsewhere), but the page can also be opened with no id at all — directly
   // by URL, a fresh tab with nothing in sessionStorage yet, etc. Rather than
@@ -234,14 +289,18 @@
   // id (stale/typo'd link) falls back the same way; only the flagship itself
   // failing to load still shows the not-found state, as a last resort.
   var currentId = window.EBNews.resolveCurrentId() || FLAGSHIP_ID;
-  window.EBNews.getById(currentId).then(function (article) {
-    if (article) { renderArticle(article); return; }
+  window.EBNews.loadArticles().then(function (allArticles) {
+    function findById(id) {
+      for (var i = 0; i < allArticles.length; i++) {
+        if (String(allArticles[i].id) === String(id)) return allArticles[i];
+      }
+      return null;
+    }
+    var article = findById(currentId);
+    if (article) { renderArticle(article, allArticles); return; }
     if (currentId === FLAGSHIP_ID) { renderNotFound(); return; }
-    window.EBNews.getById(FLAGSHIP_ID).then(function (fallback) {
-      if (fallback) renderArticle(fallback); else renderNotFound();
-    }).catch(function () {
-      renderNotFound();
-    });
+    var fallback = findById(FLAGSHIP_ID);
+    if (fallback) renderArticle(fallback, allArticles); else renderNotFound();
   }).catch(function () {
     renderNotFound();
   });
