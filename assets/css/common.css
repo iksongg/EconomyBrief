@@ -51,6 +51,11 @@
 .eb-thumb-placeholder .gicon { font-size: 22px; width: 22px; height: 22px; color: #C2C6D1; }
 .eb-logo-placeholder { width: 16px; height: 16px; border-radius: 4px; background: #E2E4E9; flex-shrink: 0; display: inline-block; }
 
+/* ---- press-logo component (data-eb="press-logo") — 16x16 outlet logo used
+   in every byline; self-contained sizing so it looks right regardless of
+   which list/card it's dropped into. See assets/js/common.js. ---- */
+.eb-press-logo { width: 16px; height: 16px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
+
 /* ---- shared toast (nav-header 공유 버튼의 "링크 복사됨" 안내 등) — 항상
    .device(고정 모바일 프레임) 안쪽 하단에 뜬다 ---- */
 .eb-toast {
@@ -142,3 +147,59 @@
 
 /* Prevent page-level horizontal overflow at any viewport width. */
 html, body { width: 100%; min-width: 0; overflow-x: hidden; }
+
+/* ---- 한글 단어 단위 줄바꿈 ----
+   기본값(word-break: normal)은 한글을 음절 단위로 쪼개 줄바꿈해 "분위기"가
+   "분위"/"기"처럼 잘리는 문제가 있다. keep-all로 어절 단위 줄바꿈을 유지하고,
+   그래도 화면 폭을 넘는 긴 단어(영문 URL 등)만 overflow-wrap으로 강제
+   줄바꿈한다. word-break/overflow-wrap은 상속 속성이라 body에서 전체
+   본문에 적용되며, white-space: nowrap이 걸린 로고/뱃지/말줄임 요소는
+   애초에 줄바꿈이 발생하지 않으므로 영향받지 않는다. */
+body { word-break: keep-all; overflow-wrap: break-word; }
+
+/* ---- desktop pointer cursor for clickable elements ----
+   Native <button>/<a href> don't always get a pointer cursor by default
+   (buttons default to the arrow cursor); mobile behavior is unaffected since
+   touch devices ignore :hover/cursor entirely. .story is the one div-based
+   custom clickable element (main.html) without a native cursor. */
+button:not(:disabled), a[href], .story { cursor: pointer; }
+
+/* ---- shared toggle switch (알림설정 등) ---- */
+.eb-toggle { position: relative; display: inline-block; width: 44px; height: 26px; flex-shrink: 0; }
+.eb-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+.eb-toggle .track {
+  position: absolute; inset: 0; background: #E6E7EB; border-radius: 999px;
+  transition: background 0.15s ease;
+}
+.eb-toggle .thumb {
+  position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.15s ease;
+}
+.eb-toggle input:checked ~ .track { background: var(--color-brand-600); }
+.eb-toggle input:checked ~ .thumb { transform: translateX(18px); }
+.eb-toggle input:focus-visible ~ .track { outline: 2px solid var(--color-brand-400); outline-offset: 2px; }
+
+/* ---- mypage 설정 반영 범위: 공용 헤더/GNB로 한정 ----
+   design-system/tokens/colors.css에는 Dark 값이 없고, 각 페이지 본문은 CSS
+   변수가 아니라 페이지별 <style>에 색을 직접 적어둔 구조라, 앱 전체를 다시
+   칠하는 완전한 다크모드/전역 글자 크기 확대는 이 구조를 바꾸지 않는 한 불가능
+   하다(각 페이지 redesign 금지 범위와 충돌). 대신 실제로 모든 페이지가 공유하는
+   컴포넌트(nav-header/tab-bar/공용 배경)에만 정확히 반영한다. */
+html[data-eb-theme="dark"] body { background: #000000; }
+html[data-eb-theme="dark"] .device { background: #121212; }
+html[data-eb-theme="dark"] .nav-header-common,
+html[data-eb-theme="dark"] .header-row-main,
+html[data-eb-theme="dark"] .gnb-tab-bar { background: #1C1C1E; }
+html[data-eb-theme="dark"] .nav-header-common .title,
+html[data-eb-theme="dark"] .header-row-main .logo { color: #FFFFFF; }
+html[data-eb-theme="dark"] .nav-header-common .icon-btn,
+html[data-eb-theme="dark"] .nav-header-common .nav-text-btn,
+html[data-eb-theme="dark"] .header-row-main .icons { color: #FFFFFF; }
+html[data-eb-theme="dark"] .gnb-tab-bar { border-top-color: #333333; }
+html[data-eb-theme="dark"] .gnb-tab-bar .tab-item { color: #7C7C82; }
+html[data-eb-theme="dark"] .gnb-tab-bar .tab-item.active { color: var(--color-brand-400); }
+
+html[data-eb-font-scale="sm"] .nav-header-common .title,
+html[data-eb-font-scale="sm"] .gnb-tab-bar .tab-item span { font-size: 0.9em; }
+html[data-eb-font-scale="lg"] .nav-header-common .title,
+html[data-eb-font-scale="lg"] .gnb-tab-bar .tab-item span { font-size: 1.15em; }

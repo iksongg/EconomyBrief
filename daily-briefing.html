@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
 <title>이코노미브리프 - 데일리브리핑</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -11,6 +12,7 @@
 <link rel="stylesheet" href="design-system/tokens/layout.css" />
 <link rel="stylesheet" href="assets/css/common.css" />
 <link rel="stylesheet" href="assets/css/device-mockup.css" />
+<link rel="stylesheet" href="assets/css/term-sheet.css" />
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -23,17 +25,16 @@
     justify-content: center;
   }
 
-  .device { background: #fafafa; height: max(100dvh, 874px); }
+  .device { background: #fff; height: max(100dvh, 874px); }
 
   .screen { position: absolute; inset: 0; display: none; }
   .screen.active { display: block; }
 
   /* ---- progress block ---- */
   .progress-block {
-    position: absolute;
-    top: 120px; left: 50%; transform: translateX(-50%);
     width: 362px;
     display: flex; flex-direction: column; gap: 10px;
+    margin: 12px auto;
     z-index: 3;
   }
   .progress-block .counter-row { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
@@ -50,32 +51,38 @@
   }
 
   /* ---- card stack (reading state) ---- */
-  .card-stack { position: absolute; top: 242px; left: 0; width: 402px; height: 632px; }
-  /* peek sheets are the same tall "paper" shape as the front card, just offset up a
-     little and dimmed, like the next A4 pages waiting underneath — not a stretchy pill */
+  .card-stack { position: relative; top: 50px; left: 0; width: 402px; height: 632px; margin: 0 auto; float: left; }
+  /* peek sheets: left/top/width/color/opacity match the Figma node
+     (get_design_context on 4909:38509) exactly. Height does NOT — Figma's
+     own static frame only draws these 78px tall because that's a resting
+     screenshot where the main card covers the rest anyway, but this app
+     also exposes them mid-drag (see setupSwipe's rotate/translate), where a
+     78px-tall sheet reads as a page cut off partway down. Reusing the main
+     card's own height (602px, same value as .reading-card below) keeps them
+     full pages regardless of how far the drag reveals them. */
   .peek-back {
-    position: absolute; background: #ffffff; opacity: 0.55; border-radius: 10px;
+    position: absolute; background: #d9d9d9; opacity: 0.5; border-radius: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.08);
-    left: 27px; top: 14px; width: 342px; height: 617px;
+    left: 38px; top: 0px; width: 321px; height: 602px;
     transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
   }
   .peek-front {
-    position: absolute; background: #ffffff; opacity: 0.85; border-radius: 10px;
+    position: absolute; background: #dbdbdb; opacity: 1; border-radius: 10px;
     box-shadow: 0 0 6px rgba(0,0,0,0.1);
-    left: 22px; top: 22px; width: 352px; height: 617px;
+    left: 27px; top: 14px; width: 342px; height: 602px;
     transition: left 0.28s ease, top 0.28s ease, width 0.28s ease, opacity 0.28s ease;
   }
   /* stack "advances": each sheet slides forward one slot, like flipping to the next A4 page */
-  .peek-back.advance { left: 22px; top: 22px; width: 352px; opacity: 0.85; }
+  .peek-back.advance { left: 27px; top: 14px; width: 342px; opacity: 1; }
   .peek-front.advance { left: 17px; top: 30px; width: 362px; opacity: 1; }
   .peek-back.no-anim, .peek-front.no-anim { transition: none !important; }
 
   .reading-card {
     position: absolute;
-    left: 17px; top: 30px; width: 362px; height: 617px;
+    left: 17px; top: 30px; width: 362px; height: 602px;
     background: #ffffff; border-radius: 10px;
     box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
-    padding: 20px; overflow: hidden;
+    padding: 0 20px; overflow: hidden;
     display: flex; flex-direction: column; gap: 15px;
     cursor: grab;
     touch-action: pan-y;
@@ -97,7 +104,17 @@
 
   .article-body-wrap { display: flex; flex-direction: column; gap: 27px; flex: 1; min-height: 0; overflow-y: auto; }
   .article-media-wrap { display: flex; flex-direction: column; gap: 15px; }
-  .article-image { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; }
+  /* A fixed height:180px with width:100% left the box's aspect ratio dependent
+     on viewport width — at the 402px reference it happens to match this photo's
+     own ratio (43:24) almost exactly, but at the narrower widths the reading
+     card resizes to (@media above), the box got visibly squatter than the
+     photo and object-fit:cover cropped increasingly more off the sides. Locking
+     the box to that same 43:24 ratio keeps the crop identical at every width —
+     at 402px it renders pixel-for-pixel the same as the old height:180px did. */
+  .article-image { width: 100%; aspect-ratio: 43 / 24; object-fit: cover; border-radius: 8px; }
+  /* Wrapping <a> is block-level (its own default is inline) purely so it
+     doesn't change the image's box/flow — no visual treatment added. */
+  .article-image-link { display: block; }
   .article-body { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
   .article-body .term-link {
     font-weight: var(--font-weight-semibold);
@@ -107,35 +124,30 @@
     background: none; border: none; font-family: inherit; font-size: inherit; padding: 0;
   }
 
-  .related-list { display: flex; flex-direction: column; gap: 4px; width: 174px; }
-  .related-list .related-item { display: flex; gap: 2px; align-items: center; }
-  .related-list .gicon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: var(--color-brand-600); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  /* Figma (get_design_context) has this as w-full, not a fixed px — the 174px
+     here was stale/arbitrary and caused long related-item labels to wrap. */
+  .related-list { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+  /* .related-item is an <a> now (see renderArticle) so the whole icon+text
+     row is one click target; reset the browser's default link underline/
+     color here so a real href doesn't change how the row looks. */
+  .related-list .related-item { display: flex; gap: 2px; align-items: center; color: inherit; text-decoration: none; }
+  /* Figma's related-item icon is an outline ring + matching triangle (not a
+     solid disc), in a muted steel-blue (#95a9be, sampled directly from the
+     reference — no existing brand/gray token matches this specific tone).
+     FILL 0 switches the glyph from solid-disc to the outline variant. */
+  .related-list .gicon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: #95a9be; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
   .related-list span { font-size: 12px; color: #000; line-height: 1.6; }
 
-  /* ---- term tooltip popup ---- */
-  .term-overlay {
-    position: absolute; left: 17px; top: 30px; width: 362px; height: 587px;
-    display: none; z-index: 10;
-  }
-  .term-overlay.visible { display: block; }
-  .term-overlay img.dim { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: 10px; }
-  .term-popup {
-    position: absolute; left: 50%; top: calc(50% + 40px); transform: translate(-50%, -50%);
-    width: 314px; background: #ffffff; border-radius: 12px; padding: 16px;
-    box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
-    display: flex; flex-direction: column; gap: 12px;
-  }
-  .term-popup .top-row { display: flex; align-items: flex-end; justify-content: space-between; gap: 8px; }
-  .term-popup .term-title { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-600); line-height: 1.6; }
-  .term-popup .close-btn { width: 24px; height: 24px; background: none; border: none; cursor: pointer; padding: 0; flex-shrink: 0; }
-  .term-popup .close-btn .gicon { font-size: 24px; width: 24px; height: 24px; color: #000; }
-  .term-popup .term-desc { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
-  .term-popup .save-btn {
-    align-self: flex-end;
-    width: 90px; height: 40px; border-radius: 8px; background: #3271CB;
-    color: #fff; border: none; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px;
-    cursor: pointer;
-  }
+  /* term bottom sheet: see assets/css/term-sheet.css (shared component).
+     Now a direct child of #screen-reading (== .device's own box) so the dim
+     covers the whole screen and the sheet's bottom:0 lands on the real
+     visible edge — see the HTML comment above the markup for why.
+     Darkened for this page only (id selector beats the shared component's
+     rgba fill) to match the Figma reference measured here — note this is
+     the fill's own alpha, separate from the .visible class's show/hide
+     opacity (which must stay at the shared component's 0/1 toggle).
+     article.html keeps the shared component's own default untouched. */
+  #term-overlay-bg { background: rgba(0, 0, 0, 0.28); }
 
   /* ---- summary state ---- */
   .summary-card {
@@ -206,8 +218,7 @@
     .peek-front { left: 25px; width: calc(100% - 50px); }
     .peek-back.advance { left: 25px; width: calc(100% - 50px); }
     .peek-front.advance { left: 20px; width: calc(100% - 40px); }
-    .reading-card,
-    .term-overlay { left: 20px; width: calc(100% - 40px); }
+    .reading-card { left: 20px; width: calc(100% - 40px); }
     .summary-card,
     .completion-buttons { width: calc(100% - 40px); }
   }
@@ -255,23 +266,33 @@
         </div>
         <div class="article-body-wrap">
           <div class="article-media-wrap">
-            <img class="article-image" id="article-image" style="display:none;" src="" alt="" />
+            <a class="article-image-link" id="article-image-link">
+              <img class="article-image" id="article-image" style="display:none;" src="" alt="" />
+            </a>
             <p class="article-body" id="article-body"></p>
           </div>
           <div class="related-list" id="article-related" style="display:none;"></div>
         </div>
       </div>
-      <div class="term-overlay" id="term-overlay">
-        <img class="dim" src="assets/img/icons/dim-overlay.svg" alt="" />
-        <div class="term-popup">
-          <div class="top-row">
-            <div class="term-title">프로젝트파이낸싱(PF)</div>
-            <button type="button" class="close-btn" id="term-close"><span class="gicon" role="img" aria-label="닫기">close</span></button>
-          </div>
-          <div class="term-desc">부동산 개발 사업에 필요한 자금을 미리 빌리는 금융 방식</div>
-          <button type="button" class="save-btn" id="term-save">용어저장</button>
-        </div>
+    </div>
+
+    <!-- Overlay/sheet are siblings of .card-stack (not nested inside it): .card-stack
+         is authored against the native 402x874 frame, but the desktop mockup
+         constrains .device to 828px (the other 46px goes to the decorative status
+         bar), so anything positioned off .card-stack's own bottom edge renders
+         ~46px+ below .device's real bottom and gets clipped by .app-screen's
+         overflow. #screen-reading matches .device's actual box exactly
+         (position:absolute; inset:0), so anchoring here keeps the sheet's
+         bottom edge — and the save button — on-screen, and lets the dim
+         overlay cover the whole screen (header + progress + card) as intended. -->
+    <div class="term-sheet-overlay" id="term-overlay-bg"></div>
+    <div class="term-sheet" id="term-popup">
+      <div class="ts-handle"></div>
+      <div class="ts-body">
+        <div class="ts-title" id="term-popup-title"></div>
+        <div class="ts-desc" id="term-popup-desc"></div>
       </div>
+      <button type="button" class="ts-save">용어저장</button>
     </div>
   </div>
 
@@ -302,7 +323,7 @@
         <button type="button" data-tab="other-view">다른 시각</button>
         <button type="button" data-tab="30sec">30초 브리핑</button>
       </div>
-      <div class="summary-box"><p>투자자 보호와 PF 리스크 관리가<br />핵심입니다.</p></div>
+      <div class="summary-box"><p>정부가 부동산 시장 안정화 대책을 발표했습니다.</p></div>
     </div>
   </div>
 
@@ -333,60 +354,87 @@
 <script src="assets/js/device-mockup.js"></script>
 <script src="assets/js/icons.js"></script>
 <script src="assets/js/common.js"></script>
+<script src="assets/js/term-sheet.js"></script>
 <script>
   (function () {
     var articles = [
       {
+        id: 'bok-rate-325',
         headline: '한국은행, 기준금리 3.25%로 동결',
         subhead: '5회 연속 동결, 물가·가계부채 균형 고려',
-        image: 'assets/img/news-thumb-1.png',
+        image: 'assets/img/news/bok-rate-325.webp',
         body: '한국은행이 기준금리를 3.25%로 5회 연속 동결했다. 물가 안정과 가계부채 관리 사이 균형을 고려한 결정으로 풀이된다.',
-        related: null
-      },
-      {
-        headline: '정부, 부동산·ETF 시장 안정화<br />대책 발표',
-        subhead: '시장 변동성 확대 속 투자자 보호와 유동성 관리 방안 공개',
-        image: 'assets/img/briefing-article-pf.png',
-        bodyHtml: '최근 부동산 <span class="term-link" data-term="pf">프로젝트파이낸싱(PF)</span> 리스크와 레버리지ETF 투자 증가에 대응하기 위해 정부가 시장 안정화 대책을 발표했습니다. 금융당국은 투자자 보호를 강화하고 시장 변동성 완화를 위한 관리 방안을 단계적으로 추진할 예정입니다.',
         related: [
-          '정부 대책 핵심 브리핑',
-          '부동산 PF 리스크, 무엇이 달라지나',
-          'ETF 시장 안정화 방안 살펴보기',
-          '투자자 보호 조치와 향후 일정'
+          { title: '기준금리 동결 배경 살펴보기', href: 'article.html?id=bok-rate-hold-2' },
+          { title: '물가·가계부채 균형 전략', href: 'article.html?id=rate-inflation-debt-balance' },
+          { title: '가계대출 영향, 무엇이 달라지나', href: 'article.html?id=bok-rate-household-loan-impact' },
+          { title: '향후 통화정책 방향 전망', href: 'article.html?id=bok-rate-outlook-h2' }
         ]
       },
       {
+        id: 'realestate-etf-plan',
+        headline: '정부, 부동산·ETF 시장 안정화<br />대책 발표',
+        subhead: '시장 변동성 확대 속 투자자 보호와 유동성 관리 방안 공개',
+        image: 'assets/img/briefing-article-pf.webp',
+        bodyHtml: '최근 부동산 <span class="term-link" data-term="pf">프로젝트파이낸싱(PF)</span> 리스크와 레버리지ETF 투자 증가에 대응하기 위해 정부가 시장 안정화 대책을 발표했습니다. 금융당국은 투자자 보호를 강화하고 시장 변동성 완화를 위한 관리 방안을 단계적으로 추진할 예정입니다.',
+        related: [
+          { title: '정부 대책 핵심 브리핑', href: 'article.html?id=realestate-etf-plan' },
+          { title: '부동산 PF 리스크, 무엇이 달라지나', href: 'article.html?id=realestate-pf-risk-change' },
+          { title: 'ETF 시장 안정화 방안 살펴보기', href: 'article.html?id=leveraged-etf-stabilization-measures' },
+          { title: '투자자 보호 조치와 향후 일정', href: 'article.html?id=investor-protection-schedule' }
+        ]
+      },
+      {
+        id: 'samsung-hbm4',
         headline: '삼성전자, HBM4 양산 AI 메모리<br />경쟁',
         subhead: '엔비디아향 공급 확대 기대감',
-        image: 'assets/img/news-thumb-2.png',
+        image: 'assets/img/news/samsung-hbm4.webp',
         body: '삼성전자가 차세대 고대역폭메모리 HBM4 양산에 들어갔다. 엔비디아향 공급 확대 기대감에 반도체 업종 전반이 강세를 보였다.',
-        related: null
+        related: [
+          { title: '엔비디아향 공급 확대 기대감', href: 'article.html?id=samsung-hbm4' },
+          { title: 'HBM4 시장 경쟁 구도 살펴보기', href: 'article.html?id=hbm-demand-surge' },
+          { title: 'AI 반도체 수요가 미치는 영향', href: 'article.html?id=ai-chip-demand-impact' },
+          { title: '삼성전자 차세대 메모리 전략', href: 'article.html?id=samsung-next-gen-memory-strategy' }
+        ]
       },
       {
+        id: 'seoul-apt-price',
         headline: '서울 아파트값 3주 연속 상승,<br />강남권 주도',
         subhead: '재건축 단지 중심 상승 폭 확대',
-        image: 'assets/img/news-thumb-3.png',
+        image: 'assets/img/news/seoul-apt-price.webp',
         body: '서울 아파트 매매가격이 3주 연속 오름세를 나타냈다. 강남·서초 등 재건축 단지 중심으로 상승 폭이 확대되는 모습이다.',
-        related: null
+        related: [
+          { title: '강남권 재건축 단지 상승세', href: 'article.html?id=seoul-apt-price' },
+          { title: '서울 아파트 거래량 변화', href: 'article.html?id=seoul-apt-transaction-volume' },
+          { title: '금리와 주택시장 전망', href: 'article.html?id=rate-housing-market-outlook' },
+          { title: '향후 부동산 시장 변수', href: 'article.html?id=realestate-market-variables-outlook' }
+        ]
       },
       {
+        id: 'fed-rate-cut-sep',
         headline: '美연준, 9월 금리 인하 시사,<br />시장 환호',
         subhead: '뉴욕증시 3대 지수 일제히 상승',
-        image: 'assets/img/news-thumb-4.png',
+        image: 'assets/img/news/fed-rate-cut-sep.webp',
         body: '미 연방준비제도 의장이 9월 회의에서 금리 인하 가능성을 시사했다. 뉴욕증시 3대 지수가 일제히 상승 마감했다.',
-        related: null
+        related: [
+          { title: '연준 금리 결정 핵심 내용', href: 'article.html?id=fed-rate-cut-sep' },
+          { title: '미국 물가와 금리 전망', href: 'article.html?id=us-inflation-rate-outlook' },
+          { title: '뉴욕증시 주요 지수 움직임', href: 'article.html?id=nyse-index-movement' },
+          { title: '금리 인하가 국내 시장에 미치는 영향', href: 'article.html?id=fed-cut-domestic-market-impact' }
+        ]
       }
     ];
 
     var currentIndex = 0; // 0-based
     var readingCard = document.getElementById('reading-card');
-    var termOverlay = document.getElementById('term-overlay');
+    var termOverlay = document.getElementById('term-overlay-bg');
 
     function renderArticle(i) {
       var a = articles[i];
       document.getElementById('article-headline').innerHTML = a.headline;
       document.getElementById('article-subhead').textContent = a.subhead;
       var img = document.getElementById('article-image');
+      var imgLink = document.getElementById('article-image-link');
       var body = document.getElementById('article-body');
       var related = document.getElementById('article-related');
 
@@ -397,6 +445,15 @@
       } else {
         img.style.display = 'none';
       }
+      // Tapping the hero image opens this same story's full article.html
+      // (and from there, its Deep Research) — a.id is the real id shared
+      // with assets/js/news-data-source.js, the same database article.html
+      // itself reads from.
+      if (a.id) {
+        imgLink.setAttribute('href', 'article.html?id=' + encodeURIComponent(a.id));
+      } else {
+        imgLink.removeAttribute('href');
+      }
 
       if (a.bodyHtml) {
         body.innerHTML = a.bodyHtml;
@@ -406,37 +463,20 @@
 
       if (a.related) {
         related.style.display = 'flex';
-        related.innerHTML = a.related.map(function (t) {
-          return '<div class="related-item"><span class="gicon" role="img" aria-label="">play_circle</span><span>' + t + '</span></div>';
+        // Real <a> per item so the row is a genuine clickable link wherever a
+        // matching article already exists (href set to article.html?id=...);
+        // items with no matching article yet render as an <a> with no href
+        // attribute at all, which browsers treat as plain non-interactive
+        // text (no navigation, not tab-focusable) rather than a dead link.
+        related.innerHTML = a.related.map(function (item) {
+          var hrefAttr = item.href ? ' href="' + item.href + '"' : '';
+          return '<a class="related-item"' + hrefAttr + '><span class="gicon" role="img" aria-label="">play_circle</span><span>' + item.title + '</span></a>';
         }).join('');
       } else {
         related.style.display = 'none';
       }
-
-      document.querySelectorAll('.term-link').forEach(function (el) {
-        el.addEventListener('click', function (e) {
-          e.stopPropagation();
-          termOverlay.classList.add('visible');
-        });
-      });
+      // term-link click handling now lives in assets/js/term-sheet.js (shared component)
     }
-
-    document.getElementById('term-close').addEventListener('click', function () {
-      termOverlay.classList.remove('visible');
-    });
-    document.getElementById('term-save').addEventListener('click', function () {
-      var result = EB.glossary.save({
-        term: '프로젝트파이낸싱(PF)',
-        definition: '부동산 개발 사업에 필요한 자금을 미리 빌리는 금융 방식',
-        category: '부동산'
-      });
-      var btn = document.getElementById('term-save');
-      btn.textContent = result.added ? '저장완료 ✓' : '이미 저장됨';
-      setTimeout(function () {
-        termOverlay.classList.remove('visible');
-        btn.textContent = '용어저장';
-      }, 700);
-    });
 
     function showScreen(id) {
       document.querySelectorAll('.screen').forEach(function (s) { s.classList.remove('active'); });
@@ -508,7 +548,7 @@
 
       card.addEventListener('pointerdown', function (e) {
         if (termOverlay.classList.contains('visible')) return;
-        if (e.target.closest('.term-link') || e.target.closest('button')) return;
+        if (e.target.closest('.term-link') || e.target.closest('button') || e.target.closest('a')) return;
         isDragging = true;
         dragMoved = false;
         startX = e.clientX;
@@ -556,10 +596,19 @@
     setupSwipe(readingCard, advanceReading);
     setupSwipe(document.getElementById('summary-card'), function () { showScreen('screen-complete'); });
 
+    // AI가 임의로 생성한 프로토타입 콘텐츠 — 실제로는 기사별 요약 API 응답이 들어갈 자리.
+    var summaryBoxTexts = {
+      'one-line': '정부가 부동산 시장 안정화 대책을 발표했습니다.',
+      'other-view': 'PF 리스크 관리와 시장 유동성 확보가 주요 내용입니다.',
+      '30sec': '정부는 투자자 보호를 강화하고 부동산 시장 변동성을 낮추는 방안을 추진합니다.'
+    };
+    var summaryBox = document.querySelector('#summary-card .summary-box p');
     document.querySelectorAll('.tab-row button').forEach(function (btn) {
       btn.addEventListener('click', function () {
         document.querySelectorAll('.tab-row button').forEach(function (b) { b.classList.remove('active'); });
         btn.classList.add('active');
+        var text = summaryBoxTexts[btn.dataset.tab];
+        if (text && summaryBox) summaryBox.textContent = text;
       });
     });
 

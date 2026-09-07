@@ -75,7 +75,7 @@
       byline.className = 'news-byline';
       byline.innerHTML = '<span></span><span>·</span><span></span>';
       byline.children[0].textContent = a.source;
-      byline.children[2].textContent = a.date;
+      byline.children[2].textContent = window.EBNews.formatDate(a.date);
       info.appendChild(titleEl);
       info.appendChild(byline);
 
@@ -107,6 +107,21 @@
     var recommend = others.filter(function (a) { return relatedIds.indexOf(a.id) === -1; }).slice(0, 3);
     renderNewsList('related-news-list', related);
     renderNewsList('recommend-news-list', recommend);
+
+    // A handful of categories (e.g. 부동산, 주거) currently have no other
+    // article sharing them, so `related` can come back empty. Rather than
+    // padding it with unrelated-category articles just to hit 3, hide the
+    // "관련된 뉴스 TOP3" section (and its divider) entirely when there is
+    // nothing real to show — an empty list under a "TOP3" header otherwise
+    // reads as broken. The keyword-recommended section below is unaffected.
+    var relatedSection = document.getElementById('related-news-list').closest('.news-section');
+    if (relatedSection) {
+      relatedSection.style.display = related.length ? '' : 'none';
+      var divider = relatedSection.nextElementSibling;
+      if (divider && divider.classList.contains('section-divider-img')) {
+        divider.style.display = related.length ? '' : 'none';
+      }
+    }
   }
 
   function renderArticle(article, allArticles) {
@@ -136,22 +151,8 @@
     }
 
     var sourceEl = document.getElementById('article-source');
-    sourceEl.innerHTML = '';
-    if (article.sourceLogo) {
-      var logo = document.createElement('img');
-      logo.src = article.sourceLogo;
-      logo.alt = '';
-      sourceEl.appendChild(logo);
-    } else if (article.sourceLogoPlaceholder) {
-      // No verified logo for this outlet yet — a plain gray badge instead
-      // of a mismatched stock logo. sourceLogoPlaceholder names the file
-      // to drop into assets/img/logos/ later.
-      var logoPlaceholder = document.createElement('span');
-      logoPlaceholder.className = 'source-logo-placeholder';
-      logoPlaceholder.setAttribute('role', 'img');
-      logoPlaceholder.setAttribute('aria-label', article.sourceLogoPlaceholder);
-      sourceEl.appendChild(logoPlaceholder);
-    }
+    var logoPath = article.sourceLogo || (article.sourceLogoPlaceholder ? 'assets/img/' + article.sourceLogoPlaceholder : '');
+    sourceEl.innerHTML = EB.media.renderPressLogo(article.source, logoPath);
     sourceEl.appendChild(document.createTextNode(article.source));
 
     var isFlagship = article.id === FLAGSHIP_ID;

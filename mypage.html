@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
 <title>이코노미브리프 - 마이페이지</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -45,7 +46,8 @@
 
   /* stat grid */
   .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .stat-card { border: 1px solid var(--color-border-default); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px 0; }
+  .stat-card { border: 1px solid var(--color-border-default); border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 20px 0; text-decoration: none; color: inherit; }
+  a.stat-card { cursor: pointer; }
   .stat-card .icon-badge { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .stat-card .icon-badge .gicon { font-size: 22.5px; width: 22.5px; height: 22.5px; }
   .stat-card .stat-value { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-brand-600); }
@@ -114,7 +116,6 @@
 <div class="device">
   <div class="scroll-area">
 
-    <div class="status-bar-simple"></div>
     <div data-eb="nav-header" data-title="마이페이지" data-back="main.html" data-right="share" data-short="true"></div>
 
     <div class="section-white">
@@ -157,11 +158,11 @@
           <div class="stat-value">126개</div>
           <div class="stat-label">읽은 기사</div>
         </div>
-        <div class="stat-card">
+        <a class="stat-card" href="glossary.html">
           <div class="icon-badge gray"><span class="gicon" style="font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;" role="img" aria-label="">bookmark</span></div>
-          <div class="stat-value" id="mypage-saved-articles-count">24개</div>
-          <div class="stat-label">저장한 기사</div>
-        </div>
+          <div class="stat-value" id="mypage-saved-terms-count">0개</div>
+          <div class="stat-label">저장한 용어</div>
+        </a>
         <div class="stat-card">
           <div class="icon-badge blue"><span class="gicon" role="img" aria-label="">schedule</span></div>
           <div class="stat-value">5분</div>
@@ -215,30 +216,30 @@
     <div class="section-white">
       <div class="section-title-row"><h2>내 콘텐츠</h2></div>
       <div class="row-list">
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" style="font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;" role="img" aria-label="">bookmark</span></div><span class="label">저장한 기사</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">smart_toy</span></div><span class="label">AI 리포트</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">news</span></div><span class="label">분석 기록</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">upload</span></div><span class="label">공유한 리포트</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
+        <a class="row-item" href="saved-articles.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" style="font-variation-settings:'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24;" role="img" aria-label="">bookmark</span></div><span class="label">저장한 기사</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="ai-reports.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">smart_toy</span></div><span class="label">AI 리포트</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="analysis-history.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">news</span></div><span class="label">분석 기록</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="shared-reports.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">upload</span></div><span class="label">공유한 리포트</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
       </div>
     </div>
 
     <div class="section-white">
       <div class="section-title-row"><h2>설정</h2></div>
       <div class="row-list">
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">notifications</span></div><span class="label">알림설정</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">dark_mode</span></div><span class="label">다크모드</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">match_case</span></div><span class="label">글자 크기</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">public</span></div><span class="label">언어 설정</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
+        <a class="row-item" href="notification-settings.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">notifications</span></div><span class="label">알림설정</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="theme-settings.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">dark_mode</span></div><span class="label">다크모드</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="font-settings.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">match_case</span></div><span class="label">글자 크기</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="language-settings.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">public</span></div><span class="label">언어 설정</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
       </div>
     </div>
 
     <div class="section-white">
       <div class="section-title-row"><h2>고객센터</h2></div>
       <div class="row-list">
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">question_mark</span></div><span class="label">자주 묻는 질문</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">comment</span></div><span class="label">문의하기</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">assignment</span></div><span class="label">서비스 이용약관</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
-        <button type="button" class="row-item"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">shield_lock</span></div><span class="label">개인정보 처리방침</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></button>
+        <a class="row-item" href="faq.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">question_mark</span></div><span class="label">자주 묻는 질문</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="contact.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">comment</span></div><span class="label">문의하기</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="terms.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">assignment</span></div><span class="label">서비스 이용약관</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
+        <a class="row-item" href="privacy.html"><div class="row-left"><div class="icon-badge gray"><span class="gicon" role="img" aria-label="">shield_lock</span></div><span class="label">개인정보 처리방침</span></div><span class="gicon chev-icon" role="img" aria-label="">arrow_forward_ios</span></a>
       </div>
     </div>
 
@@ -256,12 +257,15 @@
 <script src="assets/js/common.js"></script>
 <script>
   document.getElementById('mypage-token-amount').textContent = EB.appState.load().tokens + '개';
-  document.getElementById('mypage-saved-articles-count').textContent = EB.savedArticles.getAll().length + '개';
+  document.getElementById('mypage-saved-terms-count').textContent = EB.glossary.count() + '개';
   document.getElementById('charge-btn').addEventListener('click', function () {
     window.location.href = 'token.html';
   });
   document.getElementById('all-history-btn').addEventListener('click', function () {
     window.location.href = 'token.html';
+  });
+  document.getElementById('add-keyword-btn').addEventListener('click', function () {
+    EB.showToast('서비스 준비중입니다.');
   });
 </script>
 

@@ -13,6 +13,8 @@
                                     data-right="share|bookmark|text|none"(default "share") data-right-label="편집"(for right="text")
                                     data-short="true"(48px height variant)
     data-eb="tab-bar"              data-active="home|feed|token|mypage"
+    data-eb="press-logo"           data-source="회사명" data-logo="경로"(실제 파일 없어도 OK — 자동으로
+                                    16x16 placeholder로 대체됨, 파일 추가 시 코드 수정 없이 표시됨)
 
   Icon registry:
     Defined in assets/js/icons.js (load that script before this one) — it maps every
@@ -118,6 +120,16 @@
       });
       html += '</div>';
       return html;
+    },
+    // 16x16 press/outlet logo, used in every article byline (article.html
+    // header, main.html news list + trend cards). data-source="회사명"
+    // data-logo="경로"(real file or not-yet-added placeholder path — either
+    // way it just works: real file shows, missing file falls back to a gray
+    // badge automatically). See renderPressLogo() below.
+    'press-logo': function (el) {
+      var source = el.getAttribute('data-source') || '';
+      var logo = el.getAttribute('data-logo') || '';
+      return renderPressLogo(source, logo);
     }
   };
 
@@ -321,6 +333,7 @@
   }
 
   function mount() {
+    applySettingsToDocument(loadSettings());
     document.querySelectorAll('[data-eb]').forEach(function (el) {
       var name = el.getAttribute('data-eb');
       var factory = COMPONENTS[name];
@@ -387,6 +400,88 @@
     return saved;
   }
 
+  // ---- 분석 기록 / AI 리포트: 딥 리서치를 실제로 연 기록 ----
+  // mypage의 "AI 리포트"/"분석 기록"이 가짜 mock 목록이 아니라 사용자가 실제로
+  // 토큰을 쓰고 연 딥 리서치를 반영하도록, deep-research.html이 기사를 성공적으로
+  // 불러올 때마다(deep-research-ai.js) 한 줄씩 여기 남긴다. 같은 기사를 여러 번
+  // 열면 방문마다 별도 기록이 쌓인다("분석 기록"은 이력, "AI 리포트"는 기사 기준
+  // 중복 제거된 목록으로 화면에서 구분해서 보여준다).
+  var ANALYSIS_HISTORY_KEY = 'eb-analysis-history-v1';
+  function loadAnalysisHistory() {
+    try { return JSON.parse(localStorage.getItem(ANALYSIS_HISTORY_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function addAnalysisHistory(articleId) {
+    var list = loadAnalysisHistory();
+    list.unshift({ id: articleId, date: new Date().toISOString() });
+    try { localStorage.setItem(ANALYSIS_HISTORY_KEY, JSON.stringify(list)); } catch (e) { /* in-memory only */ }
+    return list;
+  }
+  function loadDistinctAnalyzedIds() {
+    var seen = {};
+    var out = [];
+    loadAnalysisHistory().forEach(function (entry) {
+      if (seen[entry.id]) return;
+      seen[entry.id] = true;
+      out.push(entry);
+    });
+    return out;
+  }
+
+  // ---- 공유한 리포트: nav-header 공유 버튼으로 실제 공유한 기사 기록 ----
+  var SHARED_REPORTS_KEY = 'eb-shared-reports-v1';
+  function loadSharedReports() {
+    try { return JSON.parse(localStorage.getItem(SHARED_REPORTS_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function addSharedReport(articleId) {
+    var list = loadSharedReports();
+    list.unshift({ id: articleId, date: new Date().toISOString() });
+    try { localStorage.setItem(SHARED_REPORTS_KEY, JSON.stringify(list)); } catch (e) { /* in-memory only */ }
+    return list;
+  }
+
+  // ---- mypage 설정: 알림/다크모드/글자크기/언어 ----
+  // common.css의 색상 토큰에는 Dark 값이 없고(design-system/tokens/colors.css
+  // 주석 참고), 각 페이지 본문은 CSS 변수가 아니라 페이지별 <style>에 직접 색을
+  // 적어둔 구조라 "토글 하나로 앱 전체가 어두워지는" 완전한 다크모드는 이 구조를
+  // 유지하는 한 만들 수 없다. 대신 데이터는 정확히 저장/반영하고, 공용 컴포넌트
+  // (헤더/GNB)에만 범위를 한정해 실제로 눈에 보이는 변화를 준다 — 아래 mount()의
+  // documentElement 속성 반영, common.css의 [data-eb-theme]/[data-eb-font-scale]
+  // 규칙 참고.
+  var SETTINGS_KEY = 'eb-settings-v1';
+  var SETTINGS_DEFAULT = {
+    notifications: { news: true, majorEconomy: true, aiReport: true, dailyBriefing: true },
+    theme: 'light',
+    fontScale: 'md',
+    language: 'ko'
+  };
+  function loadSettings() {
+    try {
+      var stored = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      return {
+        notifications: Object.assign({}, SETTINGS_DEFAULT.notifications, stored.notifications || {}),
+        theme: stored.theme === 'dark' ? 'dark' : 'light',
+        fontScale: ['sm', 'md', 'lg'].indexOf(stored.fontScale) !== -1 ? stored.fontScale : 'md',
+        language: stored.language === 'en' ? 'en' : 'ko'
+      };
+    } catch (e) {
+      return Object.assign({}, SETTINGS_DEFAULT);
+    }
+  }
+  function saveSettings(next) {
+    try { localStorage.setItem(SETTINGS_KEY, JSON.stringify(next)); } catch (e) { /* in-memory only */ }
+    applySettingsToDocument(next);
+    return next;
+  }
+  function updateSettings(mutator) {
+    var state = loadSettings();
+    mutator(state);
+    return saveSettings(state);
+  }
+  function applySettingsToDocument(settings) {
+    document.documentElement.setAttribute('data-eb-theme', settings.theme);
+    document.documentElement.setAttribute('data-eb-font-scale', settings.fontScale);
+  }
+
   function setBookmarkIconState(btn, saved) {
     var glyph = btn.querySelector('.gicon');
     if (!glyph) return;
@@ -406,7 +501,11 @@
       var label = glyph ? glyph.getAttribute('aria-label') : '';
 
       if (label === '공유') {
-        btn.addEventListener('click', shareCurrentPage);
+        btn.addEventListener('click', function () {
+          shareCurrentPage();
+          var id = window.EBNews && window.EBNews.resolveCurrentId ? window.EBNews.resolveCurrentId() : null;
+          if (id) addSharedReport(id);
+        });
       } else if (label === '북마크') {
         var articleId = window.EBNews && window.EBNews.resolveCurrentId ? window.EBNews.resolveCurrentId() : null;
         if (articleId) setBookmarkIconState(btn, isArticleSaved(articleId));
@@ -457,6 +556,27 @@
     img.insertAdjacentElement('afterend', badge);
   }
 
+  function escapeAttr(s) {
+    return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+  }
+
+  // Single source of truth for rendering a press/outlet logo: tries the real
+  // <img> first (works the moment a real file is dropped at `logoPath`, no
+  // code change needed), and falls back to the plain gray .eb-logo-placeholder
+  // badge — labeled with the outlet name + the path it's still waiting on —
+  // if that file 404s, or immediately if no path is known at all yet. Used
+  // by the "press-logo" data-eb component (static markup) and directly by
+  // article-ai.js (JS-rendered article header).
+  function renderPressLogo(source, logoPath) {
+    var label = escapeAttr(source);
+    if (!logoPath) {
+      return '<span class="eb-press-logo eb-logo-placeholder" role="img" aria-label="' + label + '"></span>';
+    }
+    var fallbackLabel = escapeAttr((source || '') + ' (' + logoPath + ')');
+    return '<img class="eb-press-logo" src="' + logoPath + '" alt="" data-eb-fallback-label="' +
+      fallbackLabel + '" onerror="EB.media.showLogoPlaceholder(this, this.dataset.ebFallbackLabel)" />';
+  }
+
   // cardEl is any article-card element containing a thumb/logo image (or
   // just a thumb — not every card shows a source logo, e.g. newsfeed.html's
   // timeline cards). Missing elements are silently skipped.
@@ -476,10 +596,13 @@
   window.EB = {
     icon: icon,
     iconSrc: iconSrc,
+    showToast: showToast,
+    share: shareCurrentPage,
     media: {
       apply: applyArticleMedia,
       showThumbPlaceholder: showThumbPlaceholder,
-      showLogoPlaceholder: showLogoPlaceholder
+      showLogoPlaceholder: showLogoPlaceholder,
+      renderPressLogo: renderPressLogo
     },
     glossary: {
       getAll: glossaryGetAll,
@@ -491,6 +614,20 @@
       getAll: loadSavedArticles,
       isSaved: isArticleSaved,
       toggle: toggleSavedArticle
+    },
+    analysisHistory: {
+      getAll: loadAnalysisHistory,
+      getDistinctArticles: loadDistinctAnalyzedIds,
+      add: addAnalysisHistory
+    },
+    sharedReports: {
+      getAll: loadSharedReports,
+      add: addSharedReport
+    },
+    settings: {
+      load: loadSettings,
+      save: saveSettings,
+      update: updateSettings
     },
     appState: {
       load: appStateLoad,
@@ -508,5 +645,23 @@
     document.addEventListener('DOMContentLoaded', mount);
   } else {
     mount();
+  }
+
+  // Safety net for pages with more than one <img onerror=...> pointing at the
+  // same missing logo file (main.html's news list + trend cards can repeat a
+  // company): once a URL 404s, the browser may resolve later <img>s sharing
+  // that cached failure as "complete" without re-dispatching the error event,
+  // so the inline onerror alone can miss them. Sweep once after window load.
+  function guardBrokenLogoImages() {
+    document.querySelectorAll('img[onerror]').forEach(function (img) {
+      if (img.complete && img.naturalWidth === 0 && !img.dataset.ebPlaceholderApplied) {
+        showLogoPlaceholder(img, img.alt);
+      }
+    });
+  }
+  if (document.readyState === 'complete') {
+    guardBrokenLogoImages();
+  } else {
+    window.addEventListener('load', guardBrokenLogoImages);
   }
 })();

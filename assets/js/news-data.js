@@ -59,6 +59,24 @@
     try { sessionStorage.setItem(STORAGE_KEY, id); } catch (e) {}
   }
 
+  // News cards across the app should only ever show "오늘" or "M월 D일" —
+  // never a relative time ("5시간 전") or a bare timestamp ("오늘 08:32").
+  // This only changes how a raw data/news.json date string is displayed;
+  // the stored date values themselves are never touched.
+  function formatDate(raw) {
+    if (!raw) return raw;
+    if (raw.indexOf('오늘') === 0) return '오늘';
+    // "N시간 전" is always still today, so this isn't a fabricated date —
+    // just today's already-known label without the trailing time.
+    if (/^\d+시간 전$/.test(raw)) return '오늘';
+    var ymd = raw.match(/^\d{4}\.(\d{1,2})\.(\d{1,2})$/);
+    if (ymd) return Number(ymd[1]) + '월 ' + Number(ymd[2]) + '일';
+    if (/^\d{1,2}월 \d{1,2}일$/.test(raw)) return raw;
+    // Unrecognized format: no safe way to compute "오늘"/"M월 D일" without
+    // guessing, so leave it unchanged rather than inventing a date.
+    return raw;
+  }
+
   function buildSummary(article) {
     var bullets = [];
     bullets.push(article.description);
@@ -107,6 +125,7 @@
     resolveCurrentId: resolveCurrentId,
     rememberId: rememberId,
     buildSummary: buildSummary,
-    buildDeepAnalysis: buildDeepAnalysis
+    buildDeepAnalysis: buildDeepAnalysis,
+    formatDate: formatDate
   };
 })();

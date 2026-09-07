@@ -490,7 +490,7 @@
       title: article.title,
       desc: article.description,
       badge: '원문 기사',
-      meta: escapeHtml(article.source) + ' · ' + escapeHtml(article.date),
+      meta: escapeHtml(article.source) + ' · ' + escapeHtml(window.EBNews.formatDate(article.date)),
       href: 'article.html?id=' + encodeURIComponent(article.id),
       logo: article.sourceLogo
     });
@@ -500,7 +500,7 @@
         title: a.title,
         desc: a.description,
         badge: '뉴스/기사',
-        meta: escapeHtml(a.source) + ' · ' + escapeHtml(a.date),
+        meta: escapeHtml(a.source) + ' · ' + escapeHtml(window.EBNews.formatDate(a.date)),
         href: 'article.html?id=' + encodeURIComponent(a.id),
         logo: a.sourceLogo
       });
@@ -537,6 +537,11 @@
   }
 
   function renderArticle(article, allArticles) {
+    // mypage의 "AI 리포트"/"분석 기록"이 실제 사용 기록을 반영하도록, 이 화면이
+    // 실제 기사로 정상 로드될 때마다 방문 기록을 남긴다(EB.analysisHistory,
+    // common.js). 토큰 소모는 이미 article.html의 "딥 리서치" 버튼에서 끝난
+    // 뒤라 여기서는 순수하게 기록만 추가한다 — 토큰/라우팅 로직은 건드리지 않음.
+    if (window.EB && window.EB.analysisHistory) window.EB.analysisHistory.add(article.id);
     var rng = makeRng(String(article.id));
     var profile = getProfile(article.category);
     renderHeader(article, rng);
@@ -574,16 +579,35 @@
       }
     }
 
+    // Distance from `ancestor`'s own top edge to `el`'s top edge, walking the
+    // offsetParent chain — entirely in `ancestor`'s local (pre-transform) coordinate
+    // space. Unlike getBoundingClientRect(), this is unaffected by any ancestor's CSS
+    // transform (e.g. the desktop portfolio mockup's `transform: scale(...)` on
+    // .iphone-device — see assets/js/device-mockup.js): getBoundingClientRect()
+    // reports the post-scale screen position, and assigning that straight into a
+    // local CSS top/height (itself interpreted pre-scale, inside the same scaled
+    // ancestor) double-applies the scale once the browser paints it — the line
+    // rendered at scale^2 of its intended length instead of scale, landing short of
+    // the last mark whenever the mockup was scaled down. offsetTop is a layout-box
+    // value, immune to any ancestor transform, so it stays correct at any scale.
+    function localTopWithin(el, ancestor) {
+      var y = 0, node = el;
+      while (node && node !== ancestor) {
+        y += node.offsetTop;
+        node = node.offsetParent;
+      }
+      return y;
+    }
+
     // Line only connects analyzed ("done") steps to each other — never reaches
     // into the current/active or not-yet-analyzed steps below it.
     function updateTaskLine(doneCount) {
       if (!taskLine) return;
       if (doneCount < 2) { taskLine.style.display = 'none'; return; }
-      var listTop = taskList.getBoundingClientRect().top;
-      var firstRect = taskItems[0].querySelector('.mark').getBoundingClientRect();
-      var lastRect = taskItems[doneCount - 1].querySelector('.mark').getBoundingClientRect();
-      var top = (firstRect.top - listTop) + firstRect.height / 2;
-      var bottom = (lastRect.top - listTop) + lastRect.height / 2;
+      var firstMark = taskItems[0].querySelector('.mark');
+      var lastMark = taskItems[doneCount - 1].querySelector('.mark');
+      var top = localTopWithin(firstMark, taskList) + firstMark.offsetHeight / 2;
+      var bottom = localTopWithin(lastMark, taskList) + lastMark.offsetHeight / 2;
       taskLine.style.display = 'block';
       taskLine.style.top = top + 'px';
       taskLine.style.height = Math.max(0, bottom - top) + 'px';
@@ -676,6 +700,19 @@
       document.getElementById('screen-report').classList.remove('active');
       document.getElementById('screen-loading').classList.add('active');
       window.location.reload();
+    });
+
+    document.querySelectorAll('.fill-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        EB.share();
+        var id = window.EBNews.resolveCurrentId();
+        if (id) EB.sharedReports.add(id);
+      });
+    });
+    document.querySelectorAll('.fb-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        EB.showToast('소중한 의견 감사합니다');
+      });
     });
   }
 

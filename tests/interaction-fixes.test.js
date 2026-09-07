@@ -23,7 +23,8 @@ function loadCommonWithEmptyStorage() {
       icon() { return ''; },
       iconSrc() { return ''; }
     },
-    window: {}
+    window: {},
+    addEventListener() {}
   };
   context.window = context;
   vm.runInNewContext(read('assets/js/common.js'), context);
@@ -44,13 +45,14 @@ function loadCommonWithEmptyStorage() {
 
 {
   const briefing = read('daily-briefing.html');
-  assert.match(briefing, /get-token-btn[^\n]*token\.html/,
+  assert.match(briefing, /get-token-btn[\s\S]{0,200}?token\.html/,
     'the token reward CTA must open the token page');
 }
 
 {
   const token = read('token.html');
-  assert.match(token, /claim-btn[^\n]*addEventListener|querySelector\('\.claim-btn'\)\.addEventListener/,
+  assert.match(token, /class="claim-btn"/, 'the sponsor reward button must exist');
+  assert.match(token, /querySelector\('\.claim-btn'\)[\s\S]*?\.addEventListener/,
     'the sponsor reward button must have a click handler');
 }
 

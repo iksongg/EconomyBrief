@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="favicon.ico" />
 <title>이코노미브리프 - 딥 리서치</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
@@ -285,6 +286,16 @@
   .criteria-item .ci-head span { font-weight: var(--font-weight-bold); font-size: 14px; color: #262930; }
   .criteria-item p { font-weight: var(--font-weight-medium); font-size: 12px; color: #808791; line-height: 1.6; }
   .criteria-disclaimer { border-top: 1px solid var(--color-border-default); padding-top: 12px; font-size: 12px; color: #99A1AB; line-height: 1.6; }
+
+  /* .scroll-area(공용, common.css)에는 하단 여백이 전혀 없어 마지막 콘텐츠가
+     화면 가장자리에 딱 붙는다 — 실제 모바일에서는 눈에 안 띄지만, 데스크톱
+     iPhone 목업(둥근 베젤 프레임) 안에서는 콘텐츠가 곡선에 바짝 붙어 보임.
+     같은 유형(탭바 없는 상세 페이지)인 glossary.html이 이미 쓰고 있는
+     padding-bottom: 20px를 그대로 재사용, 목업이 활성화되는 구간에만 적용해
+     모바일 레이아웃은 전혀 건드리지 않는다. */
+  @media (min-width: 700px) {
+    .scroll-area { padding-bottom: 20px; }
+  }
 </style>
 </head>
 <body>

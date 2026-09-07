@@ -6,10 +6,10 @@ window.EB_NEWS_SOURCE = {
       "title": "AI 데이터 투자 확대, 국내 반도체 수혜 기대",
       "source": "KBS뉴스",
       "sourceLogo": "assets/img/article-kbs-logo.png",
-      "date": "2025.04.11",
+      "date": "2026.04.11",
       "category": "반도체",
       "description": "글로벌 빅테크 기업들이 생성형 AI 서비스 확대를 위해 데이터센터 투자를 지속하면서 AI 반도체 수요도 빠르게 증가하고 있습니다.",
-      "image": "assets/img/article-hero.png",
+      "image": "assets/img/news/ai-data-investment.webp",
       "keywords": [
         "AI",
         "반도체",
@@ -38,17 +38,18 @@ window.EB_NEWS_SOURCE = {
         "word": "HBM",
         "definition": "여러 개의 D램을 수직으로 쌓아 데이터 처리 속도를 크게 높인 고성능 메모리로, AI 서버·GPU에 주로 쓰입니다.",
         "context": "AI 핵심 요약 문장 내 (기존 하드코딩 유지)"
-      }
+      },
+      "imagePlaceholder": "news/ai-data-investment.png"
     },
     {
       "id": "kospi-2700",
       "title": "코스피 2,700선 돌파, 외국인 매수세 확대",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "오늘",
       "category": "증시",
       "description": "외국인 투자자의 순매수세가 이어지며 코스피가 연중 최고치를 경신했습니다. 반도체와 이차전지 업종이 상승세를 주도했습니다.",
-      "image": "assets/img/news/kospi-2700.png",
+      "image": "assets/img/news/kospi-2700.webp",
       "keywords": [
         "코스피",
         "외국인매수",
@@ -83,12 +84,12 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "bok-rate-350",
       "title": "한국은행 기준금리 동결, 인하 시점에 쏠린 관심",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "오늘",
       "category": "금리",
       "description": "한국은행이 기준금리를 3.50%로 동결했습니다. 시장에서는 하반기 인하 가능성에 무게를 두는 분위기입니다.",
-      "image": "assets/img/news/bok-rate-350.png",
+      "image": "assets/img/news/bok-rate-350.webp",
       "keywords": [
         "기준금리",
         "한국은행",
@@ -122,12 +123,13 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "krw-usd-1380",
       "title": "원·달러 환율 1,380원대, 수입물가 부담 커져",
-      "source": "이코노미브리프",
+      "source": "이데일리",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
       "date": "오늘",
       "category": "환율",
       "description": "미국 강달러 기조가 이어지며 원화 약세가 지속되고 있습니다. 수입 원자재 가격 상승으로 기업들의 부담이 커지고 있습니다.",
-      "image": null,
+      "image": "assets/img/news/krw-usd-1380.webp",
       "keywords": [
         "환율",
         "원달러",
@@ -156,17 +158,18 @@ window.EB_NEWS_SOURCE = {
         "word": "강달러",
         "definition": "미국 달러화의 가치가 다른 통화 대비 상대적으로 높아지는 현상을 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/krw-usd-1380.png"
     },
     {
       "id": "bok-rate-325",
       "title": "한국은행, 기준금리 3.25%로 동결",
       "source": "매일경제",
-      "sourceLogo": "assets/img/logos/maeil-kyungjae.png",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "7월 8일",
       "category": "금리",
       "description": "한국은행이 기준금리를 3.25%로 5회 연속 동결했다. 물가 안정과 가계부채 관리 사이 균형을 고려한 결정으로 풀이된다.",
-      "image": "assets/img/news/bok-rate-325.png",
+      "image": "assets/img/news/bok-rate-325.webp",
       "keywords": [
         "기준금리",
         "한국은행",
@@ -197,17 +200,17 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/bok-rate-325.png",
-      "sourceLogoPlaceholder": "logos/maeil-kyungjae.png"
+      "sourceLogoPlaceholder": "company-logos/maeil-kyungjae.png"
     },
     {
       "id": "samsung-hbm4",
       "title": "삼성전자, HBM4 양산 AI 메모리 경쟁",
       "source": "머니투데이",
-      "sourceLogo": "assets/img/logos/moneytoday.png",
+      "sourceLogo": "assets/img/company-logos/moneytoday.png",
       "date": "7월 14일",
       "category": "반도체",
       "description": "삼성전자가 차세대 고대역폭메모리 HBM4 양산에 들어갔다. 엔비디아향 공급 확대 기대감에 반도체 업종 전반이 강세를 보였다.",
-      "image": "assets/img/news/samsung-hbm4.png",
+      "image": "assets/img/news/samsung-hbm4.webp",
       "keywords": [
         "HBM4",
         "AI메모리",
@@ -238,17 +241,17 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/samsung-hbm4.png",
-      "sourceLogoPlaceholder": "logos/moneytoday.png"
+      "sourceLogoPlaceholder": "company-logos/moneytoday.png"
     },
     {
       "id": "seoul-apt-price",
       "title": "서울 아파트값 3주 연속 상승, 강남권 주도",
       "source": "경기일보",
-      "sourceLogo": "assets/img/logos/gyeonggi-ilbo.png",
+      "sourceLogo": "assets/img/company-logos/gyeonggi-ilbo.png",
       "date": "7월 13일",
       "category": "부동산",
       "description": "서울 아파트 매매가격이 3주 연속 오름세를 나타냈다. 강남·서초 등 재건축 단지 중심으로 상승 폭이 확대되는 모습이다.",
-      "image": "assets/img/news/seoul-apt-price.png",
+      "image": "assets/img/news/seoul-apt-price.webp",
       "keywords": [
         "서울아파트",
         "강남권",
@@ -279,17 +282,17 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/seoul-apt-price.png",
-      "sourceLogoPlaceholder": "logos/gyeonggi-ilbo.png"
+      "sourceLogoPlaceholder": "company-logos/gyeonggi-ilbo.png"
     },
     {
       "id": "fed-rate-cut-sep",
       "title": "美연준, 9월 금리 인하 시사, 시장 환호",
       "source": "한겨례",
-      "sourceLogo": "assets/img/logos/hankyoreh.png",
+      "sourceLogo": "assets/img/company-logos/hankyoreh.png",
       "date": "7월 6일",
       "category": "금리",
       "description": "미 연방준비제도 의장이 9월 회의에서 금리 인하 가능성을 시사했다. 뉴욕증시 3대 지수가 일제히 상승 마감했다.",
-      "image": "assets/img/news/fed-rate-cut-sep.png",
+      "image": "assets/img/news/fed-rate-cut-sep.webp",
       "keywords": [
         "연준",
         "금리인하",
@@ -320,7 +323,509 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/fed-rate-cut-sep.png",
-      "sourceLogoPlaceholder": "logos/hankyoreh.png"
+      "sourceLogoPlaceholder": "company-logos/hankyoreh.png"
+    },
+    {
+      "id": "realestate-etf-plan",
+      "title": "정부, 부동산·ETF 시장 안정화 대책 발표",
+      "source": "연합뉴스",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/yonhap-news.png",
+      "date": "7월 16일",
+      "category": "부동산",
+      "description": "최근 부동산 프로젝트파이낸싱(PF) 리스크와 레버리지ETF 투자 증가에 대응하기 위해 정부가 시장 안정화 대책을 발표했습니다. 금융당국은 투자자 보호를 강화하고 시장 변동성 완화를 위한 관리 방안을 단계적으로 추진할 예정입니다.",
+      "image": "assets/img/news/realestate-etf-plan.webp",
+      "keywords": [
+        "프로젝트파이낸싱",
+        "레버리지ETF",
+        "시장안정화"
+      ],
+      "aiSummary": [
+        "정부가 부동산 PF 리스크와 레버리지ETF 투자 증가에 대응한 시장 안정화 대책을 발표한 것으로 전해집니다.",
+        "금융당국은 투자자 보호를 강화하는 방안을 함께 추진할 계획인 것으로 나타났습니다.",
+        "시장 변동성 완화를 위한 관리 방안이 단계적으로 시행될 예정인 것으로 보입니다."
+      ],
+      "whatHappened": "최근 부동산 프로젝트파이낸싱(PF) 리스크와 레버리지ETF 투자 증가에 대응하기 위해 정부가 시장 안정화 대책을 발표했습니다. 금융당국은 투자자 보호를 강화하고 시장 변동성 완화를 위한 관리 방안을 단계적으로 추진할 예정입니다.",
+      "whyImportant": "부동산 PF와 레버리지ETF는 시장 변동성에 취약한 상품으로 꼽히는 만큼, 이번 대책이 투자자 보호와 금융시장 안정에 미칠 영향에 관심이 모이는 사안으로 평가됩니다.",
+      "whatNext": "실제 관리 방안이 어떻게 구체화되고 시행되는지에 따라 부동산 PF·ETF 시장의 안정 여부가 달라질 수 있다는 시각입니다.",
+      "deepResearch": {
+        "summary": "정부의 부동산 PF·레버리지ETF 시장 안정화 대책과 투자자 보호 방안을 다룬 기사입니다.",
+        "keyPoints": [
+          "부동산 PF 리스크 대응 대책 발표",
+          "레버리지ETF 투자자 보호 강화",
+          "시장 변동성 완화 방안 단계적 추진"
+        ],
+        "impact": "이번 대책은 부동산 PF와 레버리지ETF 시장 참여자들의 투자심리와 리스크 관리 방식에 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "관리 방안이 실제로 어떻게 이행되는지에 따라 시장 안정 효과가 달라질 수 있다는 관측입니다.",
+        "risks": "대책이 충분한 효과를 내지 못할 경우 PF·ETF 관련 리스크가 다시 부각될 가능성도 거론됩니다."
+      },
+      "term": {
+        "word": "프로젝트파이낸싱(PF)",
+        "definition": "부동산 개발 사업에 필요한 자금을 미리 빌리는 금융 방식",
+        "context": "무슨 일이 있었나요? 문장 내"
+      },
+      "imagePlaceholder": "news/realestate-etf-plan.png"
+    },
+    {
+      "id": "rate-inflation-debt-balance",
+      "title": "한국은행, 물가·가계부채 균형 고려한 정책 기조 유지",
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
+      "date": "7월 9일",
+      "category": "금리",
+      "description": "한국은행이 물가 안정과 가계부채 관리 사이의 균형을 고려해 통화정책 기조를 유지하고 있는 것으로 전해집니다.",
+      "image": "assets/img/news/rate-inflation-debt-balance.webp",
+      "keywords": [
+        "물가안정",
+        "가계부채",
+        "통화정책"
+      ],
+      "aiSummary": [
+        "한국은행이 물가와 가계부채 관리 사이 균형을 고려한 정책 기조를 유지하고 있는 것으로 전해집니다.",
+        "물가 안정을 우선하면서도 가계부채 증가 속도를 주시하고 있다는 점이 함께 언급됩니다.",
+        "두 목표 사이의 균형을 맞추는 것이 통화정책의 핵심 과제로 평가됩니다."
+      ],
+      "whatHappened": "한국은행이 물가 안정과 가계부채 관리라는 두 목표 사이에서 균형을 고려한 통화정책 기조를 유지하고 있는 것으로 전해집니다.",
+      "whyImportant": "물가와 가계부채는 서로 상충될 수 있는 정책 목표인 만큼, 두 지표를 함께 관리하는 방식이 통화정책 신뢰도에 영향을 줄 수 있는 사안으로 평가됩니다.",
+      "whatNext": "물가와 가계부채 지표가 앞으로 어떻게 움직이는지에 따라 균형 전략의 방향도 조정될 수 있다는 시각입니다.",
+      "deepResearch": {
+        "summary": "한국은행의 물가·가계부채 균형 고려 통화정책 기조를 다룬 기사입니다.",
+        "keyPoints": [
+          "물가 안정과 가계부채 관리 병행",
+          "통화정책 기조 유지",
+          "두 목표 간 균형이 핵심 과제"
+        ],
+        "impact": "물가와 가계부채를 동시에 관리하는 기조는 시중 대출금리와 예금금리 흐름에도 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "두 지표의 향후 흐름에 따라 정책 균형점이 미세하게 조정될 수 있다는 관측입니다.",
+        "risks": "가계부채가 예상보다 빠르게 늘어날 경우 균형 전략에 부담이 커질 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/rate-inflation-debt-balance.png"
+    },
+    {
+      "id": "bok-rate-household-loan-impact",
+      "title": "기준금리 동결에 가계대출 금리 흐름 '주목'",
+      "source": "이데일리",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
+      "date": "7월 10일",
+      "category": "금리",
+      "description": "기준금리 동결이 이어지면서 가계대출 금리와 대출 수요에 어떤 변화가 나타날지 관심이 모이고 있습니다.",
+      "image": "assets/img/news/bok-rate-household-loan-impact.webp",
+      "keywords": [
+        "가계대출",
+        "대출금리",
+        "기준금리"
+      ],
+      "aiSummary": [
+        "기준금리 동결이 이어지며 가계대출 금리 흐름에 관심이 모이고 있는 것으로 전해집니다.",
+        "대출 수요와 상환 부담에 미치는 영향이 함께 주목받고 있습니다.",
+        "은행권 대출금리 조정 여부가 관전 포인트로 언급됩니다."
+      ],
+      "whatHappened": "기준금리 동결이 이어지면서 은행권 가계대출 금리와 대출 수요에 어떤 변화가 나타날지에 관심이 모이고 있는 것으로 전해집니다.",
+      "whyImportant": "가계대출 금리는 가계의 상환 부담과 직결되는 만큼, 동결 기조가 대출시장에 미치는 영향은 중요하게 평가되는 사안입니다.",
+      "whatNext": "은행권이 대출금리를 어떻게 조정하는지, 대출 수요가 어떻게 반응하는지가 앞으로 지켜볼 지점으로 언급됩니다.",
+      "deepResearch": {
+        "summary": "기준금리 동결이 가계대출 금리와 대출 수요에 미치는 영향을 다룬 기사입니다.",
+        "keyPoints": [
+          "기준금리 동결 지속",
+          "가계대출 금리 흐름 주목",
+          "대출 수요 변화 가능성"
+        ],
+        "impact": "대출금리 흐름에 따라 가계의 상환 부담과 소비 여력이 달라질 수 있다는 분석입니다.",
+        "outlook": "은행권의 금리 조정 폭에 따라 대출 시장의 온도가 달라질 수 있다는 관측입니다.",
+        "risks": "대출금리가 예상보다 더디게 내려갈 경우 가계 부담이 이어질 수 있다는 우려가 있습니다."
+      },
+      "imagePlaceholder": "news/bok-rate-household-loan-impact.png"
+    },
+    {
+      "id": "realestate-pf-risk-change",
+      "title": "부동산 PF 리스크 관리 기준 바뀐다",
+      "source": "머니투데이",
+      "sourceLogo": "assets/img/company-logos/moneytoday.png",
+      "date": "7월 17일",
+      "category": "부동산",
+      "description": "정부의 시장 안정화 대책에 따라 부동산 프로젝트파이낸싱(PF) 리스크 관리 기준에 변화가 생길 것으로 전망됩니다.",
+      "image": "assets/img/news/realestate-pf-risk-change.webp",
+      "keywords": [
+        "프로젝트파이낸싱",
+        "리스크관리",
+        "부동산개발"
+      ],
+      "aiSummary": [
+        "정부 대책에 따라 부동산 PF 리스크 관리 기준에 변화가 생길 것으로 전망됩니다.",
+        "사업성 평가와 자금 조달 방식에 조정이 있을 수 있다는 점이 언급됩니다.",
+        "건설·금융업계가 새로운 기준에 어떻게 대응할지 주목됩니다."
+      ],
+      "whatHappened": "정부의 부동산 시장 안정화 대책에 따라 프로젝트파이낸싱(PF) 사업의 리스크 관리 기준에 변화가 생길 것으로 전망되는 것으로 전해집니다.",
+      "whyImportant": "PF 리스크 관리 기준 변화는 건설사와 금융권의 자금 조달·사업 추진 방식에 직접 영향을 줄 수 있는 사안으로 평가됩니다.",
+      "whatNext": "구체적인 기준 변경 내용과 시행 시기가 어떻게 확정되는지가 업계의 다음 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "정부 대책에 따른 부동산 PF 리스크 관리 기준 변화를 다룬 기사입니다.",
+        "keyPoints": [
+          "PF 리스크 관리 기준 변화 전망",
+          "사업성 평가 방식 조정 가능성",
+          "건설·금융업계 대응 주목"
+        ],
+        "impact": "기준 변화는 신규 PF 사업의 자금 조달 문턱과 속도에 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "세부 기준이 어떻게 마련되는지에 따라 업계의 부담 정도가 달라질 수 있다는 관측입니다.",
+        "risks": "기준이 지나치게 엄격해질 경우 신규 사업 추진이 위축될 가능성도 거론됩니다."
+      },
+      "imagePlaceholder": "news/realestate-pf-risk-change.png"
+    },
+    {
+      "id": "leveraged-etf-stabilization-measures",
+      "title": "레버리지ETF 변동성 관리 방안 구체화",
+      "source": "조선비즈",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png",
+      "date": "7월 18일",
+      "category": "ETF",
+      "description": "금융당국이 레버리지ETF의 시장 변동성을 관리하기 위한 구체적인 방안을 마련하고 있는 것으로 전해집니다.",
+      "image": "assets/img/news/leveraged-etf-stabilization-measures.webp",
+      "keywords": [
+        "레버리지ETF",
+        "변동성관리",
+        "금융당국"
+      ],
+      "aiSummary": [
+        "금융당국이 레버리지ETF의 변동성 관리 방안을 구체화하고 있는 것으로 전해집니다.",
+        "투자자 보호와 시장 안정을 함께 고려한 조치로 풀이됩니다.",
+        "구체적인 시행 방식은 단계적으로 공개될 예정인 것으로 나타났습니다."
+      ],
+      "whatHappened": "금융당국이 레버리지ETF 투자 증가에 따른 시장 변동성을 관리하기 위한 구체적인 방안을 마련하고 있는 것으로 전해집니다.",
+      "whyImportant": "레버리지ETF는 일반 ETF보다 가격 변동 폭이 큰 상품인 만큼, 관리 방안의 실효성이 투자자 보호와 직결되는 사안으로 평가됩니다.",
+      "whatNext": "방안이 어떻게 구체화되고 시행되는지에 따라 레버리지ETF 시장의 변동성 완화 효과가 달라질 수 있다는 시각입니다.",
+      "deepResearch": {
+        "summary": "레버리지ETF 변동성 관리 방안 마련 움직임을 다룬 기사입니다.",
+        "keyPoints": [
+          "레버리지ETF 변동성 관리 방안 구체화",
+          "투자자 보호 목적",
+          "단계적 시행 예정"
+        ],
+        "impact": "관리 방안이 시행되면 레버리지ETF 거래 방식과 투자자 접근성에 변화가 생길 수 있다는 분석입니다.",
+        "outlook": "실제 시행 이후 시장 변동성이 얼마나 완화되는지가 관전 포인트로 언급됩니다.",
+        "risks": "규제가 과도할 경우 관련 상품의 거래 유동성이 위축될 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/leveraged-etf-stabilization-measures.png"
+    },
+    {
+      "id": "investor-protection-schedule",
+      "title": "부동산·ETF 투자자 보호 조치, 단계적 시행 일정 공개",
+      "source": "연합뉴스",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/yonhap-news.png",
+      "date": "7월 19일",
+      "category": "부동산",
+      "description": "정부가 부동산 PF·레버리지ETF 관련 투자자 보호 조치의 단계적 시행 일정을 공개했습니다.",
+      "image": "assets/img/news/investor-protection-schedule.webp",
+      "keywords": [
+        "투자자보호",
+        "시행일정",
+        "금융당국"
+      ],
+      "aiSummary": [
+        "정부가 투자자 보호 조치의 단계적 시행 일정을 공개한 것으로 전해집니다.",
+        "부동산 PF와 레버리지ETF 관련 조치가 순차적으로 적용될 예정인 것으로 나타났습니다.",
+        "시장 참여자들의 준비 기간을 고려한 일정으로 풀이됩니다."
+      ],
+      "whatHappened": "정부가 부동산 PF와 레버리지ETF 관련 투자자 보호 조치를 단계적으로 시행하는 일정을 공개한 것으로 전해집니다.",
+      "whyImportant": "시행 일정이 구체화되면 시장 참여자들이 미리 대응 방안을 마련할 수 있어, 정책의 실효성을 높이는 요인으로 평가됩니다.",
+      "whatNext": "각 단계별 조치가 예정대로 시행되는지, 시장 반응은 어떤지가 앞으로 지켜볼 지점으로 언급됩니다.",
+      "deepResearch": {
+        "summary": "부동산·ETF 투자자 보호 조치의 단계적 시행 일정을 다룬 기사입니다.",
+        "keyPoints": [
+          "투자자 보호 조치 시행 일정 공개",
+          "부동산 PF·레버리지ETF 단계적 적용",
+          "시장 준비 기간 고려"
+        ],
+        "impact": "일정이 공개되면서 관련 업계와 투자자들의 대응 전략 수립에도 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "일정대로 조치가 이행되는지에 따라 시장의 신뢰도가 달라질 수 있다는 관측입니다.",
+        "risks": "일정이 지연되거나 조치가 완화될 경우 정책 신뢰도에 영향을 줄 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/investor-protection-schedule.png"
+    },
+    {
+      "id": "ai-chip-demand-impact",
+      "title": "AI 반도체 수요 급증, 관련 산업 전반에 파급 효과",
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
+      "date": "7월 15일",
+      "category": "반도체",
+      "description": "AI 반도체 수요 급증이 메모리·파운드리·장비 등 관련 산업 전반에 파급 효과를 미치고 있는 것으로 나타났습니다.",
+      "image": "assets/img/news/ai-chip-demand-impact.webp",
+      "keywords": [
+        "AI반도체",
+        "산업파급효과",
+        "공급망"
+      ],
+      "aiSummary": [
+        "AI 반도체 수요 급증이 관련 산업 전반에 파급 효과를 미치고 있는 것으로 전해집니다.",
+        "메모리뿐 아니라 파운드리, 장비업계까지 영향을 받고 있다는 점이 언급됩니다.",
+        "공급망 전반의 투자 확대로 이어지고 있는 것으로 나타났습니다."
+      ],
+      "whatHappened": "AI 반도체 수요가 급증하면서 메모리, 파운드리, 장비 업계 등 관련 산업 전반에 파급 효과가 나타나고 있는 것으로 전해집니다.",
+      "whyImportant": "AI 반도체 수요는 특정 기업을 넘어 공급망 전반의 투자와 실적에 영향을 미치는 만큼, 산업 전체 관점에서 주목받는 사안으로 평가됩니다.",
+      "whatNext": "수요 증가세가 얼마나 지속되는지, 공급망 전반의 투자가 실제 성과로 이어질지가 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "AI 반도체 수요 급증이 관련 산업 전반에 미치는 파급 효과를 다룬 기사입니다.",
+        "keyPoints": [
+          "AI 반도체 수요 급증",
+          "메모리·파운드리·장비 업계 영향",
+          "공급망 전반 투자 확대"
+        ],
+        "impact": "수요 급증은 관련 기업들의 설비 투자와 채용 확대로 이어질 수 있다는 분석입니다.",
+        "outlook": "수요 지속 여부에 따라 공급망 전반의 투자 속도가 달라질 수 있다는 관측입니다.",
+        "risks": "수요가 예상보다 둔화될 경우 과잉 투자에 대한 부담이 생길 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/ai-chip-demand-impact.png"
+    },
+    {
+      "id": "samsung-next-gen-memory-strategy",
+      "title": "삼성전자, 차세대 메모리 기술 경쟁력 강화 전략",
+      "source": "머니투데이",
+      "sourceLogo": "assets/img/company-logos/moneytoday.png",
+      "date": "7월 20일",
+      "category": "반도체",
+      "description": "삼성전자가 HBM 이후를 겨냥한 차세대 메모리 기술 경쟁력 강화 전략을 추진하고 있는 것으로 전해집니다.",
+      "image": "assets/img/news/samsung-next-gen-memory-strategy.webp",
+      "keywords": [
+        "삼성전자",
+        "차세대메모리",
+        "기술경쟁력"
+      ],
+      "aiSummary": [
+        "삼성전자가 차세대 메모리 기술 경쟁력 강화 전략을 추진하고 있는 것으로 전해집니다.",
+        "HBM 이후 세대 기술 개발에도 힘을 싣고 있다는 점이 언급됩니다.",
+        "글로벌 메모리 경쟁에서 우위를 지키기 위한 행보로 풀이됩니다."
+      ],
+      "whatHappened": "삼성전자가 HBM 이후 세대를 겨냥한 차세대 메모리 기술 개발과 경쟁력 강화 전략을 추진하고 있는 것으로 전해집니다.",
+      "whyImportant": "메모리 기술 경쟁력은 AI 반도체 공급망 내 입지를 좌우하는 핵심 요소인 만큼, 차세대 기술 전략은 중요하게 평가되는 사안입니다.",
+      "whatNext": "실제 기술 개발 성과가 언제, 어떤 형태로 가시화될지가 업계의 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "삼성전자의 차세대 메모리 기술 경쟁력 강화 전략을 다룬 기사입니다.",
+        "keyPoints": [
+          "차세대 메모리 기술 개발 추진",
+          "HBM 이후 세대 대비",
+          "글로벌 경쟁력 강화 목표"
+        ],
+        "impact": "기술 경쟁력 강화는 향후 AI 반도체 공급망 내 삼성전자의 입지에 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "경쟁사 대비 기술 개발 속도가 향후 시장 점유율을 좌우할 변수로 언급됩니다.",
+        "risks": "경쟁사들의 기술 추격이 빨라질 경우 격차가 예상보다 좁혀질 가능성도 거론됩니다."
+      },
+      "imagePlaceholder": "news/samsung-next-gen-memory-strategy.png"
+    },
+    {
+      "id": "seoul-apt-transaction-volume",
+      "title": "서울 아파트 거래량, 상승세 속 지역별 온도차",
+      "source": "경기일보",
+      "sourceLogo": "assets/img/company-logos/gyeonggi-ilbo.png",
+      "date": "7월 12일",
+      "category": "부동산",
+      "description": "서울 아파트값 상승세 속에서도 지역별 거래량 변화에는 온도차가 나타나고 있는 것으로 분석됩니다.",
+      "image": "assets/img/news/seoul-apt-transaction-volume.webp",
+      "keywords": [
+        "아파트거래량",
+        "지역별온도차",
+        "매매수급"
+      ],
+      "aiSummary": [
+        "서울 아파트값 상승세 속에서도 지역별 거래량 변화에는 온도차가 있는 것으로 전해집니다.",
+        "강남권 등 인기 지역과 그 외 지역 간 거래 흐름이 다르게 나타나고 있습니다.",
+        "매매수급 지표를 통해 실제 거래 활력을 가늠할 필요가 있다는 시각입니다."
+      ],
+      "whatHappened": "서울 아파트값이 상승세를 보이는 가운데, 지역별 거래량 변화에는 온도차가 나타나고 있는 것으로 전해집니다.",
+      "whyImportant": "가격 상승과 거래량이 항상 함께 움직이는 것은 아닌 만큼, 거래량 흐름은 시장의 실제 활력을 판단하는 중요한 지표로 평가됩니다.",
+      "whatNext": "거래량이 가격 상승세를 뒷받침할 만큼 늘어날지, 특정 지역에 국한된 흐름으로 남을지가 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "서울 아파트값 상승 속 지역별 거래량 변화를 다룬 기사입니다.",
+        "keyPoints": [
+          "서울 아파트값 상승세 지속",
+          "지역별 거래량 온도차",
+          "매매수급 지표 주목"
+        ],
+        "impact": "거래량이 특정 지역에 집중될 경우 시장 전반의 가격 상승 지속 가능성에 대한 판단이 엇갈릴 수 있다는 분석입니다.",
+        "outlook": "거래량 흐름이 확산되는지 여부가 향후 가격 추이를 가늠하는 변수로 언급됩니다.",
+        "risks": "거래량 없는 가격 상승이 이어질 경우 시장 과열에 대한 우려로 이어질 수 있습니다."
+      },
+      "imagePlaceholder": "news/seoul-apt-transaction-volume.png"
+    },
+    {
+      "id": "rate-housing-market-outlook",
+      "title": "기준금리 향방에 쏠리는 주택시장 시선",
+      "source": "매일일보",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/maeil-ilbo.png",
+      "date": "7월 22일",
+      "category": "부동산",
+      "description": "기준금리 향방에 따라 주택시장 매수 심리와 대출 여건이 어떻게 달라질지 관심이 모이고 있습니다.",
+      "image": "assets/img/news/rate-housing-market-outlook.webp",
+      "keywords": [
+        "기준금리",
+        "주택시장",
+        "매수심리"
+      ],
+      "aiSummary": [
+        "기준금리 향방에 주택시장의 관심이 쏠리고 있는 것으로 전해집니다.",
+        "금리 수준에 따라 대출 여건과 매수 심리가 달라질 수 있다는 점이 언급됩니다.",
+        "실수요자와 투자수요 모두 금리 변수를 주시하고 있는 것으로 나타났습니다."
+      ],
+      "whatHappened": "기준금리 향방에 따라 주택시장의 대출 여건과 매수 심리가 어떻게 달라질지에 관심이 모이고 있는 것으로 전해집니다.",
+      "whyImportant": "금리는 주택담보대출 부담과 직결되는 만큼, 향후 금리 방향은 주택 매수 결정에 큰 영향을 줄 수 있는 변수로 평가됩니다.",
+      "whatNext": "향후 금리가 어떤 방향으로 움직이는지에 따라 주택시장의 매수세가 달라질 수 있다는 시각입니다.",
+      "deepResearch": {
+        "summary": "기준금리 향방이 주택시장에 미치는 영향을 다룬 기사입니다.",
+        "keyPoints": [
+          "기준금리 향방 주목",
+          "주택담보대출 여건 변수",
+          "매수 심리 영향"
+        ],
+        "impact": "금리 변화는 주택 구매력과 대출 상환 부담에 직접적인 영향을 줄 수 있다는 분석입니다.",
+        "outlook": "금리 인하 시점과 폭에 따라 주택시장의 회복 속도가 달라질 수 있다는 관측입니다.",
+        "risks": "금리가 예상보다 더디게 내려갈 경우 매수 심리 회복도 지연될 수 있다는 우려가 있습니다."
+      },
+      "imagePlaceholder": "news/rate-housing-market-outlook.png"
+    },
+    {
+      "id": "realestate-market-variables-outlook",
+      "title": "하반기 부동산 시장, 대출규제·공급물량이 변수",
+      "source": "이데일리",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
+      "date": "7월 23일",
+      "category": "부동산",
+      "description": "하반기 부동산 시장의 방향을 가를 변수로 대출규제 강도와 신규 공급물량이 꼽히고 있습니다.",
+      "image": "assets/img/news/realestate-market-variables-outlook.webp",
+      "keywords": [
+        "대출규제",
+        "공급물량",
+        "하반기전망"
+      ],
+      "aiSummary": [
+        "하반기 부동산 시장의 주요 변수로 대출규제와 공급물량이 꼽히고 있는 것으로 전해집니다.",
+        "정책 방향에 따라 시장 분위기가 달라질 수 있다는 점이 언급됩니다.",
+        "지역별 공급 계획도 함께 주목받고 있는 것으로 나타났습니다."
+      ],
+      "whatHappened": "하반기 부동산 시장의 방향을 가를 변수로 대출규제 강도와 신규 공급물량이 꼽히고 있는 것으로 전해집니다.",
+      "whyImportant": "대출규제와 공급물량은 수요와 공급 양쪽에서 시장 가격에 직접 영향을 미치는 요인인 만큼, 향후 정책 방향이 중요하게 평가되는 사안입니다.",
+      "whatNext": "정부의 규제 강도 조정과 실제 공급 일정이 어떻게 진행되는지가 하반기 시장의 관전 포인트로 언급됩니다.",
+      "deepResearch": {
+        "summary": "하반기 부동산 시장의 대출규제·공급물량 변수를 다룬 기사입니다.",
+        "keyPoints": [
+          "대출규제 강도 변수",
+          "신규 공급물량 변수",
+          "지역별 공급 계획 주목"
+        ],
+        "impact": "규제와 공급 상황에 따라 지역별 가격 흐름이 엇갈릴 수 있다는 분석입니다.",
+        "outlook": "정책 기조가 유지되는지, 완화되는지에 따라 시장 분위기가 달라질 수 있다는 관측입니다.",
+        "risks": "공급 부족이 지속될 경우 규제만으로는 가격 안정 효과가 제한적일 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/realestate-market-variables-outlook.png"
+    },
+    {
+      "id": "us-inflation-rate-outlook",
+      "title": "미국 물가 지표에 쏠리는 금리 인하 셈법",
+      "source": "한겨례",
+      "sourceLogo": "assets/img/company-logos/hankyoreh.png",
+      "date": "7월 24일",
+      "category": "금리",
+      "description": "미국 물가 지표 흐름에 따라 연준의 금리 인하 속도와 폭에 대한 셈법이 달라지고 있는 것으로 전해집니다.",
+      "image": "assets/img/news/us-inflation-rate-outlook.webp",
+      "keywords": [
+        "미국물가",
+        "연준",
+        "금리인하"
+      ],
+      "aiSummary": [
+        "미국 물가 지표 흐름에 연준의 금리 인하 셈법이 영향을 받고 있는 것으로 전해집니다.",
+        "물가가 예상보다 높게 나올 경우 인하 속도가 늦춰질 수 있다는 우려도 있습니다.",
+        "시장은 다음 물가 지표 발표에 촉각을 곤두세우고 있는 것으로 나타났습니다."
+      ],
+      "whatHappened": "미국 물가 지표 흐름에 따라 연준의 금리 인하 속도와 폭에 대한 시장의 셈법이 달라지고 있는 것으로 전해집니다.",
+      "whyImportant": "물가 지표는 연준 통화정책 결정의 핵심 근거인 만큼, 향후 발표되는 지표 결과가 금리 인하 경로에 직접 영향을 줄 수 있는 사안으로 평가됩니다.",
+      "whatNext": "다음 물가 지표가 예상치를 웃도는지, 밑도는지에 따라 시장의 금리 인하 기대가 조정될 수 있다는 시각입니다.",
+      "deepResearch": {
+        "summary": "미국 물가 지표와 연준 금리 인하 셈법 변화를 다룬 기사입니다.",
+        "keyPoints": [
+          "미국 물가 지표 주목",
+          "연준 금리 인하 속도 변수",
+          "시장의 지표 발표 촉각"
+        ],
+        "impact": "물가 지표 결과에 따라 글로벌 금리 인하 기대와 자산시장 심리가 함께 출렁일 수 있다는 분석입니다.",
+        "outlook": "물가 안정 흐름이 확인될 경우 예정된 인하 경로가 유지될 가능성이 높다는 관측입니다.",
+        "risks": "물가가 재반등할 경우 금리 인하 시점이 늦춰지며 시장 변동성이 커질 수 있다는 우려가 있습니다."
+      },
+      "imagePlaceholder": "news/us-inflation-rate-outlook.png"
+    },
+    {
+      "id": "nyse-index-movement",
+      "title": "뉴욕증시 3대 지수, 금리 기대감에 동반 상승",
+      "source": "조선비즈",
+      "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png",
+      "date": "7월 7일",
+      "category": "증시",
+      "description": "금리 인하 기대감이 커지면서 뉴욕증시 3대 지수가 동반 상승세를 보이고 있는 것으로 전해집니다.",
+      "image": "assets/img/news/nyse-index-movement.webp",
+      "keywords": [
+        "뉴욕증시",
+        "3대지수",
+        "금리기대감"
+      ],
+      "aiSummary": [
+        "금리 인하 기대감에 뉴욕증시 3대 지수가 동반 상승한 것으로 전해집니다.",
+        "기술주를 중심으로 상승폭이 두드러졌다는 점이 언급됩니다.",
+        "투자심리 개선이 지수 상승을 이끈 것으로 풀이됩니다."
+      ],
+      "whatHappened": "금리 인하 기대감이 커지면서 뉴욕증시 3대 지수가 동반 상승세를 보인 것으로 전해집니다.",
+      "whyImportant": "뉴욕증시의 상승은 글로벌 투자심리와 자금 흐름에 영향을 미치는 만큼, 국내 증시에도 함께 관심이 모이는 사안으로 평가됩니다.",
+      "whatNext": "금리 인하가 실제로 단행될 경우 상승세가 이어질지, 차익 실현 매물이 나올지가 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "금리 인하 기대감에 따른 뉴욕증시 3대 지수 동반 상승을 다룬 기사입니다.",
+        "keyPoints": [
+          "뉴욕증시 3대 지수 동반 상승",
+          "기술주 중심 상승폭 확대",
+          "금리 인하 기대감이 배경"
+        ],
+        "impact": "뉴욕증시 강세는 국내 증시를 비롯한 글로벌 위험자산 선호 심리에도 긍정적으로 작용할 수 있다는 분석입니다.",
+        "outlook": "실제 금리 인하 여부와 폭에 따라 상승세의 지속 여부가 갈릴 수 있다는 관측입니다.",
+        "risks": "금리 인하 기대가 후퇴할 경우 상승분을 반납하는 조정이 나타날 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/nyse-index-movement.png"
+    },
+    {
+      "id": "fed-cut-domestic-market-impact",
+      "title": "연준 금리 인하 시사, 국내 증시·환율에도 촉각",
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
+      "date": "7월 8일",
+      "category": "금리",
+      "description": "연준의 금리 인하 시사가 국내 증시와 환율 등 금융시장 전반에 미칠 영향에 관심이 모이고 있습니다.",
+      "image": "assets/img/news/fed-cut-domestic-market-impact.webp",
+      "keywords": [
+        "연준금리인하",
+        "국내증시",
+        "환율영향"
+      ],
+      "aiSummary": [
+        "연준의 금리 인하 시사가 국내 금융시장에도 영향을 줄 수 있다는 분석이 나오고 있는 것으로 전해집니다.",
+        "환율과 외국인 자금 흐름이 함께 주목받고 있다는 점이 언급됩니다.",
+        "국내 통화정책 운신의 폭에도 영향을 줄 수 있다는 시각입니다."
+      ],
+      "whatHappened": "연준의 금리 인하 시사가 국내 증시와 환율 등 금융시장 전반에 미칠 영향에 관심이 모이고 있는 것으로 전해집니다.",
+      "whyImportant": "미국의 금리 정책은 국내 환율, 외국인 자금 흐름, 통화정책 운신 폭에까지 영향을 미치는 만큼, 국내 시장 입장에서도 중요하게 평가되는 사안입니다.",
+      "whatNext": "실제 인하 시점과 폭이 확정되면 국내 환율과 외국인 수급이 어떻게 반응하는지가 다음 관심사로 언급됩니다.",
+      "deepResearch": {
+        "summary": "연준 금리 인하 시사가 국내 시장에 미치는 영향을 다룬 기사입니다.",
+        "keyPoints": [
+          "연준 금리 인하 시사",
+          "국내 환율·외국인 자금 영향",
+          "국내 통화정책 운신 폭 변수"
+        ],
+        "impact": "연준의 인하 기조는 원달러 환율과 외국인 자금 유입에 긍정적으로 작용할 수 있다는 분석입니다.",
+        "outlook": "국내 통화당국이 미국과의 금리차를 어떻게 고려하는지에 따라 정책 대응이 달라질 수 있다는 관측입니다.",
+        "risks": "미국의 인하 속도가 예상과 다를 경우 환율 변동성이 오히려 커질 수 있다는 우려도 있습니다."
+      },
+      "imagePlaceholder": "news/fed-cut-domestic-market-impact.png"
     },
     {
       "id": "krw-usd-export",
@@ -330,7 +835,7 @@ window.EB_NEWS_SOURCE = {
       "date": "7월 11일",
       "category": "환율",
       "description": "원달러 환율이 1,380원대에서 안정세를 보이며 수출 중심 기업들의 실적 개선 기대감이 커지고 있다.",
-      "image": null,
+      "image": "assets/img/news/krw-usd-export.webp",
       "keywords": [
         "원달러",
         "수출기업",
@@ -361,7 +866,7 @@ window.EB_NEWS_SOURCE = {
         "context": "왜 중요한가요? 문장 내"
       },
       "imagePlaceholder": "news/krw-usd-export.png",
-      "sourceLogoPlaceholder": "logos/seoul-economic.png"
+      "sourceLogoPlaceholder": "company-logos/seoul-economic.png"
     },
     {
       "id": "skhynix-hbm-earnings",
@@ -371,7 +876,7 @@ window.EB_NEWS_SOURCE = {
       "date": "7월 9일",
       "category": "반도체",
       "description": "SK하이닉스가 HBM 공급 확대에 힘입어 시장 예상치를 웃도는 실적을 발표했다. 반도체 업황 회복 기대가 높아지고 있다.",
-      "image": "assets/img/news/skhynix-hbm-earnings.png",
+      "image": "assets/img/news/skhynix-hbm-earnings.webp",
       "keywords": [
         "SK하이닉스",
         "HBM",
@@ -402,7 +907,7 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/skhynix-hbm-earnings.png",
-      "sourceLogoPlaceholder": "logos/chosun-biz.png"
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png"
     },
     {
       "id": "ai-semi-etf-inflow",
@@ -412,7 +917,7 @@ window.EB_NEWS_SOURCE = {
       "date": "7월 5일",
       "category": "ETF",
       "description": "AI 반도체 관련 ETF로 개인 투자자 자금이 꾸준히 유입되고 있다. 하반기 반도체 업황 개선 기대가 반영된 것으로 풀이된다.",
-      "image": null,
+      "image": "assets/img/news/ai-semi-etf-inflow.webp",
       "keywords": [
         "AI반도체",
         "ETF",
@@ -443,17 +948,17 @@ window.EB_NEWS_SOURCE = {
         "context": "무슨 일이 있었나요? 문장 내"
       },
       "imagePlaceholder": "news/ai-semi-etf-inflow.png",
-      "sourceLogoPlaceholder": "logos/hankyung.png"
+      "sourceLogoPlaceholder": "company-logos/hankyung.png"
     },
     {
       "id": "jeonse-fraud-support",
       "title": "전세사기 피해자 지원 확대, 국회 통과?",
       "source": "조선일보",
-      "sourceLogo": "assets/img/logos/chosun-ilbo.png",
+      "sourceLogo": "assets/img/company-logos/chosun-ilbo.png",
       "date": "5시간 전",
       "category": "주거",
       "description": "전세사기 피해자에 대한 지원을 확대하는 방안이 국회에서 논의되고 있습니다. 임대차 시장 안정을 위한 후속 대책에 관심이 모입니다.",
-      "image": "assets/img/news/jeonse-fraud-support.png",
+      "image": "assets/img/news/jeonse-fraud-support.webp",
       "keywords": [
         "전세사기",
         "임대차법",
@@ -483,18 +988,18 @@ window.EB_NEWS_SOURCE = {
         "definition": "집주인(임대인)이 세입자(임차인)에게 일정 기간 집을 빌려주고 대가를 받는 계약 관계를 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
       },
-      "sourceLogoPlaceholder": "logos/chosun-ilbo.png",
+      "sourceLogoPlaceholder": "company-logos/chosun-ilbo.png",
       "imagePlaceholder": "news/jeonse-fraud-support.png"
     },
     {
       "id": "dining-cost-inflation",
       "title": "외식물가 8개월 연속 상승, 밥값 부담 커져",
       "source": "한겨레",
-      "sourceLogo": "assets/img/logos/hankyoreh.png",
+      "sourceLogo": "assets/img/company-logos/hankyoreh.png",
       "date": "5시간 전",
       "category": "물가",
       "description": "외식물가가 8개월 연속 상승세를 이어가며 소비자들의 체감 물가 부담이 커지고 있습니다.",
-      "image": "assets/img/news/dining-cost-inflation.png",
+      "image": "assets/img/news/dining-cost-inflation.webp",
       "keywords": [
         "외식물가",
         "장바구니물가",
@@ -524,7 +1029,7 @@ window.EB_NEWS_SOURCE = {
         "definition": "소비자가 실제 생활 속에서 느끼는 물가 수준을 의미하며, 공식 물가지수와는 차이가 날 수 있습니다.",
         "context": "무슨 일이 있었나요? 문장 내"
       },
-      "sourceLogoPlaceholder": "logos/hankyoreh.png",
+      "sourceLogoPlaceholder": "company-logos/hankyoreh.png",
       "imagePlaceholder": "news/dining-cost-inflation.png"
     },
     {
@@ -535,7 +1040,7 @@ window.EB_NEWS_SOURCE = {
       "date": "3시간 전",
       "category": "에너지",
       "description": "전기요금 인상 논의가 본격화되면서 서민 가계의 부담이 커질 수 있다는 우려가 제기되고 있습니다.",
-      "image": "assets/img/news/electric-bill-hike.png",
+      "image": "assets/img/news/electric-bill-hike.webp",
       "keywords": [
         "전기요금",
         "에너지물가",
@@ -565,18 +1070,18 @@ window.EB_NEWS_SOURCE = {
         "definition": "한 가정이 일상적으로 지출하는 생활 관련 비용 전체를 의미합니다.",
         "context": "왜 중요한가요? 문장 내"
       },
-      "sourceLogoPlaceholder": "logos/edaily.png",
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
       "imagePlaceholder": "news/electric-bill-hike.png"
     },
     {
       "id": "household-debt-1900t",
       "title": "가계부채 1900조 돌파, 정부 추가 대출규제 검토",
       "source": "매일경제",
-      "sourceLogo": null,
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "2시간 전",
       "category": "가계부채",
       "description": "가계부채 규모가 1900조원을 넘어서면서 정부가 추가적인 대출 규제 방안을 검토하고 있습니다.",
-      "image": "assets/img/news/household-debt-1900t.png",
+      "image": "assets/img/news/household-debt-1900t.webp",
       "keywords": [
         "가계부채",
         "대출규제",
@@ -606,7 +1111,7 @@ window.EB_NEWS_SOURCE = {
         "definition": "총부채원리금상환비율의 줄임말로, 소득 대비 전체 대출의 원금과 이자 상환액이 차지하는 비중을 나타내는 대출 규제 지표입니다.",
         "context": "앞으로 어떻게 될까요? 문장 내"
       },
-      "sourceLogoPlaceholder": "logos/maeil-kyungjae.png",
+      "sourceLogoPlaceholder": "company-logos/maeil-kyungjae.png",
       "imagePlaceholder": "news/household-debt-1900t.png"
     },
     {
@@ -617,7 +1122,7 @@ window.EB_NEWS_SOURCE = {
       "date": "1시간 전",
       "category": "고용",
       "description": "청년층 체감실업률이 역대 최고 수준을 기록하며 고용시장의 어려움이 지속되고 있습니다.",
-      "image": null,
+      "image": "assets/img/news/youth-unemployment-record.webp",
       "keywords": [
         "청년실업",
         "고용시장",
@@ -647,22 +1152,22 @@ window.EB_NEWS_SOURCE = {
         "definition": "공식 실업률 통계에는 잘 드러나지 않는 취업준비생, 단기 근로자 등을 포함해 사람들이 실제로 느끼는 실업 수준을 나타내는 지표입니다.",
         "context": "무슨 일이 있었나요? 문장 내"
       },
-      "sourceLogoPlaceholder": "logos/hankyung.png",
+      "sourceLogoPlaceholder": "company-logos/hankyung.png",
       "imagePlaceholder": "news/youth-unemployment-record.png"
     },
     {
       "id": "bok-rate-hold-timeline",
       "title": "한국은행 기준금리 3.25%로 동결",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "머니투데이",
+      "sourceLogo": "assets/img/company-logos/moneytoday.png",
       "date": "오늘 09:32",
-      "category": "물가",
-      "description": "글로벌 관세 전쟁 우려로 달러 환율이 금융위기 이후 최고치를 기록했습니다.",
-      "image": "assets/img/feed-thumb-1.png",
+      "category": "금리",
+      "description": "한국은행이 기준금리를 3.25%로 동결한 가운데, 글로벌 관세 전쟁 우려로 달러 환율도 금융위기 이후 최고치를 기록했습니다.",
+      "image": "assets/img/feed-thumb-1.webp",
       "keywords": [
-        "물가",
-        "CPI",
-        "인플레이션"
+        "기준금리",
+        "환율",
+        "관세"
       ],
       "aiSummary": [
         "한국은행이 기준금리를 3.25%로 동결한 것으로 전해집니다.",
@@ -687,17 +1192,18 @@ window.EB_NEWS_SOURCE = {
         "word": "관세",
         "definition": "한 나라가 다른 나라에서 수입하는 상품에 부과하는 세금으로, 관세가 오르면 수입 물가와 교역 비용에 영향을 줍니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/bok-rate-hold-timeline.png"
     },
     {
       "id": "nvidia-next-ai-chip",
       "title": "엔비디아, 차세대 AI칩 공개",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "오늘 09:12",
       "category": "반도체",
       "description": "성능 1.5배 향상, HBM4 지원으로 AI 연산 속도 크게 개선",
-      "image": "assets/img/feed-thumb-2.png",
+      "image": "assets/img/feed-thumb-2.webp",
       "keywords": [
         "엔비디아",
         "AI반도체"
@@ -725,17 +1231,18 @@ window.EB_NEWS_SOURCE = {
         "word": "연산 속도",
         "definition": "컴퓨터나 반도체 칩이 데이터를 처리하는 빠르기를 의미하며, AI 모델 학습과 추론 성능에 직접적인 영향을 줍니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/nvidia-next-ai-chip.png"
     },
     {
       "id": "krw-usd-1379",
       "title": "원,달러 환율 1,379원 돌파",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "한겨레",
+      "sourceLogo": "assets/img/company-logos/hankyoreh.png",
       "date": "오늘 08:45",
       "category": "환율",
       "description": "달러 강세 지속, 외국인 주식 순매도 확대로 원화 약세 압력 확대",
-      "image": "assets/img/feed-thumb-3.png",
+      "image": "assets/img/news/krw-usd-1379.webp",
       "keywords": [
         "환율",
         "달러"
@@ -763,17 +1270,19 @@ window.EB_NEWS_SOURCE = {
         "word": "순매도",
         "definition": "특정 기간 동안 판 금액이 산 금액보다 많은 상태를 의미하며, 해당 투자 주체의 자금이 시장에서 빠져나가고 있다는 뜻입니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/krw-usd-1379.png"
     },
     {
       "id": "bok-rate-hold-2",
       "title": "한국은행 기준금리 3.25%로 동결",
-      "source": "이코노미브리프",
+      "source": "이데일리",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
       "date": "오늘 08:32",
       "category": "금리",
       "description": "성장 둔화 우려에도 물가 안정 우선 고려해 기준금리 동결 결정",
-      "image": "assets/img/feed-thumb-4.png",
+      "image": "assets/img/news/bok-rate-hold-2.webp",
       "keywords": [
         "한국은행",
         "금리"
@@ -801,17 +1310,19 @@ window.EB_NEWS_SOURCE = {
         "word": "성장 둔화",
         "definition": "경제가 이전보다 더디게 성장하거나 성장 속도가 느려지는 상태를 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/bok-rate-hold-2.png"
     },
     {
       "id": "oil-price-up",
       "title": "국제유가 소폭 상승",
-      "source": "이코노미브리프",
+      "source": "조선비즈",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png",
       "date": "오늘 07:15",
       "category": "에너지",
       "description": "중동 긴장감 고조 및 OPEC 감산 연장 가능성에 유가 상승",
-      "image": "assets/img/feed-thumb-5.png",
+      "image": "assets/img/news/oil-price-up.webp",
       "keywords": [
         "유가",
         "에너지"
@@ -839,17 +1350,19 @@ window.EB_NEWS_SOURCE = {
         "word": "감산",
         "definition": "원유 등의 생산량을 의도적으로 줄이는 것을 의미하며, 공급이 줄어들면 통상 가격 상승 요인으로 작용합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/oil-price-up.png"
     },
     {
       "id": "us-cpi-april",
       "title": "미국 4월 CPI 발표",
-      "source": "이코노미브리프",
+      "source": "조선비즈",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png",
       "date": "오늘",
       "category": "물가",
       "description": "미국 4월 CPI 발표",
-      "image": null,
+      "image": "assets/img/news/us-cpi-april.webp",
       "keywords": [
         "CPI",
         "미국물가"
@@ -883,12 +1396,12 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "kospi-2750-close",
       "title": "코스피 2,750선 회복 마감",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "머니투데이",
+      "sourceLogo": "assets/img/company-logos/moneytoday.png",
       "date": "오늘",
       "category": "증시",
       "description": "코스피 2,750선 회복 마감",
-      "image": null,
+      "image": "assets/img/news/kospi-2750-close.webp",
       "keywords": [
         "코스피",
         "증시"
@@ -922,12 +1435,12 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "oil-85-dollar",
       "title": "국제유가 배럴당 85달러 상승",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "KBS뉴스",
+      "sourceLogo": "assets/img/article-kbs-logo.png",
       "date": "오늘",
       "category": "에너지",
       "description": "국제유가 배럴당 85달러 상승",
-      "image": null,
+      "image": "assets/img/news/oil-85-dollar.webp",
       "keywords": [
         "국제유가",
         "에너지"
@@ -961,12 +1474,13 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "samsung-3nm-foundry",
       "title": "삼성전자 3나노 파운드리 수주 확대",
-      "source": "이코노미브리프",
+      "source": "이데일리",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/edaily.png",
       "date": "오늘",
       "category": "반도체",
       "description": "삼성전자 3나노 파운드리 수주 확대",
-      "image": null,
+      "image": "assets/img/news/samsung-3nm-foundry.webp",
       "keywords": [
         "삼성전자",
         "파운드리",
@@ -995,17 +1509,18 @@ window.EB_NEWS_SOURCE = {
         "word": "파운드리",
         "definition": "반도체 설계도만 가지고 있는 기업의 주문을 받아 실제로 반도체를 위탁 생산해주는 전문 생산업체를 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/samsung-3nm-foundry.png"
     },
     {
       "id": "tesla-earnings-volatility",
       "title": "테슬라 실적 발표 앞두고 주가 변동성 확대",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "매일경제",
+      "sourceLogo": "assets/img/company-logos/maeil-kyungjae.png",
       "date": "오늘",
       "category": "글로벌증시",
       "description": "테슬라 실적 발표 앞두고 주가 변동성 확대",
-      "image": null,
+      "image": "assets/img/news/tesla-earnings-volatility.webp",
       "keywords": [
         "테슬라",
         "실적",
@@ -1040,12 +1555,12 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "china-export-miss",
       "title": "중국 4월 수출 예상치 하회",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "KBS뉴스",
+      "sourceLogo": "assets/img/article-kbs-logo.png",
       "date": "오늘",
       "category": "글로벌경제",
       "description": "중국 4월 수출 예상치 하회",
-      "image": null,
+      "image": "assets/img/news/china-export-miss.webp",
       "keywords": [
         "중국",
         "수출",
@@ -1080,12 +1595,12 @@ window.EB_NEWS_SOURCE = {
     {
       "id": "fed-hike-signal",
       "title": "美 연준 위원, 추가 금리인상 가능성 시사",
-      "source": "이코노미브리프",
-      "sourceLogo": null,
+      "source": "한겨레",
+      "sourceLogo": "assets/img/company-logos/hankyoreh.png",
       "date": "오늘",
       "category": "금리",
       "description": "美 연준 위원, 추가 금리인상 가능성 시사",
-      "image": "assets/img/news/fed-hike-signal.png",
+      "image": "assets/img/news/fed-hike-signal.webp",
       "keywords": [
         "연준",
         "금리인상"
@@ -1120,10 +1635,11 @@ window.EB_NEWS_SOURCE = {
       "title": "HBM 수요 급증에 AI 메모리 시장 경쟁 본격화되며 투자 확대 기대감 커져",
       "source": "매일일보",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/maeil-ilbo.png",
       "date": "7월 21일",
       "category": "반도체",
       "description": "HBM 수요 급증에 AI 메모리 시장 경쟁 본격화되며 투자 확대 기대감 커져",
-      "image": "assets/img/article-related-thumb-1.png",
+      "image": "assets/img/news/hbm-demand-surge.webp",
       "keywords": [
         "HBM",
         "AI메모리",
@@ -1152,17 +1668,19 @@ window.EB_NEWS_SOURCE = {
         "word": "투자 확대",
         "definition": "기업이 생산설비나 연구개발 등에 들이는 자금 규모를 늘리는 것을 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/hbm-demand-surge.png"
     },
     {
       "id": "bigtech-ai-datacenter",
       "title": "글로벌 빅테크 기업 AI 데이터센터 투자 확대에 반도체 업계 수혜 기대",
       "source": "한국경제",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/hankyung.png",
       "date": "7월 20일",
       "category": "반도체",
       "description": "글로벌 빅테크 기업 AI 데이터센터 투자 확대에 반도체 업계 수혜 기대",
-      "image": "assets/img/article-related-thumb-2.png",
+      "image": "assets/img/news/bigtech-ai-datacenter.webp",
       "keywords": [
         "빅테크",
         "AI데이터센터",
@@ -1191,17 +1709,19 @@ window.EB_NEWS_SOURCE = {
         "word": "데이터센터",
         "definition": "서버와 저장장치 등 대규모 컴퓨팅 설비를 모아 두고 운영하는 시설로, AI 서비스 운영에 필수적인 인프라입니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/bigtech-ai-datacenter.png"
     },
     {
       "id": "ai-chip-equipment-earnings",
       "title": "AI 반도체 생산 확대에 장비 기업 실적 개선 기대감 지속적으로 확산",
       "source": "서울경제",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/seoul-economic.png",
       "date": "7월 15일",
       "category": "반도체",
       "description": "AI 반도체 생산 확대에 장비 기업 실적 개선 기대감 지속적으로 확산",
-      "image": "assets/img/article-related-thumb-3.png",
+      "image": "assets/img/news/ai-chip-equipment-earnings.webp",
       "keywords": [
         "AI반도체",
         "장비기업",
@@ -1230,17 +1750,19 @@ window.EB_NEWS_SOURCE = {
         "word": "장비 기업",
         "definition": "반도체를 생산하는 데 필요한 기계나 설비를 만들어 공급하는 기업을 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/ai-chip-equipment-earnings.png"
     },
     {
       "id": "bok-rate-outlook-h2",
       "title": "한국은행 기준금리 동결 이후 하반기 금융시장 전망에 관심 집중",
       "source": "매일일보",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/maeil-ilbo.png",
       "date": "7월 17일",
       "category": "금리",
       "description": "한국은행 기준금리 동결 이후 하반기 금융시장 전망에 관심 집중",
-      "image": "assets/img/article-recommend-thumb-1.png",
+      "image": "assets/img/news/bok-rate-outlook-h2.webp",
       "keywords": [
         "기준금리",
         "금융시장전망"
@@ -1268,17 +1790,19 @@ window.EB_NEWS_SOURCE = {
         "word": "기준금리",
         "definition": "한 나라의 중앙은행이 정하는 대표적인 정책금리로, 예금·대출 금리와 금융시장 전반에 영향을 줍니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/bok-rate-outlook-h2.png"
     },
     {
       "id": "krw-usd-export-earnings",
       "title": "원달러 환율 상승세 이어지며 수출 중심 기업 실적 개선 기대감 확대",
       "source": "조선비즈",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/chosun-biz.png",
       "date": "7월 20일",
       "category": "환율",
       "description": "원달러 환율 상승세 이어지며 수출 중심 기업 실적 개선 기대감 확대",
-      "image": "assets/img/article-recommend-thumb-2.png",
+      "image": "assets/img/news/krw-usd-export-earnings.webp",
       "keywords": [
         "원달러",
         "수출기업",
@@ -1307,17 +1831,19 @@ window.EB_NEWS_SOURCE = {
         "word": "가격 경쟁력",
         "definition": "같은 품질의 상품을 다른 경쟁자보다 낮은 가격에 제공할 수 있는 능력을 의미합니다.",
         "context": "왜 중요한가요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/krw-usd-export-earnings.png"
     },
     {
       "id": "ai-semi-etf-individual",
       "title": "AI 반도체 ETF 투자 자금 꾸준히 유입되며 개인 투자자 관심 증가",
       "source": "한국경제",
       "sourceLogo": null,
+      "sourceLogoPlaceholder": "company-logos/hankyung.png",
       "date": "7월 19일",
       "category": "ETF",
       "description": "AI 반도체 ETF 투자 자금 꾸준히 유입되며 개인 투자자 관심 증가",
-      "image": "assets/img/article-recommend-thumb-3.png",
+      "image": "assets/img/news/ai-semi-etf-individual.webp",
       "keywords": [
         "AI반도체",
         "ETF",
@@ -1346,7 +1872,8 @@ window.EB_NEWS_SOURCE = {
         "word": "개인 투자자",
         "definition": "증권사나 기관이 아닌 일반 개인이 자기 자금으로 주식이나 펀드에 투자하는 사람을 의미합니다.",
         "context": "무슨 일이 있었나요? 문장 내"
-      }
+      },
+      "imagePlaceholder": "news/ai-semi-etf-individual.png"
     }
   ]
 };

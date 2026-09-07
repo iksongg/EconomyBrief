@@ -18,6 +18,7 @@ function loadAppState(storage = createStorage()) {
     document,
     localStorage: storage,
     window: {},
+    addEventListener() {},
     EB_ICONS: { icon() { return ''; }, iconSrc() { return ''; } }
   };
   context.window = context;
