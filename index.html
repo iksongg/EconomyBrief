@@ -54,7 +54,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    background: #ffffff;
+    background: var(--color-bg-surface);
     overflow: hidden;
     display: none;
   }
@@ -144,13 +144,13 @@
     font-weight: 700;
     line-height: 1.3;
   }
-  .intro-text h1 .line-primary { color: #000000; }
+  .intro-text h1 .line-primary { color: var(--color-text-primary); }
   .intro-text h1 .line-accent { color: var(--color-primary); display: block; }
   .intro-text p {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.3;
-    color: #000000;
+    color: var(--color-text-primary);
     white-space: nowrap;
   }
 
@@ -191,7 +191,7 @@
     background: var(--color-primary);
     border: none;
     border-radius: 16px;
-    color: #ffffff;
+    color: var(--color-text-inverse);
     font-family: inherit;
     font-size: 16px;
     font-weight: 600;
@@ -215,7 +215,7 @@
     font-size: 30px;
     font-weight: 700;
     line-height: 1.3;
-    color: #000000;
+    color: var(--color-text-primary);
     text-align: center;
   }
   .keyword-count {
@@ -223,7 +223,7 @@
     color: var(--color-text-secondary);
   }
   .keyword-count strong {
-    color: #000000;
+    color: var(--color-text-primary);
     font-weight: 700;
   }
 
@@ -251,7 +251,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50px;
-    background: #ffffff;
+    background: var(--color-bg-surface);
     border: 1.108px solid var(--color-border);
     color: var(--color-pill-text);
     font-size: 19.64px;
@@ -261,11 +261,11 @@
     white-space: nowrap;
     padding: 0 12px;
   }
-  .pill.regular { color: #000000; font-weight: 400; font-size: 17.73px; }
+  .pill.regular { color: var(--color-text-primary); font-weight: 400; font-size: 17.73px; }
   .pill.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
-    color: #ffffff;
+    color: var(--color-text-inverse);
     font-weight: 600;
   }
 

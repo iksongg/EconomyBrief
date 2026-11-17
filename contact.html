@@ -21,32 +21,32 @@
     display: flex; align-items: flex-start; justify-content: center;
   }
   .scroll-area { padding-bottom: 20px; }
-  .section-white { background: #ffffff; padding: 20px; }
+  .section-white { background: var(--color-bg-surface); padding: 20px; }
 
   .form-field { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-  .form-field label { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; }
+  .form-field label { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); }
   .form-field select, .form-field textarea {
-    font-family: inherit; font-size: 14px; color: #000; border: 1px solid var(--color-border-default);
-    border-radius: 12px; padding: 12px 14px; background: #fff; width: 100%;
+    font-family: inherit; font-size: 14px; color: var(--color-text-primary); border: 1px solid var(--color-border-default);
+    border-radius: 12px; padding: 12px 14px; background: var(--color-bg-surface); width: 100%;
   }
   .form-field select { height: 48px; }
   .form-field textarea { min-height: 140px; resize: vertical; line-height: 1.6; }
-  .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--color-brand-600); }
+  .form-field select:focus, .form-field textarea:focus { outline: none; border-color: var(--color-brand-primary); }
 
   .submit-btn {
     width: 100%; height: 48px; border-radius: 999px; border: none;
-    background: var(--color-brand-600); color: #fff; font-family: inherit;
+    background: var(--color-brand-primary); color: var(--color-text-inverse); font-family: inherit;
     font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer;
   }
-  .submit-btn:disabled { background: #E6E7EB; color: #9CA0AC; cursor: not-allowed; }
+  .submit-btn:disabled { background: var(--color-border-default); color: #9CA0AC; cursor: not-allowed; }
 
   .done-view { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 80px 20px; gap: 16px; }
-  .done-view .gicon { font-size: 48px; width: 48px; height: 48px; color: var(--color-status2-green-fill); }
-  .done-view h2 { font-weight: var(--font-weight-bold); font-size: 18px; color: #000; }
+  .done-view .gicon { font-size: 48px; width: 48px; height: 48px; color: var(--color-tag-green-fg); }
+  .done-view h2 { font-weight: var(--font-weight-bold); font-size: 18px; color: var(--color-text-primary); }
   .done-view p { font-weight: var(--font-weight-regular); font-size: 14px; color: #5B5E73; line-height: 1.6; }
   .done-view .confirm-btn {
     margin-top: 8px; padding: 12px 24px; border-radius: 999px; border: none;
-    background: var(--color-brand-600); color: #fff; font-family: inherit;
+    background: var(--color-brand-primary); color: var(--color-text-inverse); font-family: inherit;
     font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer;
   }
 </style>

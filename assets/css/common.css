@@ -61,7 +61,7 @@
 .eb-toast {
   position: absolute; left: 50%; bottom: 100px; transform: translate(-50%, 8px);
   max-width: calc(100% - 40px); padding: 12px 20px; border-radius: 999px;
-  background: rgba(0,0,0,0.8); color: #fff; font-size: 14px; text-align: center;
+  background: rgba(0,0,0,0.8); color: var(--color-text-inverse); font-size: 14px; text-align: center;
   opacity: 0; visibility: hidden; transition: opacity 0.2s ease, transform 0.2s ease;
   z-index: 999; pointer-events: none;
 }
@@ -74,7 +74,7 @@
   max-width: 402px;
   min-height: 100dvh;
   height: 100dvh;
-  background: #ffffff;
+  background: var(--color-bg-surface);
   overflow: hidden;
 }
 .scroll-area {
@@ -88,22 +88,22 @@
 /* ---- status bar: dynamic island (main / newsfeed / daily-briefing / deep-research) ---- */
 .status-bar-dynamic {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  height: 50px; padding-top: 2px; width: 100%; background: #ffffff;
+  height: 50px; padding-top: 2px; width: 100%; background: var(--color-bg-surface);
 }
 .status-bar-dynamic .row { display: flex; align-items: center; justify-content: space-between; width: 100%; }
 .status-bar-dynamic .time {
   flex: 1 0 0; display: flex; align-items: center; justify-content: center;
-  padding: 0 6px 0 16px; font-weight: var(--font-weight-semibold); font-size: 17px; color: #000;
+  padding: 0 6px 0 16px; font-weight: var(--font-weight-semibold); font-size: 17px; color: var(--color-text-primary);
 }
 .status-bar-dynamic .island-spacer { width: 124px; height: 10px; }
-.status-bar-dynamic .levels { flex: 1 0 0; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 0 16px 0 6px; color: #000; }
+.status-bar-dynamic .levels { flex: 1 0 0; display: flex; align-items: center; justify-content: center; gap: 5px; padding: 0 16px 0 6px; color: var(--color-text-primary); }
 
 /* ---- status bar: simple pill (onboarding / article) ---- */
-.status-bar-simple { position: relative; width: 100%; height: 62px; background: #ffffff; }
+.status-bar-simple { position: relative; width: 100%; height: 62px; background: var(--color-bg-surface); }
 .status-bar-simple .time {
   position: absolute; left: 24px; top: 21px; width: 100px; height: 22px;
   display: flex; align-items: center; justify-content: center;
-  font-weight: var(--font-weight-semibold); font-size: 17px; color: #000000;
+  font-weight: var(--font-weight-semibold); font-size: 17px; color: var(--color-text-primary);
 }
 .status-bar-simple .levels { position: absolute; right: 24px; top: 21px; width: 100px; height: 22px; }
 .status-bar-simple .levels img { display: block; width: 100%; height: 100%; }
@@ -111,20 +111,20 @@
 /* ---- main header row: logo + search/notifications (main / newsfeed) ---- */
 .header-row-main {
   display: flex; align-items: center; justify-content: space-between;
-  height: 48px; padding: 0 20px; background: #ffffff;
+  height: 48px; padding: 0 20px; background: var(--color-bg-surface);
 }
-.header-row-main .logo { font-weight: var(--font-weight-bold); font-size: 24px; line-height: 23px; color: #000000; text-transform: uppercase; white-space: nowrap; }
-.header-row-main .icons { display: flex; align-items: center; gap: 12px; height: 48px; color: #000; }
+.header-row-main .logo { font-weight: var(--font-weight-bold); font-size: 24px; line-height: 23px; color: var(--color-text-primary); text-transform: uppercase; white-space: nowrap; }
+.header-row-main .icons { display: flex; align-items: center; gap: 12px; height: 48px; color: var(--color-text-primary); }
 
 /* ---- nav header: back + title + share/bookmark (article / daily-briefing / deep-research) ---- */
-.nav-header-common { background: #fff; display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 20px; }
+.nav-header-common { background: var(--color-bg-surface); display: flex; align-items: center; justify-content: space-between; height: 60px; padding: 0 20px; }
 .nav-header-common.short { height: 48px; }
-.nav-header-common .icon-btn { width: 24px; height: 24px; background: none; border: none; padding: 0; cursor: pointer; display: block; text-decoration: none; color: #000; }
+.nav-header-common .icon-btn { width: 24px; height: 24px; background: none; border: none; padding: 0; cursor: pointer; display: block; text-decoration: none; color: var(--color-text-primary); }
 .nav-header-common .icon-spacer { width: 24px; height: 24px; }
 .nav-header-common .title { font-weight: var(--font-weight-semibold); font-size: 16px; color: #0D0D14; }
 .nav-header-common .nav-text-btn {
   background: none; border: none; padding: 0; cursor: pointer; font-family: inherit;
-  font-weight: var(--font-weight-semibold); font-size: 16px; color: #000; white-space: nowrap;
+  font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-text-primary); white-space: nowrap;
 }
 
 /* ---- bottom GNB tab bar (main / newsfeed) ----
@@ -132,7 +132,7 @@
    padding-bottom: 90px to their .scroll-area so content isn't hidden under it. */
 .gnb-tab-bar {
   position: absolute; left: 0; bottom: 0; width: 100%; z-index: 5;
-  background: #fff; border-top: 1px solid #DBDBDB;
+  background: var(--color-bg-surface); border-top: 1px solid #DBDBDB;
   display: flex; align-items: center; justify-content: center;
   height: 90px; padding-bottom: 20px;
 }
@@ -142,7 +142,7 @@
 }
 .gnb-tab-bar .tab-item svg { width: 24px; height: 24px; display: block; fill: currentColor; }
 .gnb-tab-bar .tab-item span { font-size: 14px; line-height: 1.3; font-weight: var(--font-weight-regular); color: inherit; }
-.gnb-tab-bar .tab-item.active { color: var(--color-brand-600); }
+.gnb-tab-bar .tab-item.active { color: var(--color-brand-primary); }
 .gnb-tab-bar .tab-item.active span { font-weight: var(--font-weight-bold); }
 
 /* Prevent page-level horizontal overflow at any viewport width. */
@@ -168,16 +168,16 @@ button:not(:disabled), a[href], .story { cursor: pointer; }
 .eb-toggle { position: relative; display: inline-block; width: 44px; height: 26px; flex-shrink: 0; }
 .eb-toggle input { position: absolute; opacity: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
 .eb-toggle .track {
-  position: absolute; inset: 0; background: #E6E7EB; border-radius: 999px;
+  position: absolute; inset: 0; background: var(--color-border-default); border-radius: 999px;
   transition: background 0.15s ease;
 }
 .eb-toggle .thumb {
   position: absolute; left: 3px; top: 3px; width: 20px; height: 20px; border-radius: 50%;
-  background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.15s ease;
+  background: var(--color-bg-surface); box-shadow: 0 1px 2px rgba(0,0,0,0.25); transition: transform 0.15s ease;
 }
-.eb-toggle input:checked ~ .track { background: var(--color-brand-600); }
+.eb-toggle input:checked ~ .track { background: var(--color-brand-primary); }
 .eb-toggle input:checked ~ .thumb { transform: translateX(18px); }
-.eb-toggle input:focus-visible ~ .track { outline: 2px solid var(--color-brand-400); outline-offset: 2px; }
+.eb-toggle input:focus-visible ~ .track { outline: 2px solid var(--color-brand-muted); outline-offset: 2px; }
 
 /* ---- mypage 설정 반영 범위: 공용 헤더/GNB로 한정 ----
    design-system/tokens/colors.css에는 Dark 값이 없고, 각 페이지 본문은 CSS
@@ -191,13 +191,13 @@ html[data-eb-theme="dark"] .nav-header-common,
 html[data-eb-theme="dark"] .header-row-main,
 html[data-eb-theme="dark"] .gnb-tab-bar { background: #1C1C1E; }
 html[data-eb-theme="dark"] .nav-header-common .title,
-html[data-eb-theme="dark"] .header-row-main .logo { color: #FFFFFF; }
+html[data-eb-theme="dark"] .header-row-main .logo { color: var(--color-text-inverse); }
 html[data-eb-theme="dark"] .nav-header-common .icon-btn,
 html[data-eb-theme="dark"] .nav-header-common .nav-text-btn,
-html[data-eb-theme="dark"] .header-row-main .icons { color: #FFFFFF; }
+html[data-eb-theme="dark"] .header-row-main .icons { color: var(--color-text-inverse); }
 html[data-eb-theme="dark"] .gnb-tab-bar { border-top-color: #333333; }
 html[data-eb-theme="dark"] .gnb-tab-bar .tab-item { color: #7C7C82; }
-html[data-eb-theme="dark"] .gnb-tab-bar .tab-item.active { color: var(--color-brand-400); }
+html[data-eb-theme="dark"] .gnb-tab-bar .tab-item.active { color: var(--color-brand-muted); }
 
 html[data-eb-font-scale="sm"] .nav-header-common .title,
 html[data-eb-font-scale="sm"] .gnb-tab-bar .tab-item span { font-size: 0.9em; }

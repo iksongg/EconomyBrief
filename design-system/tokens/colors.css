@@ -1,50 +1,114 @@
 /*
-  Color tokens — EconomyBrief Design System
-  Source: Figma "디자인시스템" > 02. Color
-  Values below are Light mode HEX. The Figma board notes each token also
-  carries a Dark mode value bound via Figma variables, but those Dark
-  values are not exposed as text content on the board and could not be
-  extracted from metadata — pull them directly from Figma variables if
-  Dark mode support is implemented.
+  Color tokens — EconomyBrief Design System v2
+  Source: Figma "EconomyBrief" > Variables (Primitive / Color)
+  변수 이름은 Figma 변수의 코드 이름(codeSyntax WEB)과 1:1로 같습니다.
+    예) Figma  brand/primary  =  CSS  var(--color-brand-primary)
+
+  구조: Primitive(값) → Semantic(의미). 화면 코드는 Semantic만 참조하세요.
+  Dark 모드: Figma에 모드 틀만 있고 아직 Light와 같은 값이라 여기엔 넣지 않았습니다.
 */
 
 :root {
-  /* Brand — primary blue ramp. 600 is the base brand color. */
-  --color-brand-600: #2461FA;
-  --color-brand-500: #3784FF;
-  --color-brand-400: #82B0F9;
-  --color-brand-300: #9FC3FB;
-  --color-brand-200: #BFD7FD;
+  /* ---------- Primitive ---------- */
+  --color-blue-600: #2461FA;
+  --color-blue-550: #3D7DFF;
+  --color-blue-500: #3784FF;
+  --color-blue-400: #82B0F9;
+  --color-blue-300: #9FC3FB;
+  --color-blue-200: #BFD7FD;
+  --color-blue-50: #EAF2FF;
+  --color-gray-0: #FFFFFF;
+  --color-gray-50: #FAFAFA;
+  --color-gray-100: #F3F4F6;
+  --color-gray-200: #E6E7EB;
+  --color-gray-300: #D1D3D8;
+  --color-gray-400: #BDBDBD;
+  --color-gray-500: #888888;
+  --color-gray-800: #424350;
+  --color-gray-1000: #000000;
+  --color-slate-500: #5F738C;
+  --color-green-600: #1FA971;
+  --color-green-500: #22C55E;
+  --color-green-50: #ECF8F1;
+  --color-yellow-600: #E58A00;
+  --color-yellow-500: #F59E0B;
+  --color-yellow-50: #FFF3E8;
+  --color-red-550: #F1403F;
+  --color-red-500: #EF4444;
+  --color-red-400: #E45C6B;
+  --color-red-50: #FFF1F2;
+  --color-purple-500: #5B6CFF;
+  --color-purple-50: #EEF0FF;
+  --color-orange-500: #F4801C;
 
-  /* Text — body hierarchy, Primary -> Tertiary descending importance. */
-  --color-text-primary: #000000;
-  --color-text-secondary: #424350;
-  --color-text-tertiary: #888888;
-  --color-text-disabled: #BDBDBD;
-  --color-text-inverse: #FFFFFF; /* use only on dark surfaces */
+  /* ---------- Semantic ---------- */
+  /* Brand */
+  --color-brand-primary: var(--color-blue-600);
+  --color-brand-hover: var(--color-blue-500);
+  --color-brand-muted: var(--color-blue-400);
+  --color-brand-subtle: var(--color-blue-300);
+  --color-brand-subtler: var(--color-blue-200);
+  /* Text */
+  --color-text-primary: var(--color-gray-1000);
+  --color-text-secondary: var(--color-gray-800);
+  --color-text-tertiary: var(--color-gray-500);
+  --color-text-disabled: var(--color-gray-400);
+  --color-text-inverse: var(--color-gray-0);
+  /* Background */
+  --color-bg-canvas: var(--color-gray-50);
+  --color-bg-surface: var(--color-gray-0);
+  --color-bg-surface-raised: var(--color-gray-50);
+  /* Border */
+  --color-border-default: var(--color-gray-200);
+  --color-border-strong: var(--color-gray-300);
+  /* Feedback — 알림·토스트·인라인 메시지 */
+  --color-feedback-success: var(--color-green-500);
+  --color-feedback-warning: var(--color-yellow-500);
+  --color-feedback-error: var(--color-red-500);
+  /* Tag — fg/bg는 항상 짝으로 */
+  --color-tag-red-fg: var(--color-red-400);
+  --color-tag-red-bg: var(--color-red-50);
+  --color-tag-yellow-fg: var(--color-yellow-600);
+  --color-tag-yellow-bg: var(--color-yellow-50);
+  --color-tag-green-fg: var(--color-green-600);
+  --color-tag-green-bg: var(--color-green-50);
+  --color-tag-blue-fg: var(--color-blue-550);
+  --color-tag-blue-bg: var(--color-blue-50);
+  --color-tag-purple-fg: var(--color-purple-500);
+  --color-tag-purple-bg: var(--color-purple-50);
+  --color-tag-gray-fg: var(--color-slate-500);
+  --color-tag-gray-bg: var(--color-gray-100);
+  /* Highlight */
+  --color-highlight-trending: var(--color-orange-500);
+  /* Market — 국내 증시 관례: 상승 빨강 / 하락 파랑 */
+  --color-market-rise-fg: var(--color-red-550);
+  --color-market-rise-bg: var(--color-red-50);
+  --color-market-fall-fg: var(--color-blue-550);
+  --color-market-fall-bg: var(--color-blue-50);
+  --color-market-flat-fg: var(--color-gray-500);
 
-  /* Background & Border */
-  --color-background-primary: #FAFAFA;
-  --color-background-secondary: #FFFFFF;
-  --color-background-elevated: #FAFAFA;
-  --color-border-default: #E6E7EB;
-
-  /* Status — alerts, toasts, inline messages only */
-  --color-status-success: #22C55E;
-  --color-status-warning: #F59E0B;
-  --color-status-error: #EF4444;
-
-  /* Status 2 — fill/bg pairs for tags & badges. Always use a fill with its matching bg. */
-  --color-status2-red-fill: #E45C6B;
-  --color-status2-red-bg: #FFF1F2;
-  --color-status2-yellow-fill: #E58A00;
-  --color-status2-yellow-bg: #FFF3E8;
-  --color-status2-green-fill: #1FA971;
-  --color-status2-green-bg: #ECF8F1;
-  --color-status2-blue-fill: #3D7DFF;
-  --color-status2-blue-bg: #EAF2FF;
-  --color-status2-purple-fill: #5B6CFF;
-  --color-status2-purple-bg: #EEF0FF;
-  --color-status2-gray-fill: #5F738C;
-  --color-status2-gray-bg: #F3F4F6;
+  /* ---------- Legacy (v1) 별칭 — 새 코드에서는 쓰지 마세요 ---------- */
+  --color-brand-600: var(--color-brand-primary);
+  --color-brand-500: var(--color-brand-hover);
+  --color-brand-400: var(--color-brand-muted);
+  --color-brand-300: var(--color-brand-subtle);
+  --color-brand-200: var(--color-brand-subtler);
+  --color-background-primary: var(--color-bg-canvas);
+  --color-background-secondary: var(--color-bg-surface);
+  --color-background-elevated: var(--color-bg-surface-raised);
+  --color-status-success: var(--color-feedback-success);
+  --color-status-warning: var(--color-feedback-warning);
+  --color-status-error: var(--color-feedback-error);
+  --color-status2-red-fill: var(--color-tag-red-fg);
+  --color-status2-red-bg: var(--color-tag-red-bg);
+  --color-status2-yellow-fill: var(--color-tag-yellow-fg);
+  --color-status2-yellow-bg: var(--color-tag-yellow-bg);
+  --color-status2-green-fill: var(--color-tag-green-fg);
+  --color-status2-green-bg: var(--color-tag-green-bg);
+  --color-status2-blue-fill: var(--color-tag-blue-fg);
+  --color-status2-blue-bg: var(--color-tag-blue-bg);
+  --color-status2-purple-fill: var(--color-tag-purple-fg);
+  --color-status2-purple-bg: var(--color-tag-purple-bg);
+  --color-status2-gray-fill: var(--color-tag-gray-fg);
+  --color-status2-gray-bg: var(--color-tag-gray-bg);
 }

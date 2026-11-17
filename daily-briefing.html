@@ -25,7 +25,7 @@
     justify-content: center;
   }
 
-  .device { background: #fff; height: max(100dvh, 874px); }
+  .device { background: var(--color-bg-surface); height: max(100dvh, 874px); }
 
   .screen { position: absolute; inset: 0; display: none; }
   .screen.active { display: block; }
@@ -39,12 +39,12 @@
   }
   .progress-block .counter-row { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
   .progress-block .counter-row.end-only { justify-content: flex-end; }
-  .progress-block .count-current { color: var(--color-brand-600); font-weight: var(--font-weight-semibold); }
+  .progress-block .count-current { color: var(--color-brand-primary); font-weight: var(--font-weight-semibold); }
   .progress-block .count-total { color: #7A7A7A; font-weight: var(--font-weight-regular); }
-  .progress-block .eta { color: var(--color-brand-600); font-weight: var(--font-weight-bold); }
-  .progress-block .done-label { color: var(--color-brand-600); font-weight: var(--font-weight-bold); }
+  .progress-block .eta { color: var(--color-brand-primary); font-weight: var(--font-weight-bold); }
+  .progress-block .done-label { color: var(--color-brand-primary); font-weight: var(--font-weight-bold); }
   .progress-track { width: 100%; height: 10px; border-radius: 999px; background: #EEE; overflow: hidden; }
-  .progress-fill { height: 100%; border-radius: 999px; background: var(--color-brand-600); transition: width 0.35s ease; }
+  .progress-fill { height: 100%; border-radius: 999px; background: var(--color-brand-primary); transition: width 0.35s ease; }
   .progress-block ul {
     list-style: disc; margin: 0; padding-left: 18px;
     color: #5B5E73; font-size: 12px; font-weight: var(--font-weight-regular); line-height: 1.6;
@@ -80,7 +80,7 @@
   .reading-card {
     position: absolute;
     left: 17px; top: 30px; width: 362px; height: 602px;
-    background: #ffffff; border-radius: 10px;
+    background: var(--color-bg-surface); border-radius: 10px;
     box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
     padding: 0 20px; overflow: hidden;
     display: flex; flex-direction: column; gap: 15px;
@@ -99,8 +99,8 @@
     padding: 20px 0;
     display: flex; align-items: center; justify-content: left;
   }
-  .article-head .headline { font-weight: var(--font-weight-semibold); font-size: 24px; color: #000; line-height: 1.3; }
-  .article-head .subhead { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; line-height: 1.3; }
+  .article-head .headline { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-text-primary); line-height: 1.3; }
+  .article-head .subhead { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); line-height: 1.3; }
 
   .article-body-wrap { display: flex; flex-direction: column; gap: 27px; flex: 1; min-height: 0; overflow-y: auto; }
   .article-media-wrap { display: flex; flex-direction: column; gap: 15px; }
@@ -115,10 +115,10 @@
   /* Wrapping <a> is block-level (its own default is inline) purely so it
      doesn't change the image's box/flow — no visual treatment added. */
   .article-image-link { display: block; }
-  .article-body { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
+  .article-body { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
   .article-body .term-link {
     font-weight: var(--font-weight-semibold);
-    color: var(--color-brand-600);
+    color: var(--color-brand-primary);
     text-decoration: underline;
     cursor: pointer;
     background: none; border: none; font-family: inherit; font-size: inherit; padding: 0;
@@ -136,7 +136,7 @@
      reference — no existing brand/gray token matches this specific tone).
      FILL 0 switches the glyph from solid-disc to the outline variant. */
   .related-list .gicon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: #95a9be; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
-  .related-list span { font-size: 12px; color: #000; line-height: 1.6; }
+  .related-list span { font-size: 12px; color: var(--color-text-primary); line-height: 1.6; }
 
   /* term bottom sheet: see assets/css/term-sheet.css (shared component).
      Now a direct child of #screen-reading (== .device's own box) so the dim
@@ -152,7 +152,7 @@
   /* ---- summary state ---- */
   .summary-card {
     position: absolute; left: 20px; top: 223px; width: 362px; height: 713px;
-    background: #ffffff; border-radius: 10px; box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
+    background: var(--color-bg-surface); border-radius: 10px; box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
     padding: 20px; display: flex; flex-direction: column; gap: 15px;
     cursor: grab; touch-action: pan-y;
   }
@@ -163,13 +163,13 @@
     width: 24px; height: 24px; border-radius: 10px; background: #F1F1F1;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .summary-intro .icon-box .gicon { font-size: 18px; width: 18px; height: 18px; color: #5F738C; }
+  .summary-intro .icon-box .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-tag-gray-fg); }
   .summary-intro p { font-size: 14px; color: #898989; font-weight: var(--font-weight-regular); line-height: 1.3; }
-  .summary-intro .em { color: var(--color-brand-600); font-weight: var(--font-weight-semibold); }
+  .summary-intro .em { color: var(--color-brand-primary); font-weight: var(--font-weight-semibold); }
 
   .summary-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
-  .summary-head .headline { font-weight: var(--font-weight-bold); font-size: 24px; color: #000; line-height: 1.3; }
-  .summary-head .tags { display: flex; gap: 12px; font-size: 14px; color: #000; font-weight: var(--font-weight-regular); }
+  .summary-head .headline { font-weight: var(--font-weight-bold); font-size: 24px; color: var(--color-text-primary); line-height: 1.3; }
+  .summary-head .tags { display: flex; gap: 12px; font-size: 14px; color: var(--color-text-primary); font-weight: var(--font-weight-regular); }
 
   .tab-row {
     display: flex; align-items: center; height: 37px; padding: 2px;
@@ -179,13 +179,13 @@
     flex: 1 0 0; height: 100%; border: none; border-radius: 999px; background: none;
     font-family: inherit; font-size: 14px; font-weight: var(--font-weight-regular); color: #3C4043; cursor: pointer;
   }
-  .tab-row button.active { background: var(--color-brand-600); color: #fff; }
+  .tab-row button.active { background: var(--color-brand-primary); color: var(--color-text-inverse); }
 
   .summary-box {
     background: #FAFBFE; border: 1px solid var(--color-border-default);
     padding: 16px; display: flex; align-items: center; justify-content: center;
   }
-  .summary-box p { font-weight: var(--font-weight-semibold); font-size: 20px; color: #000; line-height: 1.3; text-align: left; width: 100%; }
+  .summary-box p { font-weight: var(--font-weight-semibold); font-size: 20px; color: var(--color-text-primary); line-height: 1.3; text-align: left; width: 100%; }
 
   /* ---- completion state ---- */
   .completion-content {
@@ -193,7 +193,7 @@
     width: 197px; display: flex; flex-direction: column; align-items: center; gap: 20px;
   }
   .completion-content .wallet-img { width: 100%; height: auto; display: block; }
-  .completion-content .headline { font-weight: var(--font-weight-semibold); font-size: 22px; color: #000; text-align: center; }
+  .completion-content .headline { font-weight: var(--font-weight-semibold); font-size: 22px; color: var(--color-text-primary); text-align: center; }
   .completion-content .badge {
     background: #EFF6FF; border-radius: 999px; padding: 4px 10px;
     font-weight: var(--font-weight-semibold); font-size: 12px; color: #666;
@@ -203,12 +203,12 @@
     display: flex; flex-direction: column; gap: 12px;
   }
   .completion-buttons .primary-btn {
-    height: 60px; border-radius: 16px; background: var(--color-brand-600); border: none;
-    color: #fff; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 16px; cursor: pointer;
+    height: 60px; border-radius: 16px; background: var(--color-brand-primary); border: none;
+    color: var(--color-text-inverse); font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 16px; cursor: pointer;
   }
   .completion-buttons .outline-btn {
     height: 48px; border-radius: 16px; background: none; border: 1px solid var(--color-border-default);
-    color: var(--color-brand-600); font-family: inherit; font-weight: var(--font-weight-medium); font-size: 14px; cursor: pointer;
+    color: var(--color-brand-primary); font-family: inherit; font-weight: var(--font-weight-medium); font-size: 14px; cursor: pointer;
   }
 
   @media (max-width: 402px) {

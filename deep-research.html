@@ -20,29 +20,29 @@
     min-height: 100dvh;
     display: flex; align-items: flex-start; justify-content: center;
   }
-  .device { background: var(--color-status2-gray-bg); }
+  .device { background: var(--color-tag-gray-bg); }
   .screen { display: none; }
   .screen.active { display: block; }
 
   /* report header (loading state) */
-  .report-header { background: #fff; padding: 16px 20px; display: flex; align-items: flex-start; justify-content: space-between; }
+  .report-header { background: var(--color-bg-surface); padding: 16px 20px; display: flex; align-items: flex-start; justify-content: space-between; }
   .report-header .rh-left { display: flex; flex-direction: column; gap: 8px; width: 259px; }
-  .report-header .rh-title { font-weight: var(--font-weight-bold); font-size: 20px; color: #000; line-height: 1.3; text-transform: uppercase; }
+  .report-header .rh-title { font-weight: var(--font-weight-bold); font-size: 20px; color: var(--color-text-primary); line-height: 1.3; text-transform: uppercase; }
   .report-header .rh-tags { display: flex; gap: 4px; }
-  .report-header .rh-tags span { background: #EAEDF9; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: #000; }
+  .report-header .rh-tags span { background: #EAEDF9; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: var(--color-text-primary); }
   .report-header .rh-illust { width: 88px; height: 69.227px; object-fit: contain; }
   .report-header .rh-illust.done { width: 87px; height: 78px; }
   .report-header .rh-meta { font-size: 12px; color: #8C949E; }
 
   /* loading progress card */
-  .progress-card-wrap { background: #fff; padding: 20px; }
-  .progress-card { background: var(--color-brand-600); border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 20px; }
+  .progress-card-wrap { background: var(--color-bg-surface); padding: 20px; }
+  .progress-card { background: var(--color-brand-primary); border-radius: 20px; padding: 20px; display: flex; align-items: center; gap: 20px; }
   .progress-card .ring-wrap { position: relative; width: 88px; height: 88px; flex-shrink: 0; }
   .progress-card .ring-wrap img { width: 88px; height: 88px; display: block; }
-  .progress-card .ring-pct { position: absolute; left: 21px; top: 28.5px; color: #fff; white-space: nowrap; }
+  .progress-card .ring-pct { position: absolute; left: 21px; top: 28.5px; color: var(--color-text-inverse); white-space: nowrap; }
   .progress-card .ring-pct .num { font-weight: var(--font-weight-semibold); font-size: 24px; }
   .progress-card .ring-pct .pct { font-weight: var(--font-weight-semibold); font-size: 16px; }
-  .progress-card .info { display: flex; flex-direction: column; gap: 12px; color: #fff; }
+  .progress-card .info { display: flex; flex-direction: column; gap: 12px; color: var(--color-text-inverse); }
   .progress-card .info .status-row { display: flex; align-items: center; gap: 2px; }
   .progress-card .info .status-row img { width: 14.25px; height: 14.25px; }
   .progress-card .info .status-row span { font-weight: var(--font-weight-semibold); font-size: 14px; text-transform: uppercase; }
@@ -51,16 +51,16 @@
   .progress-card .eta-sub { font-weight: var(--font-weight-regular); font-size: 12px; margin-top: 2px; }
 
   /* task checklist */
-  .task-card { background: #fff; border: 1px solid #E6E9F0; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
-  .task-card .task-title { font-weight: var(--font-weight-semibold); font-size: 18px; color: #000; text-transform: uppercase; }
+  .task-card { background: var(--color-bg-surface); border: 1px solid #E6E9F0; padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+  .task-card .task-title { font-weight: var(--font-weight-semibold); font-size: 18px; color: var(--color-text-primary); text-transform: uppercase; }
   .task-list { display: flex; flex-direction: column; gap: 16px; position: relative; z-index: 0; }
   /* height/position set by JS so it only spans between analyzed (done) steps, never into the not-yet-analyzed ones */
   .task-line { position: absolute; left: 11.5px; width: 0; border-left: 1.5px dashed #A8C5FD; z-index: -1; display: none; }
   .task-item { display: flex; align-items: center; gap: 12px; }
   .task-item .mark { width: 24px; height: 24px; border-radius: 29px; background: #DCE9FE; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .task-item .mark .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-brand-600); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+  .task-item .mark .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-brand-primary); font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
   .task-item .mark.pending-active {
-    width: 23.941px; height: 23.941px; background: #fff; border: 2.817px dashed var(--color-brand-600); border-radius: 11.97px;
+    width: 23.941px; height: 23.941px; background: var(--color-bg-surface); border: 2.817px dashed var(--color-brand-primary); border-radius: 11.97px;
     animation: dr-spin 1.1s linear infinite;
   }
   /* not-yet-analyzed: no fill, gray outline — design system Text/Disabled token */
@@ -69,8 +69,8 @@
   .task-item p { font-size: 12px; color: #5B5E73; text-transform: uppercase; line-height: 1.3; }
 
   /* preview points */
-  .preview-card { background: #fff; padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
-  .preview-card .pv-title { font-weight: var(--font-weight-semibold); font-size: 18px; color: #000; width: 100%; text-transform: uppercase; }
+  .preview-card { background: var(--color-bg-surface); padding: 20px; display: flex; flex-direction: column; gap: 16px; align-items: center; }
+  .preview-card .pv-title { font-weight: var(--font-weight-semibold); font-size: 18px; color: var(--color-text-primary); width: 100%; text-transform: uppercase; }
   .preview-points { display: flex; flex-direction: column; gap: 8px; width: 100%; }
   .preview-point { border: 1px solid var(--color-border-default); border-radius: 20px; padding: 20px; display: flex; gap: 8px; align-items: flex-start; }
   .preview-point .pp-icon { width: 34px; height: 34px; border-radius: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -78,24 +78,24 @@
   .preview-point .pp-text p:first-child { font-weight: var(--font-weight-semibold); font-size: 14px; text-transform: uppercase; }
   .preview-point .pp-text p:last-child { font-weight: var(--font-weight-regular); font-size: 12px; color: #5B5E73; margin-top: 0; }
 
-  .notify-bar { background: #fff; height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+  .notify-bar { background: var(--color-bg-surface); height: 70px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
   .notify-bar .left { display: flex; align-items: center; gap: 8px; }
-  .notify-bar .left .gicon { font-size: 20px; width: 20px; height: 20px; color: var(--color-brand-600); }
-  .notify-bar .left span { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-brand-600); text-transform: uppercase; }
+  .notify-bar .left .gicon { font-size: 20px; width: 20px; height: 20px; color: var(--color-brand-primary); }
+  .notify-bar .left span { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-brand-primary); text-transform: uppercase; }
   .notify-bar img.toggle { width: 35px; height: 48px; display: block; }
 
   /* ===== report screen ===== */
-  .tab-bar { background: #fff; display: flex; height: 48px; }
+  .tab-bar { background: var(--color-bg-surface); display: flex; height: 48px; }
   .tab-bar button {
     flex: 1 0 0; height: 100%; border: none; background: none; border-bottom: 2px solid var(--color-border-default);
     font-family: inherit; font-size: 14px; color: #666E7A; cursor: pointer;
   }
-  .tab-bar button.active { border-bottom-color: var(--color-brand-600); color: var(--color-brand-600); font-weight: var(--font-weight-semibold); }
+  .tab-bar button.active { border-bottom-color: var(--color-brand-primary); color: var(--color-brand-primary); font-weight: var(--font-weight-semibold); }
 
   .tab-panel { display: none; }
   .tab-panel.active { display: block; }
 
-  .section-white { background: #fff; padding: 20px; }
+  .section-white { background: var(--color-bg-surface); padding: 20px; }
   .section-white.tight { padding-top: 20px; padding-bottom: 20px; }
   .section-title-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 16px; }
   .section-title-row h3 { font-weight: var(--font-weight-bold); font-size: 16px; color: #0D0D14; }
@@ -104,7 +104,7 @@
 
   .summary-box { background: #F7F9F8; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
   .summary-box .sb-head { display: flex; align-items: center; gap: 4px; }
-  .summary-box .sb-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-status2-green-fill); }
+  .summary-box .sb-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-tag-green-fg); }
   .summary-box .sb-head span { font-weight: var(--font-weight-semibold); font-size: 14px; color: #16522D; }
   .numbered-row { display: flex; gap: 12px; align-items: center; padding: 16px 0; }
   .numbered-row .num-avatar { width: 70px; height: 70px; border-radius: 22.222px; background: #E7F9EF; overflow: hidden; position: relative; flex-shrink: 0; }
@@ -113,7 +113,7 @@
   .numbered-row .num-text p:last-child { font-weight: var(--font-weight-regular); font-size: 14px; color: #6B7380; line-height: 1.6; margin-top: 4px; }
 
   .stat-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; }
-  .stat-card { background: #fff; border: 1px solid #E8EBF0; border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; }
+  .stat-card { background: var(--color-bg-surface); border: 1px solid #E8EBF0; border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; gap: 6px; }
   .stat-card .sc-label { font-size: 12px; color: #6B7380; }
   .stat-card .sc-value-row { display: flex; align-items: center; justify-content: space-between; }
   .stat-card .sc-value { font-weight: var(--font-weight-bold); font-size: 24px; color: #0D0D14; }
@@ -122,10 +122,10 @@
   .stat-card .sc-delta { display: flex; align-items: center; gap: 2px; border-radius: 999px; padding: 2px 8px; }
   .stat-card .sc-delta .gicon { font-size: 14px; width: 14px; height: 14px; }
   .stat-card .sc-delta span { font-size: 12px; }
-  .stat-card .sc-delta.up { background: var(--color-status2-green-bg); }
-  .stat-card .sc-delta.up .gicon, .stat-card .sc-delta.up span { color: var(--color-status2-green-fill); }
-  .stat-card .sc-delta.down { background: var(--color-status2-red-bg); }
-  .stat-card .sc-delta.down .gicon, .stat-card .sc-delta.down span { color: var(--color-status2-red-fill); }
+  .stat-card .sc-delta.up { background: var(--color-tag-green-bg); }
+  .stat-card .sc-delta.up .gicon, .stat-card .sc-delta.up span { color: var(--color-tag-green-fg); }
+  .stat-card .sc-delta.down { background: var(--color-tag-red-bg); }
+  .stat-card .sc-delta.down .gicon, .stat-card .sc-delta.down span { color: var(--color-tag-red-fg); }
   .stat-card .sc-spark { width: 100%; max-width: 136px; height: 40px; margin-top: 2px; }
 
   .ai-insight-box { background: #F4F6FE; border-radius: 14px; padding: 16px; display: flex; gap: 4px; margin-top: 12px; }
@@ -133,27 +133,27 @@
   .ai-badge {
     width: 24px; height: 24px; border-radius: 7px; background: #DDE1FF;
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    font-weight: var(--font-weight-semibold); font-size: 14px; color: #5B6CFF;
+    font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-tag-purple-fg);
   }
-  .ai-insight-box .aib-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-status2-purple-fill); }
-  .ai-insight-box .aib-head span { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-600); }
+  .ai-insight-box .aib-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-tag-purple-fg); }
+  .ai-insight-box .aib-head span { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-primary); }
   .ai-insight-box p, .ai-insight-box ul { font-size: 14px; color: #40424D; line-height: 1.6; margin-top: 4px; }
   .ai-insight-box.plain { gap: 10px; border-radius: 12px; }
-  .ai-insight-box.plain .gicon { font-size: 18px; width: 24px; height: 24px; flex-shrink: 0; color: var(--color-status2-purple-fill); }
+  .ai-insight-box.plain .gicon { font-size: 18px; width: 24px; height: 24px; flex-shrink: 0; color: var(--color-tag-purple-fg); }
   .ai-insight-box.plain p { margin-top: 0; }
   .ai-insight-box ul { padding-left: 18px; list-style: disc; }
 
-  .buttons-row { background: #fff; padding: 20px; display: flex; gap: 8px; }
+  .buttons-row { background: var(--color-bg-surface); padding: 20px; display: flex; gap: 8px; }
   .buttons-row .outline-btn { flex: 1; height: 48px; border-radius: 12px; border: 1px solid var(--color-border-default); background: none; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; color: #8C8C8C; cursor: pointer; }
-  .buttons-row .fill-btn { flex: 1; height: 48px; border-radius: 12px; border: none; background: var(--color-brand-600); color: #fff; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer; }
+  .buttons-row .fill-btn { flex: 1; height: 48px; border-radius: 12px; border: none; background: var(--color-brand-primary); color: var(--color-text-inverse); display: flex; align-items: center; justify-content: center; gap: 6px; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer; }
   .buttons-row .fill-btn .gicon { font-size: 18px; width: 18px; height: 18px; }
 
   /* market impact mini card */
   .impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; width: 100%; margin-bottom: 21px; }
   .impact-card { background: #FBFCFE; border: 1px solid #E8EBF0; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
   .impact-card .ic-head { display: flex; align-items: center; gap: 4px; }
-  .impact-card .ic-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-status2-green-fill); }
-  .impact-card.negative .ic-head .gicon { color: var(--color-status2-red-fill); }
+  .impact-card .ic-head .gicon { font-size: 18px; width: 24px; height: 24px; color: var(--color-tag-green-fg); }
+  .impact-card.negative .ic-head .gicon { color: var(--color-tag-red-fg); }
   .impact-card .ic-head span { font-weight: var(--font-weight-semibold); font-size: 12px; color: #6B7380; }
   .impact-card .ic-title { font-weight: var(--font-weight-bold); font-size: 16px; line-height: 1.3; color: #0D0D14; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   /* Fixed to always reserve 2 lines of space (short text just leaves blank room, long text gets ellipsis-truncated at 2 lines)
@@ -164,9 +164,9 @@
     display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden;
     min-height: calc(22px * 2);
   }
-  .impact-card .ic-badge { display: inline-flex; align-items: center; align-self: flex-start; background: #E4ECFF; border-radius: 999px; padding: 4px 10px; font-weight: var(--font-weight-medium); font-size: 12px; color: var(--color-brand-600); margin-top: auto; }
-  .impact-card .ic-badge.green { background: var(--color-status2-green-bg); color: var(--color-status2-green-fill); }
-  .impact-card .ic-badge.red { background: var(--color-status2-red-bg); color: var(--color-status2-red-fill); }
+  .impact-card .ic-badge { display: inline-flex; align-items: center; align-self: flex-start; background: #E4ECFF; border-radius: 999px; padding: 4px 10px; font-weight: var(--font-weight-medium); font-size: 12px; color: var(--color-brand-primary); margin-top: auto; }
+  .impact-card .ic-badge.green { background: var(--color-tag-green-bg); color: var(--color-tag-green-fg); }
+  .impact-card .ic-badge.red { background: var(--color-tag-red-bg); color: var(--color-tag-red-fg); }
 
   .detail-item { padding: 15px 0; border-top: 1px solid var(--color-border-default); }
   .detail-item:first-child { border-top: none; }
@@ -184,17 +184,17 @@
   .detail-item ul { padding-left: 21px; list-style: disc; margin-top: 4px; }
   .detail-item ul li, .detail-item p.di-desc { font-size: 14px; color: #6B7380; line-height: 1.6; margin-top: 4px; }
   .detail-item .di-box { border: 1px solid var(--color-border-default); border-radius: 20px; padding: 16px; margin-top: 12px; }
-  .detail-item .di-box p.box-title { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; }
+  .detail-item .di-box p.box-title { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); }
   .detail-item .di-box ul { color: #6B7380; }
   .detail-item .di-mini-insight { background: #F4F6FE; border-radius: 14px; padding: 16px; margin-top: 12px; display: flex; gap: 8px; }
-  .detail-item .di-mini-insight .title { font-weight: var(--font-weight-semibold); font-size: 13px; color: #000; }
+  .detail-item .di-mini-insight .title { font-weight: var(--font-weight-semibold); font-size: 13px; color: var(--color-text-primary); }
   .detail-item .di-mini-insight p { font-size: 12px; color: #40424D; margin-top: 2px; }
 
-  .feedback-row { background: #FAFAFA; height: 84px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .feedback-row span { font-size: 14px; color: #000; }
+  .feedback-row { background: var(--color-bg-canvas); height: 84px; padding: 0 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .feedback-row span { font-size: 14px; color: var(--color-text-primary); }
   .feedback-row .fb-actions { display: flex; align-items: center; gap: 12px; }
   .feedback-row .fb-btn { width: 40px; height: 40px; border-radius: 12px; background: #F1F1F1; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-  .feedback-row .fb-btn .gicon { font-size: 18px; width: 18px; height: 18px; color: #000; }
+  .feedback-row .fb-btn .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-text-primary); }
 
   /* 관련 tab specific */
   .indicator-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
@@ -203,28 +203,28 @@
   .indicator-head .ih-sub { font-size: 12px; color: #8C949E; margin-top: 4px; }
   .view-toggle { background: #F0F0F2; border-radius: 8px; padding: 3px; display: flex; gap: 2px; }
   .view-toggle button { border: none; border-radius: 6px; padding: 6px 12px; font-family: inherit; font-size: 12px; background: none; color: #8C949E; cursor: pointer; }
-  .view-toggle button.active { background: #fff; color: #0D0D14; font-weight: var(--font-weight-semibold); }
+  .view-toggle button.active { background: var(--color-bg-surface); color: #0D0D14; font-weight: var(--font-weight-semibold); }
 
   .donut-section { display: flex; flex-direction: column; gap: 12px; }
   .donut-row { display: flex; gap: 38px; padding-bottom: 12px; }
   .donut-wrap { position: relative; width: 124px; height: 124px; flex-shrink: 0; }
   .donut-wrap img { width: 100%; height: 100%; }
-  .donut-wrap .donut-label { position: absolute; left: 50%; top: 44px; transform: translateX(-50%); text-align: center; font-weight: var(--font-weight-medium); font-size: 14px; color: #000; width: 88px; }
+  .donut-wrap .donut-label { position: absolute; left: 50%; top: 44px; transform: translateX(-50%); text-align: center; font-weight: var(--font-weight-medium); font-size: 14px; color: var(--color-text-primary); width: 88px; }
   .legend-list { flex: 1; display: flex; flex-direction: column; }
   .legend-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; }
   .legend-row .l-left { display: flex; align-items: center; gap: 4px; }
   .legend-row .l-left img { width: 12px; height: 12px; }
-  .legend-row span { font-size: 14px; color: #000; }
+  .legend-row span { font-size: 14px; color: var(--color-text-primary); }
   .donut-total { border-top: 1px solid var(--color-border-default); padding-top: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
-  .donut-total .dt-label { font-weight: var(--font-weight-bold); color: #000; }
-  .donut-total .dt-value { font-weight: var(--font-weight-semibold); color: var(--color-status2-green-fill); }
+  .donut-total .dt-label { font-weight: var(--font-weight-bold); color: var(--color-text-primary); }
+  .donut-total .dt-value { font-weight: var(--font-weight-semibold); color: var(--color-tag-green-fg); }
 
   .growth-row { display: flex; align-items: center; justify-content: space-between; padding: 4px 0; }
-  .growth-row .g-label { font-weight: var(--font-weight-medium); font-size: 14px; color: #000; width: 90px; flex-shrink: 0; }
+  .growth-row .g-label { font-weight: var(--font-weight-medium); font-size: 14px; color: var(--color-text-primary); width: 90px; flex-shrink: 0; }
   .growth-row .g-bar-wrap { flex: 1; display: flex; align-items: center; gap: 20px; }
   .growth-row .g-track { flex: 1; height: 5px; border-radius: 999px; background: #F0F1F5; overflow: hidden; }
   .growth-row .g-fill { height: 100%; border-radius: 999px; background: #1262FB; }
-  .growth-row .g-pct { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-status2-green-fill); width: 40px; text-align: right; flex-shrink: 0; }
+  .growth-row .g-pct { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-tag-green-fg); width: 40px; text-align: right; flex-shrink: 0; }
 
   /* 출처 tab */
   .source-banner { background: #ECF1FF; border-radius: 12px; padding: 14px 16px; display: flex; gap: 4px; }
@@ -232,8 +232,8 @@
   .source-banner p { font-size: 14px; color: #243D80; line-height: 1.6; }
   .filter-pills { display: flex; gap: 8px; overflow-x: auto; margin: 12px 0; }
   .filter-pills::-webkit-scrollbar { display: none; }
-  .filter-pills button { flex-shrink: 0; height: 40px; border-radius: 100px; padding: 0 14px; font-family: inherit; font-size: 14px; cursor: pointer; border: 1px solid #E3E5EB; background: #fff; color: #4D525E; font-weight: var(--font-weight-medium); }
-  .filter-pills button.active { background: #16171B; border-color: #16171B; color: #fff; }
+  .filter-pills button { flex-shrink: 0; height: 40px; border-radius: 100px; padding: 0 14px; font-family: inherit; font-size: 14px; cursor: pointer; border: 1px solid #E3E5EB; background: var(--color-bg-surface); color: #4D525E; font-weight: var(--font-weight-medium); }
+  .filter-pills button.active { background: #16171B; border-color: #16171B; color: var(--color-text-inverse); }
   .source-item {
     display: flex;
     gap: 12px;
@@ -256,7 +256,7 @@
   .source-item .src-logo img { width: 18px; height: 18px; object-fit: contain; }
   .source-item .src-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
   .source-item .src-title-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
-  .source-item .src-title { font-weight: var(--font-weight-bold); font-size: 14px; color: #000; }
+  .source-item .src-title { font-weight: var(--font-weight-bold); font-size: 14px; color: var(--color-text-primary); }
   .source-item .src-badge { background: #E5F2FF; border-radius: 100px; padding: 4px 8px; font-weight: var(--font-weight-medium); font-size: 12px; color: #1C61D9; white-space: nowrap; flex-shrink: 0; }
   .source-item .src-desc { font-size: 14px; color: #6B7380; line-height: 1.6; }
   .source-item .src-meta { font-size: 12px; color: #99A1AB; }
@@ -272,17 +272,17 @@
     font-family: inherit;
     cursor: pointer;
   }
-  .more-sources-btn span { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000000; }
+  .more-sources-btn span { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); }
 
   .criteria-box { background: #F6F9FF; border-radius: 12px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
   .criteria-grid { display: flex; flex-wrap: wrap; gap: 12px; }
   .criteria-item { width: 154px; display: flex; flex-direction: column; gap: 4px; }
   .criteria-item .ci-head { display: flex; align-items: center; gap: 4px; }
-  .criteria-item .ci-head .ci-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--color-brand-600); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .criteria-item .ci-head .ci-icon .gicon { font-size: 15px; width: 15px; height: 15px; color: #ffffff; }
+  .criteria-item .ci-head .ci-icon { width: 24px; height: 24px; border-radius: 50%; background: var(--color-brand-primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .criteria-item .ci-head .ci-icon .gicon { font-size: 15px; width: 15px; height: 15px; color: var(--color-text-inverse); }
   .criteria-item .ci-head .ci-icon img { width: 15px; height: 15px; }
-  .criteria-item .ci-head .ci-icon.purple { background: var(--color-status2-purple-bg); }
-  .criteria-item .ci-head .ci-icon.purple .gicon { color: var(--color-status2-purple-fill); }
+  .criteria-item .ci-head .ci-icon.purple { background: var(--color-tag-purple-bg); }
+  .criteria-item .ci-head .ci-icon.purple .gicon { color: var(--color-tag-purple-fg); }
   .criteria-item .ci-head span { font-weight: var(--font-weight-bold); font-size: 14px; color: #262930; }
   .criteria-item p { font-weight: var(--font-weight-medium); font-size: 12px; color: #808791; line-height: 1.6; }
   .criteria-disclaimer { border-top: 1px solid var(--color-border-default); padding-top: 12px; font-size: 12px; color: #99A1AB; line-height: 1.6; }
@@ -364,8 +364,8 @@
       <div class="preview-card">
         <div class="pv-title">미리 보는 분석 포인트</div>
         <div class="preview-points" id="preview-points">
-          <div class="preview-point"><div class="pp-icon" style="background:#F1F1F1;"><span class="gicon" style="color:#5F738C;" role="img" aria-label="">lightbulb</span></div><div class="pp-text"><p>AI 투자 확대</p><p>글로벌 빅테크의 AI 인프라 투자 동향 분석</p></div></div>
-          <div class="preview-point" style="background:#F9FBFA;"><div class="pp-icon" style="background:#ECF8F1;"><span class="gicon" style="color:#4B8C6B;" role="img" aria-label="">trending_up</span></div><div class="pp-text"><p style="color:#4B8C6B;">HBM 시장 성장</p><p>고성능 메모리 수요 증가와 시장 전망 분석</p></div></div>
+          <div class="preview-point"><div class="pp-icon" style="background:#F1F1F1;"><span class="gicon" style="color:var(--color-tag-gray-fg);" role="img" aria-label="">lightbulb</span></div><div class="pp-text"><p>AI 투자 확대</p><p>글로벌 빅테크의 AI 인프라 투자 동향 분석</p></div></div>
+          <div class="preview-point" style="background:#F9FBFA;"><div class="pp-icon" style="background:var(--color-tag-green-bg);"><span class="gicon" style="color:#4B8C6B;" role="img" aria-label="">trending_up</span></div><div class="pp-text"><p style="color:#4B8C6B;">HBM 시장 성장</p><p>고성능 메모리 수요 증가와 시장 전망 분석</p></div></div>
           <div class="preview-point" style="background:#FAFAFC;"><div class="pp-icon" style="background:#DDE1FF;"><span class="gicon" style="color:#591BAF;" role="img" aria-label="">query_stats</span></div><div class="pp-text"><p style="color:#591BAF;">국내 반도체 영향</p><p>관련 기업 실적과 산업 성장 가능성 분석</p></div></div>
         </div>
       </div>
@@ -400,7 +400,7 @@
       <div class="tab-panel active" id="tab-core">
         <div class="section-white tight">
           <div class="summary-box">
-            <div class="sb-head"><span class="gicon" style="background:#ECF8F1;border-radius:8px;padding:3px;box-sizing:border-box;" role="img" aria-label="">lightbulb</span><span>핵심요약</span></div>
+            <div class="sb-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:8px;padding:3px;box-sizing:border-box;" role="img" aria-label="">lightbulb</span><span>핵심요약</span></div>
             <div id="core-summary-rows">
               <div class="numbered-row">
                 <div class="num-avatar"><img src="assets/img/1.png" alt="" /></div>
@@ -452,10 +452,10 @@
       <div class="tab-panel" id="tab-market">
         <div class="section-white">
           <div class="impact-grid" id="market-impact-grid">
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체</span></div><div><div class="ic-title">상승 기대</div><div class="ic-desc">AI 데이터센터 투자 확대</div></div><div class="ic-badge">긍정적</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>메모리 시장</span></div><div><div class="ic-title">수요 증가</div><div class="ic-desc">HBM 공급 확대 기대</div></div><div class="ic-badge">긍정적</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>데이터센터</span></div><div><div class="ic-title">투자 확대</div><div class="ic-desc">AI 인프라 구축 지속</div></div><div class="ic-badge">긍정적</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>전력 산업</span></div><div><div class="ic-title">수혜 기대</div><div class="ic-desc">전력 설비 투자 증가</div></div><div class="ic-badge green">주의</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체</span></div><div><div class="ic-title">상승 기대</div><div class="ic-desc">AI 데이터센터 투자 확대</div></div><div class="ic-badge">긍정적</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>메모리 시장</span></div><div><div class="ic-title">수요 증가</div><div class="ic-desc">HBM 공급 확대 기대</div></div><div class="ic-badge">긍정적</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>데이터센터</span></div><div><div class="ic-title">투자 확대</div><div class="ic-desc">AI 인프라 구축 지속</div></div><div class="ic-badge">긍정적</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>전력 산업</span></div><div><div class="ic-title">수혜 기대</div><div class="ic-desc">전력 설비 투자 증가</div></div><div class="ic-badge green">주의</div></div>
           </div>
           <div class="ai-insight-box plain" style="margin-top:0;">
             <div class="ai-badge">AI</div>
@@ -577,19 +577,19 @@
             <div class="view-toggle"><button type="button" class="active">차트</button><button type="button">표</button></div>
           </div>
           <div class="impact-grid" id="related-indicator-grid" style="margin-bottom:0;">
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 서버 투자 규모</span></div><div><div class="ic-title">4,320억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>HBM 시장 성장률</span></div><div><div class="ic-title">연평균 35%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">확대</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체 시장 규모</span></div><div><div class="ic-title">2,180억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>글로벌 데이터센터 투자</span></div><div><div class="ic-title">4,850억 달러</div><div class="ic-desc">연간 투자 규모</div></div><div class="ic-badge green">확대</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 서버 출하량</span></div><div><div class="ic-title">31%</div><div class="ic-desc">전년 대비</div></div><div class="ic-badge green">증가</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>GPU 공급량</span></div><div><div class="ic-title">24%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">증가</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>첨단 패키징 수요</span></div><div><div class="ic-title">29%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">확대</div></div>
-            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>전력 설비 투자</span></div><div><div class="ic-title">18%</div><div class="ic-desc">전년 대비</div></div><div class="ic-badge green">증가</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 서버 투자 규모</span></div><div><div class="ic-title">4,320억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>HBM 시장 성장률</span></div><div><div class="ic-title">연평균 35%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">확대</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 반도체 시장 규모</span></div><div><div class="ic-title">2,180억 달러</div><div class="ic-desc">2030년 전망</div></div><div class="ic-badge green">성장</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>글로벌 데이터센터 투자</span></div><div><div class="ic-title">4,850억 달러</div><div class="ic-desc">연간 투자 규모</div></div><div class="ic-badge green">확대</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>AI 서버 출하량</span></div><div><div class="ic-title">31%</div><div class="ic-desc">전년 대비</div></div><div class="ic-badge green">증가</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>GPU 공급량</span></div><div><div class="ic-title">24%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">증가</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>첨단 패키징 수요</span></div><div><div class="ic-title">29%</div><div class="ic-desc">시장 전망</div></div><div class="ic-badge green">확대</div></div>
+            <div class="impact-card"><div class="ic-head"><span class="gicon" style="background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;" role="img" aria-label="">trending_up</span><span>전력 설비 투자</span></div><div><div class="ic-title">18%</div><div class="ic-desc">전년 대비</div></div><div class="ic-badge green">증가</div></div>
           </div>
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-status2-green-fill);" role="img" aria-label="">pie_chart</span><span id="related-donut-section-title">AI 인프라 투자 구성 (2030 전망)</span></h3></div>
+          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-tag-green-fg);" role="img" aria-label="">pie_chart</span><span id="related-donut-section-title">AI 인프라 투자 구성 (2030 전망)</span></h3></div>
           <div class="donut-section">
             <div class="donut-row">
               <div class="donut-wrap">
@@ -608,7 +608,7 @@
         </div>
 
         <div class="section-white">
-          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:#ECF8F1;border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-status2-green-fill);" role="img" aria-label="">finance_mode</span>핵심 시장 성장률</h3></div>
+          <div class="section-title-row"><h3 style="display:flex;align-items:center;gap:4px;"><span class="gicon" style="font-size:18px;width:24px;height:24px;background:var(--color-tag-green-bg);border-radius:10px;padding:3px;box-sizing:border-box;color:var(--color-tag-green-fg);" role="img" aria-label="">finance_mode</span>핵심 시장 성장률</h3></div>
           <div id="related-growth-list">
           <div class="growth-row"><div class="g-label">HBM 시장</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:56.5%;"></div></div><div class="g-pct">+65%</div></div></div>
           <div class="growth-row"><div class="g-label">AI 서버</div><div class="g-bar-wrap"><div class="g-track"><div class="g-fill" style="width:28%;"></div></div><div class="g-pct">+28%</div></div></div>

@@ -20,12 +20,12 @@
     min-height: 100dvh;
     display: flex; align-items: flex-start; justify-content: center;
   }
-  .device { background: var(--color-status2-gray-bg); }
+  .device { background: var(--color-tag-gray-bg); }
   .scroll-area { padding-bottom: 90px; }
 
-  .section-white { background: #ffffff; padding: 20px; }
+  .section-white { background: var(--color-bg-surface); padding: 20px; }
   .section-title-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-  .section-title-row h2 { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; }
+  .section-title-row h2 { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); }
   .link-more { display: flex; align-items: center; gap: 0; font-size: 14px; color: #5D5D5D; cursor: pointer; background: none; border: none; font-family: inherit; }
   .chev-icon { font-size: 18px; width: 18px; height: 18px; flex-shrink: 0; color: #1C1B1F; }
 
@@ -35,14 +35,14 @@
   .avatar-wrap img.avatar-bg, .avatar-wrap img.avatar-photo { position: absolute; inset: 0; width: 63px; height: 63px; border-radius: 50%; object-fit: cover; }
   .avatar-wrap .camera-badge { position: absolute; left: 41px; top: 41px; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; }
   .avatar-wrap .camera-badge img { position: absolute; inset: 0; width: 20px; height: 20px; }
-  .avatar-wrap .camera-badge .gicon { position: relative; font-size: 13px; width: 13px; height: 13px; color: #000; }
+  .avatar-wrap .camera-badge .gicon { position: relative; font-size: 13px; width: 13px; height: 13px; color: var(--color-text-primary); }
   .profile-info { display: flex; flex-direction: column; gap: 5px; }
-  .profile-info .name { font-weight: var(--font-weight-semibold); font-size: 16px; color: #000; }
-  .profile-info .desc { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; margin-top: 2px; }
+  .profile-info .name { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-text-primary); }
+  .profile-info .desc { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); margin-top: 2px; }
   .profile-info .badge-row { display: flex; align-items: center; gap: 4px; margin-top: 3px; }
-  .profile-info .level-badge { background: #EFF6FF; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: #000; }
+  .profile-info .level-badge { background: #EFF6FF; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: var(--color-text-primary); }
   .profile-info .stars { display: flex; align-items: center; }
-  .profile-info .stars .gicon { font-size: 16px; width: 16px; height: 16px; color: var(--color-brand-600); }
+  .profile-info .stars .gicon { font-size: 16px; width: 16px; height: 16px; color: var(--color-brand-primary); }
 
   /* stat grid */
   .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
@@ -50,28 +50,28 @@
   a.stat-card { cursor: pointer; }
   .stat-card .icon-badge { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
   .stat-card .icon-badge .gicon { font-size: 22.5px; width: 22.5px; height: 22.5px; }
-  .stat-card .stat-value { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-brand-600); }
-  .stat-card .stat-label { font-weight: var(--font-weight-semibold); font-size: 14px; color: #000; margin-top: 2px; }
+  .stat-card .stat-value { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-brand-primary); }
+  .stat-card .stat-label { font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-text-primary); margin-top: 2px; }
 
   .icon-badge.purple { background: #DDE1FF; }
-  .icon-badge.green { background: #ECF8F1; }
+  .icon-badge.green { background: var(--color-tag-green-bg); }
   .icon-badge.gray { background: #F1F1F1; }
   .icon-badge.blue { background: #DCE9FE; }
-  .icon-badge.yellow { background: #FFF3E8; }
-  .icon-badge.purple .gicon { color: var(--color-status2-purple-fill); }
-  .icon-badge.green .gicon { color: var(--color-status2-green-fill); }
-  .icon-badge.gray .gicon { color: var(--color-status2-gray-fill); }
-  .icon-badge.blue .gicon { color: var(--color-status2-blue-fill); }
-  .icon-badge.yellow .gicon { color: var(--color-status2-yellow-fill); }
+  .icon-badge.yellow { background: var(--color-tag-yellow-bg); }
+  .icon-badge.purple .gicon { color: var(--color-tag-purple-fg); }
+  .icon-badge.green .gicon { color: var(--color-tag-green-fg); }
+  .icon-badge.gray .gicon { color: var(--color-tag-gray-fg); }
+  .icon-badge.blue .gicon { color: var(--color-tag-blue-fg); }
+  .icon-badge.yellow .gicon { color: var(--color-tag-yellow-fg); }
 
   /* token row */
   .token-row { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-border-default); padding-bottom: 20px; }
   .token-row-left { display: flex; align-items: center; gap: 12px; }
   .token-row-left .coin-frame { position: relative; width: 56px; height: 58px; overflow: hidden; flex-shrink: 0; }
   .token-row-left .coin-frame img.coin { position: absolute; left: -29.66%; top: -38.69%; width: 277.02%; height: 178.55%; max-width: none; }
-  .token-row-left .token-label { font-weight: var(--font-weight-medium); font-size: 14px; color: #000; }
-  .token-row-left .token-amount { font-weight: var(--font-weight-semibold); font-size: 24px; color: #000; margin-top: 2px; }
-  .charge-btn { background: var(--color-brand-600); border: none; border-radius: 8px; padding: 12px; color: #fff; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer; }
+  .token-row-left .token-label { font-weight: var(--font-weight-medium); font-size: 14px; color: var(--color-text-primary); }
+  .token-row-left .token-amount { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-text-primary); margin-top: 2px; }
+  .charge-btn { background: var(--color-brand-primary); border: none; border-radius: 8px; padding: 12px; color: var(--color-text-inverse); font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer; }
 
   .history-list { display: flex; flex-direction: column; padding-top: 12px; }
   .history-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; }
@@ -79,14 +79,14 @@
   .history-left .icon-badge { width: 24px; height: 24px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .history-left .icon-badge img { width: 14px; height: 14px; }
   .history-left .icon-badge .gicon { font-size: 18px; width: 18px; height: 18px; }
-  .history-left span { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; }
-  .history-amount { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; }
-  .history-amount.plus { color: var(--color-brand-600); font-weight: var(--font-weight-medium); }
+  .history-left span { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); }
+  .history-amount { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); }
+  .history-amount.plus { color: var(--color-brand-primary); font-weight: var(--font-weight-medium); }
 
   /* keywords */
   .keyword-pills { display: flex; gap: 8px; overflow-x: auto; }
   .keyword-pills::-webkit-scrollbar { display: none; }
-  .keyword-pills span { flex-shrink: 0; background: #EDF2FD; border-radius: 50px; height: 36px; padding: 0 17px; display: flex; align-items: center; font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-brand-600); }
+  .keyword-pills span { flex-shrink: 0; background: #EDF2FD; border-radius: 50px; height: 36px; padding: 0 17px; display: flex; align-items: center; font-weight: var(--font-weight-semibold); font-size: 14px; color: var(--color-brand-primary); }
 
   /* row list (내 콘텐츠 / 설정 / 고객센터) */
   .row-list { display: flex; flex-direction: column; }
@@ -96,7 +96,7 @@
   .row-item .row-left { display: flex; align-items: center; gap: 4px; }
   .row-item .icon-badge { width: 24px; height: 24px; border-radius: 7px; display: flex; align-items: center; justify-content: center; }
   .row-item .icon-badge .gicon { font-size: 18px; width: 18px; height: 18px; }
-  .row-item span.label { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; }
+  .row-item span.label { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); }
 </style>
 </head>
 <body>

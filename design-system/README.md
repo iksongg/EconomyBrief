@@ -33,7 +33,8 @@ Ready-to-use CSS custom properties / classes, mirroring the boards above:
 
 | File | Contains |
 |---|---|
-| [`tokens/colors.css`](tokens/colors.css) | All color tokens as CSS custom properties |
+| [`tokens/colors.css`](tokens/colors.css) | **v2** color tokens — Primitive → Semantic, names identical to Figma variables' code syntax (e.g. `brand/primary` = `--color-brand-primary`). v1 names kept as deprecated aliases |
+| [`tokens/OFF-PALETTE.md`](tokens/OFF-PALETTE.md) | Audit of hardcoded colors still outside the system (next cleanup backlog) |
 | [`tokens/typography.css`](tokens/typography.css) | Font family/weight variables + one class per text style |
 | [`tokens/layout.css`](tokens/layout.css) | Grid, spacing scale, corner radius, elevation |
 

@@ -21,11 +21,11 @@
     display: flex; align-items: flex-start; justify-content: center;
   }
   .scroll-area { padding-bottom: 20px; }
-  .section-white { background: #ffffff; padding: 20px; }
+  .section-white { background: var(--color-bg-surface); padding: 20px; }
 
   .preview-card { background: #F8F8FC; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
-  .preview-card .preview-title { font-weight: var(--font-weight-bold); color: #000; transition: font-size 0.15s ease; margin-bottom: 6px; }
-  .preview-card .preview-body { font-weight: var(--font-weight-regular); color: #424350; line-height: 1.6; transition: font-size 0.15s ease; }
+  .preview-card .preview-title { font-weight: var(--font-weight-bold); color: var(--color-text-primary); transition: font-size 0.15s ease; margin-bottom: 6px; }
+  .preview-card .preview-body { font-weight: var(--font-weight-regular); color: var(--color-text-secondary); line-height: 1.6; transition: font-size 0.15s ease; }
 
   .size-options { display: flex; gap: 8px; }
   .size-option {
@@ -33,7 +33,7 @@
     padding: 16px 0; border-radius: 14px; border: 1px solid var(--color-border-default);
     background: none; font-family: inherit; cursor: pointer;
   }
-  .size-option.active { border-color: var(--color-brand-600); background: #F3F6FF; color: var(--color-brand-600); }
+  .size-option.active { border-color: var(--color-brand-primary); background: #F3F6FF; color: var(--color-brand-primary); }
   .size-option .a-sample { font-weight: var(--font-weight-bold); color: inherit; }
   .size-option .label { font-size: 13px; font-weight: var(--font-weight-medium); color: inherit; }
 

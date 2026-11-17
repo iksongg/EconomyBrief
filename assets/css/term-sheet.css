@@ -29,7 +29,7 @@
 
 .term-sheet {
   position: absolute; left: 0; right: 0; bottom: 0;
-  background: #fff; border-radius: 12px 12px 0 0;
+  background: var(--color-bg-surface); border-radius: 12px 12px 0 0;
   box-shadow: 0 0 7.5px rgba(0,0,0,0.15);
   padding: 20px 16px; display: flex; flex-direction: column; align-items: center;
   transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
@@ -38,10 +38,10 @@
 .term-sheet.visible { transform: translateY(0); }
 .term-sheet .ts-handle { width: 53px; height: 4px; border-radius: 999px; background: #C2C2C2; margin-bottom: 16px; flex-shrink: 0; }
 .term-sheet .ts-body { display: flex; flex-direction: column; gap: 4px; width: 100%; }
-.term-sheet .ts-title { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-600); line-height: 1.6; text-decoration: underline; }
-.term-sheet .ts-desc { font-weight: var(--font-weight-regular); font-size: 14px; color: #000; line-height: 1.6; }
+.term-sheet .ts-title { font-weight: var(--font-weight-semibold); font-size: 16px; color: var(--color-brand-primary); line-height: 1.6; text-decoration: underline; }
+.term-sheet .ts-desc { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
 .term-sheet .ts-save {
-  width: 100%; height: 40px; border-radius: 8px; background: var(--color-brand-600); margin-top: 20px;
-  color: #fff; border: none; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px;
+  width: 100%; height: 40px; border-radius: 8px; background: var(--color-brand-primary); margin-top: 20px;
+  color: var(--color-text-inverse); border: none; font-family: inherit; font-weight: var(--font-weight-semibold); font-size: 14px;
   cursor: pointer;
 }
