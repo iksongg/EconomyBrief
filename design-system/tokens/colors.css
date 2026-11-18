@@ -51,7 +51,7 @@
   /* Text */
   --color-text-primary: var(--color-gray-1000);
   --color-text-secondary: var(--color-gray-800);
-  --color-text-tertiary: var(--color-gray-500);
+  --color-text-tertiary: var(--color-slate-500);
   --color-text-disabled: var(--color-gray-400);
   --color-text-inverse: var(--color-gray-0);
   /* Background */

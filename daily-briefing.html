@@ -40,14 +40,14 @@
   .progress-block .counter-row { display: flex; align-items: center; justify-content: space-between; font-size: 14px; }
   .progress-block .counter-row.end-only { justify-content: flex-end; }
   .progress-block .count-current { color: var(--color-brand-primary); font-weight: var(--font-weight-semibold); }
-  .progress-block .count-total { color: #7A7A7A; font-weight: var(--font-weight-regular); }
+  .progress-block .count-total { color: var(--color-text-tertiary); font-weight: var(--font-weight-regular); }
   .progress-block .eta { color: var(--color-brand-primary); font-weight: var(--font-weight-bold); }
   .progress-block .done-label { color: var(--color-brand-primary); font-weight: var(--font-weight-bold); }
   .progress-track { width: 100%; height: 10px; border-radius: 999px; background: #EEE; overflow: hidden; }
   .progress-fill { height: 100%; border-radius: 999px; background: var(--color-brand-primary); transition: width 0.35s ease; }
   .progress-block ul {
     list-style: disc; margin: 0; padding-left: 18px;
-    color: #5B5E73; font-size: 12px; font-weight: var(--font-weight-regular); line-height: 1.6;
+    color: var(--color-text-tertiary); font-size: 12px; font-weight: var(--font-weight-regular); line-height: 1.6;
   }
 
   /* ---- card stack (reading state) ---- */
@@ -164,7 +164,7 @@
     display: flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
   .summary-intro .icon-box .gicon { font-size: 18px; width: 18px; height: 18px; color: var(--color-tag-gray-fg); }
-  .summary-intro p { font-size: 14px; color: #898989; font-weight: var(--font-weight-regular); line-height: 1.3; }
+  .summary-intro p { font-size: 14px; color: var(--color-text-tertiary); font-weight: var(--font-weight-regular); line-height: 1.3; }
   .summary-intro .em { color: var(--color-brand-primary); font-weight: var(--font-weight-semibold); }
 
   .summary-head { display: flex; flex-direction: column; gap: 10px; padding-bottom: 16px; }
@@ -177,7 +177,7 @@
   }
   .tab-row button {
     flex: 1 0 0; height: 100%; border: none; border-radius: 999px; background: none;
-    font-family: inherit; font-size: 14px; font-weight: var(--font-weight-regular); color: #3C4043; cursor: pointer;
+    font-family: inherit; font-size: 14px; font-weight: var(--font-weight-regular); color: var(--color-text-secondary); cursor: pointer;
   }
   .tab-row button.active { background: var(--color-brand-primary); color: var(--color-text-inverse); }
 
@@ -196,7 +196,7 @@
   .completion-content .headline { font-weight: var(--font-weight-semibold); font-size: 22px; color: var(--color-text-primary); text-align: center; }
   .completion-content .badge {
     background: #EFF6FF; border-radius: 999px; padding: 4px 10px;
-    font-weight: var(--font-weight-semibold); font-size: 12px; color: #666;
+    font-weight: var(--font-weight-semibold); font-size: 12px; color: var(--color-text-tertiary);
   }
   .completion-buttons {
     position: absolute; left: 20px; top: 678px; width: 362px;

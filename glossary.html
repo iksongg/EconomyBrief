@@ -30,7 +30,7 @@
   .hero-card .hero-text { display: flex; flex-direction: column; gap: 5px; }
   .hero-card .hero-label { font-weight: var(--font-weight-medium); font-size: 12px; color: var(--color-text-primary); }
   .hero-card .hero-count { font-weight: var(--font-weight-semibold); font-size: 24px; color: var(--color-text-primary); }
-  .hero-card .hero-sub { font-weight: var(--font-weight-regular); font-size: 14px; color: #5B5E73; margin-top: 0; }
+  .hero-card .hero-sub { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-tertiary); margin-top: 0; }
 
   .filter-row { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--color-border-default); }
   .filter-row .filter-item { display: flex; align-items: center; gap: 2px; font-size: 14px; color: var(--color-text-primary); background: none; border: none; font-family: inherit; cursor: pointer; }
@@ -45,12 +45,12 @@
   .term-info .term-def { font-weight: var(--font-weight-regular); font-size: 14px; color: var(--color-text-primary); line-height: 1.6; margin-top: 4px; }
   .term-meta { display: flex; align-items: center; gap: 4px; }
   .term-meta .term-tag { background: #F3F2FE; border-radius: 999px; padding: 4px 10px; font-size: 10px; color: #6140E9; }
-  .term-meta .term-date { font-size: 10px; color: #5B5E73; }
+  .term-meta .term-date { font-size: 10px; color: var(--color-text-tertiary); }
   .term-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
   .term-actions .bookmark-btn { background: none; border: none; padding: 0; cursor: pointer; display: block; }
   .term-actions .bookmark-btn .gicon { font-size: 30px; width: 30px; height: 30px; color: var(--color-brand-primary); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
   .term-actions .select-btn { background: none; border: none; padding: 0; cursor: pointer; display: none; }
-  .term-actions .select-btn .gicon { font-size: 26px; width: 26px; height: 26px; color: #B5BAC5; }
+  .term-actions .select-btn .gicon { font-size: 26px; width: 26px; height: 26px; color: var(--color-text-tertiary); }
   .term-item.selected .select-btn .gicon { color: var(--color-brand-primary); font-variation-settings: 'FILL' 1, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
   .term-list.editing .select-btn { display: block; }
   .term-list.editing .bookmark-btn { display: none; }
@@ -62,10 +62,10 @@
     background: var(--color-brand-primary); color: var(--color-text-inverse); font-family: inherit;
     font-weight: var(--font-weight-semibold); font-size: 14px; cursor: pointer;
   }
-  .bulk-delete-btn:disabled { background: var(--color-border-default); color: #9CA0AC; cursor: not-allowed; }
+  .bulk-delete-btn:disabled { background: var(--color-border-default); color: var(--color-text-tertiary); cursor: not-allowed; }
   .term-list.editing ~ .bulk-delete-btn { display: block; }
 
-  .empty-state { padding: 40px 0; text-align: center; color: #5B5E73; font-size: 14px; }
+  .empty-state { padding: 40px 0; text-align: center; color: var(--color-text-tertiary); font-size: 14px; }
 </style>
 </head>
 <body>
